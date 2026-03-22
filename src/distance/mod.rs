@@ -57,16 +57,30 @@ pub trait Distance: Send + Sync + Sized + Clone + fmt::Debug + 'static {
 
     /// Normalizes the distance returned by the distance method.
     fn normalized_distance(d: f32, _dimensions: usize) -> f32 {
+        /*| distance_normalized_distance_no_sqrt [distance, normalization, scaling] */
         d.sqrt()
+        /*|| distance_normalized_distance_no_sqrt_1 */
+        /*|
+        d
+        */
+        /* |*/
     }
 
     fn pq_distance(distance: f32, margin: f32, side: Side) -> f32 {
+        /*| distance_pq_left_margin_sign [distance, queue-priority, margin] */
         match side {
             Side::Left => (-margin).min(distance),
             Side::Right => margin.min(distance),
         }
+        /*|| distance_pq_left_margin_sign_1 */
+        /*|
+        match side {
+            Side::Left => margin.min(distance),
+            Side::Right => margin.min(distance),
+        }
+        */
+        /* |*/
     }
-
     fn norm(leaf: &Leaf<Self>) -> f32 {
         Self::norm_no_header(&leaf.vector)
     }
@@ -84,15 +98,15 @@ pub trait Distance: Send + Sync + Sized + Clone + fmt::Debug + 'static {
     fn init(node: &mut Leaf<Self>);
 
     fn update_mean(mean: &mut Leaf<Self>, new_node: &Leaf<Self>, norm: f32, c: f32) {
-        let vec: Vec<_> = mean
-            .vector
-            .iter()
-            .zip(new_node.vector.iter())
-            .map(|(x, n)| (x * c + n / norm) / (c + 1.0))
-            .collect();
+        /*| distance_update_mean_divisor [distance, centroid, averaging] */
+        let vec : Vec < _ > = mean . vector . iter () . zip (new_node . vector . iter ()) . map (| (x , n) | (x * c + n / norm) / (c + 1.0)) . collect ();
+        /*|| distance_update_mean_divisor_1 */
+        /*|
+        let vec : Vec < _ > = mean . vector . iter () . zip (new_node . vector . iter ()) . map (| (x , n) | (x * c + n / norm) / c . max (1.0)) . collect ();
+        */
+        /* |*/
         mean.vector = UnalignedVector::from_vec(vec);
     }
-
     fn create_split<'a, R: Rng>(
         children: &'a ImmutableSubsetLeafs<Self>,
         rng: &mut R,
@@ -101,14 +115,24 @@ pub trait Distance: Send + Sync + Sized + Clone + fmt::Debug + 'static {
     fn margin(p: &Leaf<Self>, q: &Leaf<Self>) -> f32;
 
     fn side(normal: &Leaf<Self>, node: &Leaf<Self>) -> Side {
+        /*| distance_side_sign_flip [distance, side-selection, sign] */
         let dot = Self::margin(normal, node);
         if dot.is_sign_positive() {
             Side::Right
         } else {
             Side::Left
         }
+        /*|| distance_side_sign_flip_1 */
+        /*|
+        let dot = Self::margin(normal, node);
+        if dot.is_sign_negative() {
+            Side::Right
+        } else {
+            Side::Left
+        }
+        */
+        /* |*/
     }
-
     fn preprocess(
         _wtxn: &mut RwTxn,
         _new_iter: impl for<'a> Fn(
@@ -133,8 +157,6 @@ fn two_means<D: Distance, R: Rng>(
     // points to either one of them. We weight each centroid by the number of points
     // assigned to it, so to balance it.
 
-    const ITERATION_STEPS: usize = 10;
-
     let [leaf_p, leaf_q] = leafs.choose_two(rng)?.unwrap();
     let (mut leaf_p, mut leaf_q) = (leaf_p.into_owned(), leaf_q.into_owned());
 
@@ -148,9 +170,15 @@ fn two_means<D: Distance, R: Rng>(
 
     let mut ic = 1.0;
     let mut jc = 1.0;
-    for _ in 0..ITERATION_STEPS {
+    for _ in 0..10 {
         let node_k = leafs.choose(rng)?.unwrap();
-        let di = ic * D::non_built_distance(&leaf_p, &node_k);
+        /*| two_means_weighted_distance_left [distance, split, weighting] */
+        let di = ic * D :: non_built_distance (& leaf_p , & node_k);
+        /*|| two_means_weighted_distance_left_1 */
+        /*|
+        let di = D :: non_built_distance (& leaf_p , & node_k);
+        */
+        /* |*/
         let dj = jc * D::non_built_distance(&leaf_q, &node_k);
         let norm = if cosine { D::norm(&node_k) } else { 1.0 };
         if norm.is_nan() || norm <= 0.0 {
@@ -166,7 +194,6 @@ fn two_means<D: Distance, R: Rng>(
             jc += 1.0;
         }
     }
-
     Ok([leaf_p, leaf_q])
 }
 

@@ -1,0 +1,708 @@
+{
+  "run_id": "dfd37854-caf6-4818-b589-4fddab8f1c20",
+  "project": "arroy",
+  "base": {
+    "passed": true,
+    "exit_code": 0,
+    "duration_seconds": 5.04,
+    "mode": "debug",
+    "runner": "python3 -m wkgen test base --workload-dir workloads/Rust/arroy --timeout 900"
+  },
+  "variants": {
+    "tmpfile_missing_seek_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.04,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact"
+      ],
+      "failure_type": "Heed decode error after read to append overwrite"
+    },
+    "reader_empty_search_guard_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.34,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::reader::search_in_empty_database",
+        "tests::writer::delete_document_in_an_empty_index_74"
+      ],
+      "failure_type": "panic from integer logarithm on empty items"
+    },
+    "tree_target_rounding_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.05,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::guess_right_number_of_tree_while_growing"
+      ],
+      "failure_type": "snapshot regressions in tree count behavior"
+    },
+    "fit_in_memory_remove_by_rank_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.43,
+      "mode": "debug",
+      "failures": 3,
+      "failing_tests": [
+        "tests::fit_in_memory::test_random_selection",
+        "tests::fit_in_memory::test_partial_fit",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "fit in memory selection corruption"
+    },
+    "low_memory_none_handling_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.06,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "panic from unwrap on missing tmp node"
+    },
+    "upgrade_wrong_metadata_key_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 5.66,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::upgrade::upgrade_v0_4_to_v0_5_handles_metadata_per_index"
+      ],
+      "failure_type": "metadata decode mismatch in v0.4 to v0.5 upgrade path"
+    },
+    "upgrade_splitnode_rewrite_gate_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.38,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7",
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7"
+      ],
+      "failure_type": "split nodes not fully rewritten during upgrade"
+    },
+    "tmp_lookup_search_window_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 3.99,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::tmp_nodes::test_put_and_get_tmp_nodes",
+        "tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact"
+      ],
+      "failure_type": "tmp node lookup misses nodes outside recent tail"
+    },
+    "fit_in_memory_min_split_threshold_1": {
+      "passed": false,
+      "exit_code": -1,
+      "duration_seconds": 120.01,
+      "mode": "debug",
+      "failures": 0,
+      "failing_tests": [],
+      "failure_type": "timeout/non-termination in low-memory writer path"
+    },
+    "missing_tree_count_direction_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 3.7,
+      "mode": "debug",
+      "failures": 13,
+      "failing_tests": [
+        "tests::reader::filtering",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_item",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::reuse_node_id",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory",
+        "tests::writer::write_vectors_until_there_is_a_split"
+      ],
+      "failure_type": "target tree backfill skipped due inverted saturating subtraction"
+    },
+    "extraneous_tree_count_direction_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.11,
+      "mode": "debug",
+      "failures": 3,
+      "failing_tests": [
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "extraneous tree pruning count inverted; tree layout diverges"
+    },
+    "delete_empty_left_child_promote_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 3.86,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "duplicate tmp-node deletion panic in low-memory update path"
+    },
+    "fit_descendant_strict_threshold_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.41,
+      "mode": "debug",
+      "failures": 15,
+      "failing_tests": [
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::add_one_item_incrementally_in_a_one_item_db",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::append",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_one_item_in_a_descendant",
+        "tests::writer::delete_one_item",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_descendants",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "strict descendant threshold causes early split-node expansion"
+    },
+    "single_leaf_root_id_mismatch_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.0,
+      "mode": "debug",
+      "failures": 18,
+      "failing_tests": [
+        "tests::reader::search_in_db_with_a_single_vector",
+        "tests::binary_quantized::write_and_retrieve_binary_quantized_vector",
+        "tests::writer::add_one_item_incrementally_in_a_one_item_db",
+        "tests::writer::add_one_item_incrementally_in_an_empty_db",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::append",
+        "tests::writer::delete_document_in_an_empty_index_74",
+        "tests::writer::delete_one_item_in_a_descendant",
+        "tests::writer::delete_one_item_in_a_one_item_db",
+        "tests::writer::delete_one_item_in_a_single_document_database",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::use_u32_max_minus_one_for_a_vec",
+        "tests::writer::use_u32_max_for_a_vec",
+        "tests::writer::write_multiple_indexes",
+        "tests::writer::write_one_vector",
+        "tests::writer::write_one_vector_in_multiple_trees",
+        "tests::writer::write_one_vector_in_one_tree",
+        "tests::writer::write_vectors_until_there_is_a_descendants"
+      ],
+      "failure_type": "single-leaf metadata points to missing tree id"
+    },
+    "tree_target_small_dataset_boundary_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.08,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::writer::guess_right_number_of_tree_while_growing"
+      ],
+      "failure_type": "small-dataset threshold includes 10k boundary and shifts tree target snapshots"
+    },
+    "tree_target_dimension_power_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 3.94,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::writer::guess_right_number_of_tree_while_growing"
+      ],
+      "failure_type": "dimension scaling exponent changed in tree target formula"
+    },
+    "euclidean_split_skip_normalize_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.1,
+      "mode": "debug",
+      "failures": 10,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_item",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_vectors_until_there_is_a_split"
+      ],
+      "failure_type": "euclidean split normal is left unnormalized"
+    },
+    "median_top_k_truncate_bias_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.06,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::reader::two_dimension_on_a_line",
+        "tests::reader::median_top_k_vs_binary_heap"
+      ],
+      "failure_type": "median top-k truncates too aggressively during thresholding"
+    },
+    "euclidean_split_bias_scale_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.99,
+      "mode": "debug",
+      "failures": 10,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_item",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points"
+      ],
+      "failure_type": "euclidean split bias is over-scaled"
+    },
+    "median_top_k_final_truncate_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.17,
+      "mode": "debug",
+      "failures": 7,
+      "failing_tests": [
+        "tests::reader::search_in_db_with_a_single_vector",
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7",
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::filtering",
+        "tests::reader::median_top_k_vs_binary_heap",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "final top-k truncation drops one nearest neighbor"
+    },
+    "euclidean_margin_sign_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 5.25,
+      "mode": "debug",
+      "failures": 11,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_item",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points"
+      ],
+      "failure_type": "euclidean split margin uses inverted sign"
+    },
+    "median_top_k_filter_inversion_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 3.96,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::median_top_k_vs_binary_heap"
+      ],
+      "failure_type": "top-k candidate filter direction inverted"
+    },
+    "median_top_k_sort_direction_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.04,
+      "mode": "debug",
+      "failures": 6,
+      "failing_tests": [
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7",
+        "tests::reader::filtering",
+        "tests::reader::median_top_k_vs_binary_heap",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::reader::two_dimension_on_a_column"
+      ],
+      "failure_type": "top-k ordering reversed before truncation"
+    },
+    "reader_searchk_root_factor_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.63,
+      "mode": "debug",
+      "failures": 3,
+      "failing_tests": [
+        "tests::reader::filtering",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "search budget ignores root-count factor"
+    },
+    "reader_candidates_filter_bypass_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.09,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::reader::filtering"
+      ],
+      "failure_type": "candidate-filter bypass in descendants expansion"
+    },
+    "reader_margin_argument_order_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.17,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "margin argument order swapped"
+    },
+    "reader_split_side_distance_swap_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.16,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "left/right branch priority distance swapped"
+    },
+    "reader_nns_dedup_order_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.24,
+      "mode": "debug",
+      "failures": 3,
+      "failing_tests": [
+        "tests::reader::filtering",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "dedup performed before sorting nearest-neighbor IDs"
+    },
+    "median_top_k_initial_threshold_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.01,
+      "mode": "debug",
+      "failures": 2,
+      "failing_tests": [
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::median_top_k_vs_binary_heap"
+      ],
+      "failure_type": "top-k threshold initialized to minimum value"
+    },
+    "reader_leaf_candidates_default_false_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.58,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7"
+      ],
+      "failure_type": "leaf candidate filter defaults to excluding all items when no candidate set is provided"
+    },
+    "reader_descendant_no_candidates_skip_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.16,
+      "mode": "debug",
+      "failures": 5,
+      "failing_tests": [
+        "tests::reader::search_in_db_with_a_single_vector",
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "descendant expansion is skipped when no candidate filter is provided"
+    },
+    "reader_k_selection_max_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.12,
+      "mode": "debug",
+      "failures": 4,
+      "failing_tests": [
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7",
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "top-k bound uses max instead of min and over-returns neighbors"
+    },
+    "tree_target_small_dataset_exponent_shift_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.16,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::writer::guess_right_number_of_tree_while_growing"
+      ],
+      "failure_type": "small-dataset tree exponent is shifted by +1"
+    },
+    "euclidean_norm_no_sqrt_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.16,
+      "mode": "debug",
+      "failures": 10,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_one_item",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_vectors_until_there_is_a_split"
+      ],
+      "failure_type": "euclidean norm omits the square root during split normalization"
+    },
+    "two_means_weighted_distance_left_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.3,
+      "mode": "debug",
+      "failures": 9,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_item",
+        "tests::writer::reuse_node_id",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory",
+        "tests::writer::write_and_update_lot_of_random_points"
+      ],
+      "failure_type": "left centroid weighting factor is dropped during split clustering"
+    },
+    "euclidean_two_means_cosine_flag_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 5.02,
+      "mode": "debug",
+      "failures": 11,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::delete_one_item",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points"
+      ],
+      "failure_type": "euclidean split incorrectly enables cosine normalization in two-means"
+    },
+    "insert_descendants_right_guard_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.15,
+      "mode": "debug",
+      "failures": 5,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "right descendants are skipped when right branch is non-empty"
+    },
+    "reader_output_skip_normalization_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.12,
+      "mode": "debug",
+      "failures": 4,
+      "failing_tests": [
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::filtering",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "reader returns non-normalized distances in search output"
+    },
+    "euclidean_built_distance_dot_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.35,
+      "mode": "debug",
+      "failures": 15,
+      "failing_tests": [
+        "tests::upgrade::simple_upgrade_v0_6_to_v0_7",
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::filtering",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_one_item",
+        "tests::writer::delete_extraneous_tree",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points"
+      ],
+      "failure_type": "euclidean built distance uses dot product instead of euclidean metric"
+    },
+    "insert_descendants_merge_operator_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 3.93,
+      "mode": "debug",
+      "failures": 6,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "descendant updates intersect instead of union when merging inserts"
+    },
+    "insert_descendants_left_guard_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.16,
+      "mode": "debug",
+      "failures": 3,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "left descendants are skipped when left branch is non-empty"
+    },
+    "distance_normalized_distance_no_sqrt_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.13,
+      "mode": "debug",
+      "failures": 4,
+      "failing_tests": [
+        "tests::upgrade::large_upgrade_v0_6_to_v0_7",
+        "tests::reader::filtering",
+        "tests::reader::two_dimension_on_a_column",
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "test failure"
+    },
+    "distance_pq_left_margin_sign_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.54,
+      "mode": "debug",
+      "failures": 1,
+      "failing_tests": [
+        "tests::reader::two_dimension_on_a_line"
+      ],
+      "failure_type": "test failure"
+    },
+    "distance_update_mean_divisor_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 5.67,
+      "mode": "debug",
+      "failures": 12,
+      "failing_tests": [
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::delete_extraneous_tree",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::add_one_item_incrementally",
+        "tests::writer::delete_one_item",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory",
+        "tests::writer::write_and_update_lot_of_random_points"
+      ],
+      "failure_type": "test failure"
+    },
+    "distance_side_sign_flip_1": {
+      "passed": false,
+      "exit_code": 101,
+      "duration_seconds": 4.3,
+      "mode": "debug",
+      "failures": 12,
+      "failing_tests": [
+        "tests::writer::add_one_item_incrementally_to_create_a_split_node",
+        "tests::writer::add_one_item_incrementally",
+        "tests::reader::two_dimension_on_a_line",
+        "tests::writer::create_root_split_node_with_empty_child",
+        "tests::writer::delete_one_item",
+        "tests::writer::delete_extraneous_tree",
+        "tests::writer::overwrite_one_item_incremental",
+        "tests::writer::delete_one_leaf_in_a_split",
+        "tests::writer::reuse_node_id",
+        "tests::writer::write_vectors_until_there_is_a_split",
+        "tests::writer::write_and_update_lot_of_random_points",
+        "tests::writer::write_and_update_lot_of_random_points_with_little_memory"
+      ],
+      "failure_type": "test failure"
+    }
+  },
+  "notes": [
+    "Added regression test tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact to validate tmpfile append semantics after read.",
+    "Added regression test tests::upgrade::upgrade_v0_4_to_v0_5_handles_metadata_per_index to detect metadata branch keying bugs in v0.4 to v0.5 upgrade.",
+    "fit_in_memory_min_split_threshold_1 was validated as a timeout mutation using the targeted test filter write_and_update_lot_of_random_points_with_little_memory.",
+    "LMDB tests require elevated execution in this environment; sandboxed runs produced permission errors.",
+    "Variant tests were executed with functional syntax and source was converted back to comment syntax afterward.",
+    "Validated additional tree-count regressions with targeted tests::writer::delete_extraneous_tree for missing/extraneous tree count mutations.",
+    "Validated delete_empty_left_child_promote_1 via tests::writer::write_and_update_lot_of_random_points_with_little_memory panic path.",
+    "Validated eight additional detected variants (fit_descendant_strict_threshold, single_leaf_root_id_mismatch, tree_target_small_dataset_boundary, tree_target_dimension_power, euclidean_split_skip_normalize, median_top_k_truncate_bias, euclidean_split_bias_scale, median_top_k_final_truncate).",
+    "All acceptance runs were executed with elevated permissions to avoid LMDB sandbox permission artifacts.",
+    "Final comment-syntax base validation passed (duration_seconds=12.0).",
+    "Validated three additional detected variants (euclidean_margin_sign, median_top_k_filter_inversion, median_top_k_sort_direction).",
+    "Final comment-syntax base validation passed for 23 retained mutations (duration_seconds=8.42).",
+    "Validated six additional detected reader/search variants (searchk_root_factor, candidates_filter_bypass, margin_argument_order, split_side_distance_swap, nns_dedup_order, median_top_k_initial_threshold).",
+    "Final comment-syntax base validation passed for 29 retained mutations (duration_seconds=8.01).",
+    "Synced checkpoints to 45 source variants using full health audit on 2026-03-22.",
+    "Final comment-syntax base validation passed (duration_seconds=5.04)."
+  ]
+}

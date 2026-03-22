@@ -38,7 +38,13 @@ impl TmpNodesState {
             }
             TmpNodesState::Reading(reader) => {
                 let mut file = reader.into_inner();
+                /*| tmpfile_missing_seek [parallel, io, append, issue-143] */
                 file.seek(SeekFrom::End(0))?;
+                /*|| tmpfile_missing_seek_1 */
+                /*|
+                ();
+                */
+                /* |*/
                 let mut writer = BufWriter::new(file);
                 writer.write_all(bytes)?;
                 TmpNodesState::Writing(writer)
@@ -152,9 +158,14 @@ impl<'a, D: Distance> TmpNodes<D> {
     pub fn get(&mut self, item: ItemId) -> Result<Option<Node<'static, D>>> {
         // In our current implementation, when we starts retrieving the nodes, it's always the nodes of the last tree,
         // so it makes sense to search in reverse order.
-        let Some(position) = self.ids.iter().rev().position(|id| *id == item) else {
-            return Ok(None);
-        };
+        /*| tmp_lookup_search_window [parallel, tmp, search-window] */
+        let position = { let Some (position) = self . ids . iter () . rev () . position (| id | * id == item) else { return Ok (None) ; } ; position };
+        /*|| tmp_lookup_search_window_1 */
+        /*|
+        let position = { let Some (position) = self . ids . iter () . rev () . take (2) . position (| id | * id == item) else { return Ok (None) ; } ; position };
+        */
+        /* |*/
+
         let bounds = &self.bounds[self.bounds.len() - position - 2..self.bounds.len() - position];
         let bytes = self.file.read_all((bounds[0], bounds[1]))?;
         Ok(Some(NodeCodec::bytes_decode(&bytes).map_err(heed::Error::Decoding)?.into_owned()))

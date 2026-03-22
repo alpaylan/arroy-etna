@@ -1,0 +1,2221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arroy injected bugs</title>
+<style>
+:root{--bg:#f7f6f2;--fg:#1f2933;--muted:#5f6c7b;--card:#ffffff;--line:#d7dce2;--accent:#0f766e;}
+*{box-sizing:border-box;}
+body{margin:0;background:linear-gradient(180deg,#f7f6f2 0%,#eceff4 100%);color:var(--fg);font-family:"IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;line-height:1.5;}
+main{max-width:1100px;margin:0 auto;padding:28px 16px 56px;}
+h1{font-family:"IBM Plex Serif", Georgia, serif;font-weight:600;letter-spacing:.2px;margin:0 0 8px;}
+.sub{color:var(--muted);margin:0 0 20px;}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+input{padding:10px 12px;border:1px solid var(--line);border-radius:10px;min-width:260px;background:#fff;}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;background:#dbf5f2;color:#0b5d57;font-size:12px;margin-left:8px;}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:0 3px 12px rgba(0,0,0,.04);margin-bottom:18px;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+th,td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top;text-align:left;}
+th{background:#f5f8fb;position:sticky;top:0;}
+code{background:#eef2f7;padding:1px 5px;border-radius:6px;font-family:"IBM Plex Mono", "SFMono-Regular", Menlo, monospace;font-size:.92em;}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 12px;margin:10px 0;}
+summary{cursor:pointer;padding:11px 0;font-weight:600;}
+.meta td:first-child{width:170px;color:#334155;font-weight:600;}
+.hidden{display:none;}
+a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
+@media (max-width:760px){th:nth-child(4),td:nth-child(4){display:none;} main{padding:18px 10px 34px;}}
+</style>
+</head>
+<body>
+<main>
+<h1>arroy injected bugs</h1>
+<p class="sub">This workload contains **45** detected bugs derived from historical fixes in <a href="https://github.com/meilisearch/arroy" target="_blank" rel="noopener noreferrer">meilisearch/arroy</a>. <span class="pill">source: BUGS.md</span></p>
+<div class="toolbar"><input id="q" type="search" placeholder="Filter by name, variant, file, type, tag, test..." /></div>
+<section class="panel">
+<h2>Bug index</h2>
+<table id="index"><thead><tr>
+<th>#</th>
+<th>Name</th>
+<th>Variant</th>
+<th>File</th>
+<th>Type</th>
+<th>Failing Tests</th>
+<th>Fix Commit</th>
+</tr></thead><tbody>
+<tr class="idx-row" data-search="1 `tmpfile_missing_seek` `tmpfile_missing_seek_1` `src/parallel.rs:41` `missing-seek` 1 [`a63f097`](https://github.com/meilisearch/arroy/commit/a63f0979b216dde10d50fdfa4fadcb2b1dea73c7)">
+<td>1</td>
+<td>`tmpfile_missing_seek`</td>
+<td>`tmpfile_missing_seek_1`</td>
+<td>`src/parallel.rs:41`</td>
+<td>`missing-seek`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/a63f0979b216dde10d50fdfa4fadcb2b1dea73c7" target="_blank" rel="noopener noreferrer">`a63f097`</a></td>
+</tr>
+<tr class="idx-row" data-search="2 `reader_empty_search_guard` `reader_empty_search_guard_1` `src/reader.rs:323` `missing-base-case` 2 [`2128749`](https://github.com/meilisearch/arroy/commit/2128749806c67ca8853395e34bf0b4df1f9e41bc)">
+<td>2</td>
+<td>`reader_empty_search_guard`</td>
+<td>`reader_empty_search_guard_1`</td>
+<td>`src/reader.rs:323`</td>
+<td>`missing-base-case`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/2128749806c67ca8853395e34bf0b4df1f9e41bc" target="_blank" rel="noopener noreferrer">`2128749`</a></td>
+</tr>
+<tr class="idx-row" data-search="3 `tree_target_rounding` `tree_target_rounding_1` `src/writer.rs:1423` `wrong-rounding` 2 [`5b6f5b8`](https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93)">
+<td>3</td>
+<td>`tree_target_rounding`</td>
+<td>`tree_target_rounding_1`</td>
+<td>`src/writer.rs:1423`</td>
+<td>`wrong-rounding`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93" target="_blank" rel="noopener noreferrer">`5b6f5b8`</a></td>
+</tr>
+<tr class="idx-row" data-search="4 `fit_in_memory_remove_by_rank` `fit_in_memory_remove_by_rank_1` `src/writer.rs:1672` `wrong-remove-operation` 3 [`5262b08`](https://github.com/meilisearch/arroy/commit/5262b0866ed6a0b8fe529b170a1700fe4a47ebbd)">
+<td>4</td>
+<td>`fit_in_memory_remove_by_rank`</td>
+<td>`fit_in_memory_remove_by_rank_1`</td>
+<td>`src/writer.rs:1672`</td>
+<td>`wrong-remove-operation`</td>
+<td>3</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/5262b0866ed6a0b8fe529b170a1700fe4a47ebbd" target="_blank" rel="noopener noreferrer">`5262b08`</a></td>
+</tr>
+<tr class="idx-row" data-search="5 `low_memory_none_handling` `low_memory_none_handling_1` `src/writer.rs:1560` `missing-none-handling` 1 [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82)">
+<td>5</td>
+<td>`low_memory_none_handling`</td>
+<td>`low_memory_none_handling_1`</td>
+<td>`src/writer.rs:1560`</td>
+<td>`missing-none-handling`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr class="idx-row" data-search="6 `upgrade_wrong_metadata_key` `upgrade_wrong_metadata_key_1` `src/upgrade.rs:111` `wrong-key-field` 1 [`f3db126`](https://github.com/meilisearch/arroy/commit/f3db126a274264e90bb0eae70892da8293d74425)">
+<td>6</td>
+<td>`upgrade_wrong_metadata_key`</td>
+<td>`upgrade_wrong_metadata_key_1`</td>
+<td>`src/upgrade.rs:111`</td>
+<td>`wrong-key-field`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/f3db126a274264e90bb0eae70892da8293d74425" target="_blank" rel="noopener noreferrer">`f3db126`</a></td>
+</tr>
+<tr class="idx-row" data-search="7 `upgrade_splitnode_rewrite_gate` `upgrade_splitnode_rewrite_gate_1` `src/upgrade.rs:287` `conditional-rewrite` 2 [`7639506`](https://github.com/meilisearch/arroy/commit/7639506680d32853e1dc825a1d99ea974a4b1bb7)">
+<td>7</td>
+<td>`upgrade_splitnode_rewrite_gate`</td>
+<td>`upgrade_splitnode_rewrite_gate_1`</td>
+<td>`src/upgrade.rs:287`</td>
+<td>`conditional-rewrite`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/7639506680d32853e1dc825a1d99ea974a4b1bb7" target="_blank" rel="noopener noreferrer">`7639506`</a></td>
+</tr>
+<tr class="idx-row" data-search="8 `tmp_lookup_search_window` `tmp_lookup_search_window_1` `src/parallel.rs:161` `narrow-search-window` 2 [`c0e66c6`](https://github.com/meilisearch/arroy/commit/c0e66c674c210ad8422f4f3bf6e043a729f5d914)">
+<td>8</td>
+<td>`tmp_lookup_search_window`</td>
+<td>`tmp_lookup_search_window_1`</td>
+<td>`src/parallel.rs:161`</td>
+<td>`narrow-search-window`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/c0e66c674c210ad8422f4f3bf6e043a729f5d914" target="_blank" rel="noopener noreferrer">`c0e66c6`</a></td>
+</tr>
+<tr class="idx-row" data-search="9 `fit_in_memory_min_split_threshold` `fit_in_memory_min_split_threshold_1` `src/writer.rs:1655` `off-by-one-split-threshold` 0 [`fa62650`](https://github.com/meilisearch/arroy/commit/fa626508854b33d0e6994ba601bf27d9c1315eea)">
+<td>9</td>
+<td>`fit_in_memory_min_split_threshold`</td>
+<td>`fit_in_memory_min_split_threshold_1`</td>
+<td>`src/writer.rs:1655`</td>
+<td>`off-by-one-split-threshold`</td>
+<td>0</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/fa626508854b33d0e6994ba601bf27d9c1315eea" target="_blank" rel="noopener noreferrer">`fa62650`</a></td>
+</tr>
+<tr class="idx-row" data-search="10 `missing_tree_count_direction` `missing_tree_count_direction_1` `src/writer.rs:551` `wrong-missing-tree-count` 13 [`eaeb864`](https://github.com/meilisearch/arroy/commit/eaeb864f8f9250893fd6fd110729d7dabae38c03)">
+<td>10</td>
+<td>`missing_tree_count_direction`</td>
+<td>`missing_tree_count_direction_1`</td>
+<td>`src/writer.rs:551`</td>
+<td>`wrong-missing-tree-count`</td>
+<td>13</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/eaeb864f8f9250893fd6fd110729d7dabae38c03" target="_blank" rel="noopener noreferrer">`eaeb864`</a></td>
+</tr>
+<tr class="idx-row" data-search="11 `extraneous_tree_count_direction` `extraneous_tree_count_direction_1` `src/writer.rs:652` `wrong-extraneous-tree-count` 3 [`66068b4`](https://github.com/meilisearch/arroy/commit/66068b485aad6bd7c5a720325b9237c32a79c132)">
+<td>11</td>
+<td>`extraneous_tree_count_direction`</td>
+<td>`extraneous_tree_count_direction_1`</td>
+<td>`src/writer.rs:652`</td>
+<td>`wrong-extraneous-tree-count`</td>
+<td>3</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/66068b485aad6bd7c5a720325b9237c32a79c132" target="_blank" rel="noopener noreferrer">`66068b4`</a></td>
+</tr>
+<tr class="idx-row" data-search="12 `delete_empty_left_child_promote` `delete_empty_left_child_promote_1` `src/writer.rs:1083` `stale-empty-child-promotion` 1 [`c6c53c5`](https://github.com/meilisearch/arroy/commit/c6c53c5630e5db417492147e4533908abd05479a)">
+<td>12</td>
+<td>`delete_empty_left_child_promote`</td>
+<td>`delete_empty_left_child_promote_1`</td>
+<td>`src/writer.rs:1083`</td>
+<td>`stale-empty-child-promotion`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/c6c53c5630e5db417492147e4533908abd05479a" target="_blank" rel="noopener noreferrer">`c6c53c5`</a></td>
+</tr>
+<tr class="idx-row" data-search="13 `fit_descendant_strict_threshold` `fit_descendant_strict_threshold_1` `src/writer.rs:476` `strict-fit-threshold` 15 [`dfc3e60`](https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6)">
+<td>13</td>
+<td>`fit_descendant_strict_threshold`</td>
+<td>`fit_descendant_strict_threshold_1`</td>
+<td>`src/writer.rs:476`</td>
+<td>`strict-fit-threshold`</td>
+<td>15</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6" target="_blank" rel="noopener noreferrer">`dfc3e60`</a></td>
+</tr>
+<tr class="idx-row" data-search="14 `single_leaf_root_id_mismatch` `single_leaf_root_id_mismatch_1` `src/writer.rs:957` `wrong-single-leaf-root-id` 18 [`dfc3e60`](https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6)">
+<td>14</td>
+<td>`single_leaf_root_id_mismatch`</td>
+<td>`single_leaf_root_id_mismatch_1`</td>
+<td>`src/writer.rs:957`</td>
+<td>`wrong-single-leaf-root-id`</td>
+<td>18</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6" target="_blank" rel="noopener noreferrer">`dfc3e60`</a></td>
+</tr>
+<tr class="idx-row" data-search="15 `tree_target_small_dataset_boundary` `tree_target_small_dataset_boundary_1` `src/writer.rs:1415` `small-dataset-threshold` 1 [`92c1ddd`](https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a)">
+<td>15</td>
+<td>`tree_target_small_dataset_boundary`</td>
+<td>`tree_target_small_dataset_boundary_1`</td>
+<td>`src/writer.rs:1415`</td>
+<td>`small-dataset-threshold`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a" target="_blank" rel="noopener noreferrer">`92c1ddd`</a></td>
+</tr>
+<tr class="idx-row" data-search="16 `tree_target_dimension_power` `tree_target_dimension_power_1` `src/writer.rs:1401` `dimension-scaling-power` 1 [`92c1ddd`](https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a)">
+<td>16</td>
+<td>`tree_target_dimension_power`</td>
+<td>`tree_target_dimension_power_1`</td>
+<td>`src/writer.rs:1401`</td>
+<td>`dimension-scaling-power`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a" target="_blank" rel="noopener noreferrer">`92c1ddd`</a></td>
+</tr>
+<tr class="idx-row" data-search="17 `euclidean_split_skip_normalize` `euclidean_split_skip_normalize_1` `src/distance/euclidean.rs:84` `missing-split-normalization` 10 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>17</td>
+<td>`euclidean_split_skip_normalize`</td>
+<td>`euclidean_split_skip_normalize_1`</td>
+<td>`src/distance/euclidean.rs:84`</td>
+<td>`missing-split-normalization`</td>
+<td>10</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="18 `median_top_k_truncate_bias` `median_top_k_truncate_bias_1` `src/reader.rs:707` `early-buffer-truncation` 2 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>18</td>
+<td>`median_top_k_truncate_bias`</td>
+<td>`median_top_k_truncate_bias_1`</td>
+<td>`src/reader.rs:707`</td>
+<td>`early-buffer-truncation`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="19 `euclidean_split_bias_scale` `euclidean_split_bias_scale_1` `src/distance/euclidean.rs:99` `wrong-split-bias-scale` 10 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>19</td>
+<td>`euclidean_split_bias_scale`</td>
+<td>`euclidean_split_bias_scale_1`</td>
+<td>`src/distance/euclidean.rs:99`</td>
+<td>`wrong-split-bias-scale`</td>
+<td>10</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="20 `median_top_k_final_truncate` `median_top_k_final_truncate_1` `src/reader.rs:732` `off-by-one-final-truncate` 7 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>20</td>
+<td>`median_top_k_final_truncate`</td>
+<td>`median_top_k_final_truncate_1`</td>
+<td>`src/reader.rs:732`</td>
+<td>`off-by-one-final-truncate`</td>
+<td>7</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="21 `euclidean_margin_sign` `euclidean_margin_sign_1` `src/distance/euclidean.rs:111` `inverted-margin-sign` 11 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>21</td>
+<td>`euclidean_margin_sign`</td>
+<td>`euclidean_margin_sign_1`</td>
+<td>`src/distance/euclidean.rs:111`</td>
+<td>`inverted-margin-sign`</td>
+<td>11</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="22 `median_top_k_filter_inversion` `median_top_k_filter_inversion_1` `src/reader.rs:693` `inverted-threshold-filter` 2 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>22</td>
+<td>`median_top_k_filter_inversion`</td>
+<td>`median_top_k_filter_inversion_1`</td>
+<td>`src/reader.rs:693`</td>
+<td>`inverted-threshold-filter`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="23 `median_top_k_sort_direction` `median_top_k_sort_direction_1` `src/reader.rs:725` `reversed-ordering` 6 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>23</td>
+<td>`median_top_k_sort_direction`</td>
+<td>`median_top_k_sort_direction_1`</td>
+<td>`src/reader.rs:725`</td>
+<td>`reversed-ordering`</td>
+<td>6</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="24 `reader_searchk_root_factor` `reader_searchk_root_factor_1` `src/reader.rs:335` `missing-root-factor` 3 [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a)">
+<td>24</td>
+<td>`reader_searchk_root_factor`</td>
+<td>`reader_searchk_root_factor_1`</td>
+<td>`src/reader.rs:335`</td>
+<td>`missing-root-factor`</td>
+<td>3</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr class="idx-row" data-search="25 `reader_candidates_filter_bypass` `reader_candidates_filter_bypass_1` `src/reader.rs:374` `candidate-filter-bypass` 1 [`3e7d3d0`](https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b)">
+<td>25</td>
+<td>`reader_candidates_filter_bypass`</td>
+<td>`reader_candidates_filter_bypass_1`</td>
+<td>`src/reader.rs:374`</td>
+<td>`candidate-filter-bypass`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b" target="_blank" rel="noopener noreferrer">`3e7d3d0`</a></td>
+</tr>
+<tr class="idx-row" data-search="26 `reader_margin_argument_order` `reader_margin_argument_order_1` `src/reader.rs:399` `swapped-margin-arguments` 1 [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a)">
+<td>26</td>
+<td>`reader_margin_argument_order`</td>
+<td>`reader_margin_argument_order_1`</td>
+<td>`src/reader.rs:399`</td>
+<td>`swapped-margin-arguments`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr class="idx-row" data-search="27 `reader_split_side_distance_swap` `reader_split_side_distance_swap_1` `src/reader.rs:412` `swapped-branch-priority` 1 [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a)">
+<td>27</td>
+<td>`reader_split_side_distance_swap`</td>
+<td>`reader_split_side_distance_swap_1`</td>
+<td>`src/reader.rs:412`</td>
+<td>`swapped-branch-priority`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr class="idx-row" data-search="28 `reader_nns_dedup_order` `reader_nns_dedup_order_1` `src/reader.rs:427` `dedup-before-sort` 3 [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a)">
+<td>28</td>
+<td>`reader_nns_dedup_order`</td>
+<td>`reader_nns_dedup_order_1`</td>
+<td>`src/reader.rs:427`</td>
+<td>`dedup-before-sort`</td>
+<td>3</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr class="idx-row" data-search="29 `median_top_k_initial_threshold` `median_top_k_initial_threshold_1` `src/reader.rs:679` `wrong-threshold-initialization` 2 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>29</td>
+<td>`median_top_k_initial_threshold`</td>
+<td>`median_top_k_initial_threshold_1`</td>
+<td>`src/reader.rs:679`</td>
+<td>`wrong-threshold-initialization`</td>
+<td>2</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="30 `reader_leaf_candidates_default_false` `reader_leaf_candidates_default_false_1` `src/reader.rs:361` `wrong-candidate-default` 1 [`3e7d3d0`](https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b)">
+<td>30</td>
+<td>`reader_leaf_candidates_default_false`</td>
+<td>`reader_leaf_candidates_default_false_1`</td>
+<td>`src/reader.rs:361`</td>
+<td>`wrong-candidate-default`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b" target="_blank" rel="noopener noreferrer">`3e7d3d0`</a></td>
+</tr>
+<tr class="idx-row" data-search="31 `reader_descendant_no_candidates_skip` `reader_descendant_no_candidates_skip_1` `src/reader.rs:382` `skip-descendants-without-candidates` 5 [`3e7d3d0`](https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b)">
+<td>31</td>
+<td>`reader_descendant_no_candidates_skip`</td>
+<td>`reader_descendant_no_candidates_skip_1`</td>
+<td>`src/reader.rs:382`</td>
+<td>`skip-descendants-without-candidates`</td>
+<td>5</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b" target="_blank" rel="noopener noreferrer">`3e7d3d0`</a></td>
+</tr>
+<tr class="idx-row" data-search="32 `reader_k_selection_max` `reader_k_selection_max_1` `src/reader.rs:450` `max-instead-of-min-top-k` 4 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>32</td>
+<td>`reader_k_selection_max`</td>
+<td>`reader_k_selection_max_1`</td>
+<td>`src/reader.rs:450`</td>
+<td>`max-instead-of-min-top-k`</td>
+<td>4</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="33 `tree_target_small_dataset_exponent_shift` `tree_target_small_dataset_exponent_shift_1` `src/writer.rs:1408` `small-dataset-exponent-shift` 1 [`5b6f5b8`](https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93)">
+<td>33</td>
+<td>`tree_target_small_dataset_exponent_shift`</td>
+<td>`tree_target_small_dataset_exponent_shift_1`</td>
+<td>`src/writer.rs:1408`</td>
+<td>`small-dataset-exponent-shift`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93" target="_blank" rel="noopener noreferrer">`5b6f5b8`</a></td>
+</tr>
+<tr class="idx-row" data-search="34 `euclidean_norm_no_sqrt` `euclidean_norm_no_sqrt_1` `src/distance/euclidean.rs:56` `missing-norm-square-root` 10 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>34</td>
+<td>`euclidean_norm_no_sqrt`</td>
+<td>`euclidean_norm_no_sqrt_1`</td>
+<td>`src/distance/euclidean.rs:56`</td>
+<td>`missing-norm-square-root`</td>
+<td>10</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="35 `two_means_weighted_distance_left` `two_means_weighted_distance_left_1` `src/distance/mod.rs:175` `missing-centroid-weighting` 9 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>35</td>
+<td>`two_means_weighted_distance_left`</td>
+<td>`two_means_weighted_distance_left_1`</td>
+<td>`src/distance/mod.rs:175`</td>
+<td>`missing-centroid-weighting`</td>
+<td>9</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="36 `euclidean_two_means_cosine_flag` `euclidean_two_means_cosine_flag_1` `src/distance/euclidean.rs:71` `wrong-cosine-flag-in-euclidean-split` 11 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>36</td>
+<td>`euclidean_two_means_cosine_flag`</td>
+<td>`euclidean_two_means_cosine_flag_1`</td>
+<td>`src/distance/euclidean.rs:71`</td>
+<td>`wrong-cosine-flag-in-euclidean-split`</td>
+<td>11</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="37 `insert_descendants_right_guard` `insert_descendants_right_guard_1` `src/writer.rs:1516` `right-descendant-recursion-guard-inverted` 5 [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82)">
+<td>37</td>
+<td>`insert_descendants_right_guard`</td>
+<td>`insert_descendants_right_guard_1`</td>
+<td>`src/writer.rs:1516`</td>
+<td>`right-descendant-recursion-guard-inverted`</td>
+<td>5</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr class="idx-row" data-search="38 `reader_output_skip_normalization` `reader_output_skip_normalization_1` `src/reader.rs:460` `missing-distance-normalization` 4 [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2)">
+<td>38</td>
+<td>`reader_output_skip_normalization`</td>
+<td>`reader_output_skip_normalization_1`</td>
+<td>`src/reader.rs:460`</td>
+<td>`missing-distance-normalization`</td>
+<td>4</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr class="idx-row" data-search="39 `euclidean_built_distance_dot` `euclidean_built_distance_dot_1` `src/distance/euclidean.rs:46` `dot-product-used-as-distance` 15 [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36)">
+<td>39</td>
+<td>`euclidean_built_distance_dot`</td>
+<td>`euclidean_built_distance_dot_1`</td>
+<td>`src/distance/euclidean.rs:46`</td>
+<td>`dot-product-used-as-distance`</td>
+<td>15</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr class="idx-row" data-search="40 `insert_descendants_merge_operator` `insert_descendants_merge_operator_1` `src/writer.rs:1462` `descendant-merge-intersection` 6 [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82)">
+<td>40</td>
+<td>`insert_descendants_merge_operator`</td>
+<td>`insert_descendants_merge_operator_1`</td>
+<td>`src/writer.rs:1462`</td>
+<td>`descendant-merge-intersection`</td>
+<td>6</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr class="idx-row" data-search="41 `insert_descendants_left_guard` `insert_descendants_left_guard_1` `src/writer.rs:1490` `left-descendant-recursion-guard-inverted` 3 [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82)">
+<td>41</td>
+<td>`insert_descendants_left_guard`</td>
+<td>`insert_descendants_left_guard_1`</td>
+<td>`src/writer.rs:1490`</td>
+<td>`left-descendant-recursion-guard-inverted`</td>
+<td>3</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr class="idx-row" data-search="42 `distance_normalized_distance_no_sqrt` `distance_normalized_distance_no_sqrt_1` `src/distance/mod.rs:60` `missing-distance-root-normalization` 4 [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601)">
+<td>42</td>
+<td>`distance_normalized_distance_no_sqrt`</td>
+<td>`distance_normalized_distance_no_sqrt_1`</td>
+<td>`src/distance/mod.rs:60`</td>
+<td>`missing-distance-root-normalization`</td>
+<td>4</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601" target="_blank" rel="noopener noreferrer">`d5a7e6f`</a></td>
+</tr>
+<tr class="idx-row" data-search="43 `distance_pq_left_margin_sign` `distance_pq_left_margin_sign_1` `src/distance/mod.rs:70` `wrong-left-margin-sign` 1 [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601)">
+<td>43</td>
+<td>`distance_pq_left_margin_sign`</td>
+<td>`distance_pq_left_margin_sign_1`</td>
+<td>`src/distance/mod.rs:70`</td>
+<td>`wrong-left-margin-sign`</td>
+<td>1</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601" target="_blank" rel="noopener noreferrer">`d5a7e6f`</a></td>
+</tr>
+<tr class="idx-row" data-search="44 `distance_update_mean_divisor` `distance_update_mean_divisor_1` `src/distance/mod.rs:101` `wrong-centroid-divisor` 12 [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601)">
+<td>44</td>
+<td>`distance_update_mean_divisor`</td>
+<td>`distance_update_mean_divisor_1`</td>
+<td>`src/distance/mod.rs:101`</td>
+<td>`wrong-centroid-divisor`</td>
+<td>12</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601" target="_blank" rel="noopener noreferrer">`d5a7e6f`</a></td>
+</tr>
+<tr class="idx-row" data-search="45 `distance_side_sign_flip` `distance_side_sign_flip_1` `src/distance/mod.rs:118` `inverted-side-selection-sign` 12 [`a70b1dd`](https://github.com/meilisearch/arroy/commit/a70b1dd3c46e75901d9de86070f3167aad6ea2be)">
+<td>45</td>
+<td>`distance_side_sign_flip`</td>
+<td>`distance_side_sign_flip_1`</td>
+<td>`src/distance/mod.rs:118`</td>
+<td>`inverted-side-selection-sign`</td>
+<td>12</td>
+<td><a href="https://github.com/meilisearch/arroy/commit/a70b1dd3c46e75901d9de86070f3167aad6ea2be" target="_blank" rel="noopener noreferrer">`a70b1dd`</a></td>
+</tr>
+</tbody></table>
+</section>
+<section>
+<h2>Bug details</h2>
+<details class="bug" data-search="1 tmpfile_missing_seek file `src/parallel.rs:41` variant `tmpfile_missing_seek_1` tags `parallel, io, append, issue-143` fix commit [`a63f097`](https://github.com/meilisearch/arroy/commit/a63f0979b216dde10d50fdfa4fadcb2b1dea73c7) fix context fix #143 (2025-06-19) related links [pr #144](https://github.com/meilisearch/arroy/pull/144), [issue #143](https://github.com/meilisearch/arroy/issues/143) type `missing-seek` test mode `debug` failure profile heed decode error after read to append overwrite `tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact`"><summary>Bug 1: tmpfile_missing_seek (<code>tmpfile_missing_seek_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/parallel.rs:41`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`tmpfile_missing_seek_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`parallel, io, append, issue-143`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/a63f0979b216dde10d50fdfa4fadcb2b1dea73c7" target="_blank" rel="noopener noreferrer">`a63f097`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix #143 (2025-06-19)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/144" target="_blank" rel="noopener noreferrer">PR #144</a>, <a href="https://github.com/meilisearch/arroy/issues/143" target="_blank" rel="noopener noreferrer">Issue #143</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-seek`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>Heed decode error after read to append overwrite</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact</code></li>
+</ul>
+</details>
+<details class="bug" data-search="2 reader_empty_search_guard file `src/reader.rs:323` variant `reader_empty_search_guard_1` tags `reader, search, empty-index, issue-74` fix commit [`2128749`](https://github.com/meilisearch/arroy/commit/2128749806c67ca8853395e34bf0b4df1f9e41bc) fix context fix a panic at search time when the index is empty (2024-06-19) related links [pr #76](https://github.com/meilisearch/arroy/pull/76), [issue #74](https://github.com/meilisearch/arroy/issues/74) type `missing-base-case` test mode `debug` failure profile panic from integer logarithm on empty items `tests::reader::search_in_empty_database` `tests::writer::delete_document_in_an_empty_index_74`"><summary>Bug 2: reader_empty_search_guard (<code>reader_empty_search_guard_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:323`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_empty_search_guard_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, empty-index, issue-74`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/2128749806c67ca8853395e34bf0b4df1f9e41bc" target="_blank" rel="noopener noreferrer">`2128749`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix a panic at search time when the index is empty (2024-06-19)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/76" target="_blank" rel="noopener noreferrer">PR #76</a>, <a href="https://github.com/meilisearch/arroy/issues/74" target="_blank" rel="noopener noreferrer">Issue #74</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-base-case`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>panic from integer logarithm on empty items</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::search_in_empty_database</code></li>
+<li><code>tests::writer::delete_document_in_an_empty_index_74</code></li>
+</ul>
+</details>
+<details class="bug" data-search="3 tree_target_rounding file `src/writer.rs:1423` variant `tree_target_rounding_1` tags `writer, tree-count, rounding` fix commit [`5b6f5b8`](https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93) fix context fix the number of tree nodes required per items (2024-01-03) related links [pr #49](https://github.com/meilisearch/arroy/pull/49) type `wrong-rounding` test mode `debug` failure profile snapshot regressions in tree count behavior `tests::writer::delete_extraneous_tree` `tests::writer::guess_right_number_of_tree_while_growing`"><summary>Bug 3: tree_target_rounding (<code>tree_target_rounding_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1423`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`tree_target_rounding_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, tree-count, rounding`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93" target="_blank" rel="noopener noreferrer">`5b6f5b8`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the number of tree nodes required per items (2024-01-03)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/49" target="_blank" rel="noopener noreferrer">PR #49</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-rounding`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>snapshot regressions in tree count behavior</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::guess_right_number_of_tree_while_growing</code></li>
+</ul>
+</details>
+<details class="bug" data-search="4 fit_in_memory_remove_by_rank file `src/writer.rs:1672` variant `fit_in_memory_remove_by_rank_1` tags `writer, sampling, wrong-remove` fix commit [`5262b08`](https://github.com/meilisearch/arroy/commit/5262b0866ed6a0b8fe529b170a1700fe4a47ebbd) fix context fix multiple bugs (2025-06-17) related links [pr #130](https://github.com/meilisearch/arroy/pull/130) type `wrong-remove-operation` test mode `debug` failure profile fit in memory selection corruption `tests::fit_in_memory::test_random_selection` `tests::fit_in_memory::test_partial_fit` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 4: fit_in_memory_remove_by_rank (<code>fit_in_memory_remove_by_rank_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1672`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`fit_in_memory_remove_by_rank_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, sampling, wrong-remove`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/5262b0866ed6a0b8fe529b170a1700fe4a47ebbd" target="_blank" rel="noopener noreferrer">`5262b08`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix multiple bugs (2025-06-17)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/130" target="_blank" rel="noopener noreferrer">PR #130</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-remove-operation`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>fit in memory selection corruption</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::fit_in_memory::test_random_selection</code></li>
+<li><code>tests::fit_in_memory::test_partial_fit</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="5 low_memory_none_handling file `src/writer.rs:1560` variant `low_memory_none_handling_1` tags `writer, low-memory, none-handling` fix commit [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82) fix context fix panic when we have low memory (2025-06-17) related links [pr #130](https://github.com/meilisearch/arroy/pull/130) type `missing-none-handling` test mode `debug` failure profile panic from unwrap on missing tmp node `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 5: low_memory_none_handling (<code>low_memory_none_handling_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1560`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`low_memory_none_handling_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, low-memory, none-handling`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix panic when we have low memory (2025-06-17)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/130" target="_blank" rel="noopener noreferrer">PR #130</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-none-handling`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>panic from unwrap on missing tmp node</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="6 upgrade_wrong_metadata_key file `src/upgrade.rs:111` variant `upgrade_wrong_metadata_key_1` tags `upgrade, metadata, field-selection` fix commit [`f3db126`](https://github.com/meilisearch/arroy/commit/f3db126a274264e90bb0eae70892da8293d74425) fix context fix a bug around multi-index metadata (2024-11-04) related links [pr #108](https://github.com/meilisearch/arroy/pull/108) type `wrong-key-field` test mode `debug` failure profile metadata decode mismatch in v0.4 to v0.5 upgrade path `tests::upgrade::upgrade_v0_4_to_v0_5_handles_metadata_per_index`"><summary>Bug 6: upgrade_wrong_metadata_key (<code>upgrade_wrong_metadata_key_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/upgrade.rs:111`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`upgrade_wrong_metadata_key_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`upgrade, metadata, field-selection`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/f3db126a274264e90bb0eae70892da8293d74425" target="_blank" rel="noopener noreferrer">`f3db126`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix a bug around multi-index metadata (2024-11-04)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/108" target="_blank" rel="noopener noreferrer">PR #108</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-key-field`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>metadata decode mismatch in v0.4 to v0.5 upgrade path</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::upgrade_v0_4_to_v0_5_handles_metadata_per_index</code></li>
+</ul>
+</details>
+<details class="bug" data-search="7 upgrade_splitnode_rewrite_gate file `src/upgrade.rs:287` variant `upgrade_splitnode_rewrite_gate_1` tags `upgrade, splitnode, rewrite-gate` fix commit [`7639506`](https://github.com/meilisearch/arroy/commit/7639506680d32853e1dc825a1d99ea974a4b1bb7) fix context fix the broken update and test (2025-05-22) related links [pr #127](https://github.com/meilisearch/arroy/pull/127) type `conditional-rewrite` test mode `debug` failure profile split nodes not fully rewritten during upgrade `tests::upgrade::simple_upgrade_v0_6_to_v0_7` `tests::upgrade::large_upgrade_v0_6_to_v0_7`"><summary>Bug 7: upgrade_splitnode_rewrite_gate (<code>upgrade_splitnode_rewrite_gate_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/upgrade.rs:287`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`upgrade_splitnode_rewrite_gate_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`upgrade, splitnode, rewrite-gate`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/7639506680d32853e1dc825a1d99ea974a4b1bb7" target="_blank" rel="noopener noreferrer">`7639506`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Fix the broken update and test (2025-05-22)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/127" target="_blank" rel="noopener noreferrer">PR #127</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`conditional-rewrite`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>split nodes not fully rewritten during upgrade</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+</ul>
+</details>
+<details class="bug" data-search="8 tmp_lookup_search_window file `src/parallel.rs:161` variant `tmp_lookup_search_window_1` tags `parallel, tmp, search-window` fix commit [`c0e66c6`](https://github.com/meilisearch/arroy/commit/c0e66c674c210ad8422f4f3bf6e043a729f5d914) fix context stop panicking if we don&#x27;t find the node to remove in the two last elements (2024-01-15) related links [pr #57](https://github.com/meilisearch/arroy/pull/57) type `narrow-search-window` test mode `debug` failure profile tmp node lookup misses nodes outside recent tail `tests::tmp_nodes::test_put_and_get_tmp_nodes` `tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact`"><summary>Bug 8: tmp_lookup_search_window (<code>tmp_lookup_search_window_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/parallel.rs:161`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`tmp_lookup_search_window_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`parallel, tmp, search-window`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/c0e66c674c210ad8422f4f3bf6e043a729f5d914" target="_blank" rel="noopener noreferrer">`c0e66c6`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>stop panicking if we don&#x27;t find the node to remove in the two last elements (2024-01-15)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/57" target="_blank" rel="noopener noreferrer">PR #57</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`narrow-search-window`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>tmp node lookup misses nodes outside recent tail</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::tmp_nodes::test_put_and_get_tmp_nodes</code></li>
+<li><code>tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact</code></li>
+</ul>
+</details>
+<details class="bug" data-search="9 fit_in_memory_min_split_threshold file `src/writer.rs:1655` variant `fit_in_memory_min_split_threshold_1` tags `writer, fit-memory, split-threshold` fix commit [`fa62650`](https://github.com/meilisearch/arroy/commit/fa626508854b33d0e6994ba601bf27d9c1315eea) fix context fix a new bug and add unit tests on fit_in_memory (2025-06-17) related links [pr #130](https://github.com/meilisearch/arroy/pull/130) type `off-by-one-split-threshold` test mode `debug` failure profile timeout/non-termination in low-memory writer path _no explicit failing test captured (timeout or harness-level failure)._"><summary>Bug 9: fit_in_memory_min_split_threshold (<code>fit_in_memory_min_split_threshold_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1655`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`fit_in_memory_min_split_threshold_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, fit-memory, split-threshold`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/fa626508854b33d0e6994ba601bf27d9c1315eea" target="_blank" rel="noopener noreferrer">`fa62650`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix a new bug and add unit tests on fit_in_memory (2025-06-17)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/130" target="_blank" rel="noopener noreferrer">PR #130</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`off-by-one-split-threshold`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>timeout/non-termination in low-memory writer path</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li>_No explicit failing test captured (timeout or harness-level failure)._</li>
+</ul>
+</details>
+<details class="bug" data-search="10 missing_tree_count_direction file `src/writer.rs:551` variant `missing_tree_count_direction_1` tags `writer, tree-count, missing-tree` fix commit [`eaeb864`](https://github.com/meilisearch/arroy/commit/eaeb864f8f9250893fd6fd110729d7dabae38c03) fix context review and update all the writer + reader tests snapshots + fix a small bug (2025-03-31) related links [pr #116](https://github.com/meilisearch/arroy/pull/116) type `wrong-missing-tree-count` test mode `debug` failure profile target tree backfill skipped due inverted saturating subtraction `tests::reader::filtering` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line` `tests::writer::add_one_item_incrementally` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_item` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::reuse_node_id` `tests::writer::overwrite_one_item_incremental` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_and_update_lot_of_random_points_with_little_memory` `tests::writer::write_vectors_until_there_is_a_split`"><summary>Bug 10: missing_tree_count_direction (<code>missing_tree_count_direction_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:551`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`missing_tree_count_direction_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, tree-count, missing-tree`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/eaeb864f8f9250893fd6fd110729d7dabae38c03" target="_blank" rel="noopener noreferrer">`eaeb864`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>review and update all the writer + reader tests snapshots + fix a small bug (2025-03-31)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/116" target="_blank" rel="noopener noreferrer">PR #116</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-missing-tree-count`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>target tree backfill skipped due inverted saturating subtraction</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+</ul>
+</details>
+<details class="bug" data-search="11 extraneous_tree_count_direction file `src/writer.rs:652` variant `extraneous_tree_count_direction_1` tags `writer, tree-count, extraneous-tree` fix commit [`66068b4`](https://github.com/meilisearch/arroy/commit/66068b485aad6bd7c5a720325b9237c32a79c132) fix context fix, improve and test the targetted number of tree (2025-04-02) related links [pr #116](https://github.com/meilisearch/arroy/pull/116) type `wrong-extraneous-tree-count` test mode `debug` failure profile extraneous tree pruning count inverted; tree layout diverges `tests::writer::delete_extraneous_tree` `tests::writer::reuse_node_id` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 11: extraneous_tree_count_direction (<code>extraneous_tree_count_direction_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:652`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`extraneous_tree_count_direction_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, tree-count, extraneous-tree`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/66068b485aad6bd7c5a720325b9237c32a79c132" target="_blank" rel="noopener noreferrer">`66068b4`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix, improve and test the targetted number of tree (2025-04-02)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/116" target="_blank" rel="noopener noreferrer">PR #116</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-extraneous-tree-count`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>extraneous tree pruning count inverted; tree layout diverges</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="12 delete_empty_left_child_promote file `src/writer.rs:1083` variant `delete_empty_left_child_promote_1` tags `writer, delete, empty-child` fix commit [`c6c53c5`](https://github.com/meilisearch/arroy/commit/c6c53c5630e5db417492147e4533908abd05479a) fix context fix #117 (2025-04-01) related links [pr #116](https://github.com/meilisearch/arroy/pull/116), [issue #117](https://github.com/meilisearch/arroy/issues/117) type `stale-empty-child-promotion` test mode `debug` failure profile duplicate tmp-node deletion panic in low-memory update path `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 12: delete_empty_left_child_promote (<code>delete_empty_left_child_promote_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1083`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`delete_empty_left_child_promote_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, delete, empty-child`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/c6c53c5630e5db417492147e4533908abd05479a" target="_blank" rel="noopener noreferrer">`c6c53c5`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix #117 (2025-04-01)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/116" target="_blank" rel="noopener noreferrer">PR #116</a>, <a href="https://github.com/meilisearch/arroy/issues/117" target="_blank" rel="noopener noreferrer">Issue #117</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`stale-empty-child-promotion`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>duplicate tmp-node deletion panic in low-memory update path</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="13 fit_descendant_strict_threshold file `src/writer.rs:476` variant `fit_descendant_strict_threshold_1` tags `writer, descendant, threshold` fix commit [`dfc3e60`](https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6) fix context fix all the edges cases when all the elements fits inside a single descendant (2024-01-09) related links [pr #41](https://github.com/meilisearch/arroy/pull/41) type `strict-fit-threshold` test mode `debug` failure profile strict descendant threshold causes early split-node expansion `tests::reader::two_dimension_on_a_line` `tests::writer::add_one_item_incrementally` `tests::writer::add_one_item_incrementally_in_a_one_item_db` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::append` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_one_item_in_a_descendant` `tests::writer::delete_one_item` `tests::writer::delete_extraneous_tree` `tests::writer::overwrite_one_item_incremental` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_descendants` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 13: fit_descendant_strict_threshold (<code>fit_descendant_strict_threshold_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:476`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`fit_descendant_strict_threshold_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, descendant, threshold`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6" target="_blank" rel="noopener noreferrer">`dfc3e60`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix all the edges cases when all the elements fits inside a single descendant (2024-01-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/41" target="_blank" rel="noopener noreferrer">PR #41</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`strict-fit-threshold`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>strict descendant threshold causes early split-node expansion</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::add_one_item_incrementally_in_a_one_item_db</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::append</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_one_item_in_a_descendant</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_descendants</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="14 single_leaf_root_id_mismatch file `src/writer.rs:957` variant `single_leaf_root_id_mismatch_1` tags `writer, single-leaf, root-id` fix commit [`dfc3e60`](https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6) fix context fix all the edges cases when all the elements fits inside a single descendant (2024-01-09) related links [pr #41](https://github.com/meilisearch/arroy/pull/41) type `wrong-single-leaf-root-id` test mode `debug` failure profile single-leaf metadata points to missing tree id `tests::reader::search_in_db_with_a_single_vector` `tests::binary_quantized::write_and_retrieve_binary_quantized_vector` `tests::writer::add_one_item_incrementally_in_a_one_item_db` `tests::writer::add_one_item_incrementally_in_an_empty_db` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::append` `tests::writer::delete_document_in_an_empty_index_74` `tests::writer::delete_one_item_in_a_descendant` `tests::writer::delete_one_item_in_a_one_item_db` `tests::writer::delete_one_item_in_a_single_document_database` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::use_u32_max_minus_one_for_a_vec` `tests::writer::use_u32_max_for_a_vec` `tests::writer::write_multiple_indexes` `tests::writer::write_one_vector` `tests::writer::write_one_vector_in_multiple_trees` `tests::writer::write_one_vector_in_one_tree` `tests::writer::write_vectors_until_there_is_a_descendants`"><summary>Bug 14: single_leaf_root_id_mismatch (<code>single_leaf_root_id_mismatch_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:957`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`single_leaf_root_id_mismatch_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, single-leaf, root-id`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/dfc3e600d35bacb937e3d4e170525ab03d74ecb6" target="_blank" rel="noopener noreferrer">`dfc3e60`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix all the edges cases when all the elements fits inside a single descendant (2024-01-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/41" target="_blank" rel="noopener noreferrer">PR #41</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-single-leaf-root-id`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>single-leaf metadata points to missing tree id</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::search_in_db_with_a_single_vector</code></li>
+<li><code>tests::binary_quantized::write_and_retrieve_binary_quantized_vector</code></li>
+<li><code>tests::writer::add_one_item_incrementally_in_a_one_item_db</code></li>
+<li><code>tests::writer::add_one_item_incrementally_in_an_empty_db</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::append</code></li>
+<li><code>tests::writer::delete_document_in_an_empty_index_74</code></li>
+<li><code>tests::writer::delete_one_item_in_a_descendant</code></li>
+<li><code>tests::writer::delete_one_item_in_a_one_item_db</code></li>
+<li><code>tests::writer::delete_one_item_in_a_single_document_database</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::use_u32_max_minus_one_for_a_vec</code></li>
+<li><code>tests::writer::use_u32_max_for_a_vec</code></li>
+<li><code>tests::writer::write_multiple_indexes</code></li>
+<li><code>tests::writer::write_one_vector</code></li>
+<li><code>tests::writer::write_one_vector_in_multiple_trees</code></li>
+<li><code>tests::writer::write_one_vector_in_one_tree</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_descendants</code></li>
+</ul>
+</details>
+<details class="bug" data-search="15 tree_target_small_dataset_boundary file `src/writer.rs:1415` variant `tree_target_small_dataset_boundary_1` tags `writer, tree-count, threshold` fix commit [`92c1ddd`](https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a) fix context final version of the nb tree guesser (2025-07-07) related links [pr #138](https://github.com/meilisearch/arroy/pull/138) type `small-dataset-threshold` test mode `debug` failure profile small-dataset threshold includes 10k boundary and shifts tree target snapshots `tests::writer::guess_right_number_of_tree_while_growing`"><summary>Bug 15: tree_target_small_dataset_boundary (<code>tree_target_small_dataset_boundary_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1415`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`tree_target_small_dataset_boundary_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, tree-count, threshold`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a" target="_blank" rel="noopener noreferrer">`92c1ddd`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>final version of the nb tree guesser (2025-07-07)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/138" target="_blank" rel="noopener noreferrer">PR #138</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`small-dataset-threshold`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>small-dataset threshold includes 10k boundary and shifts tree target snapshots</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::guess_right_number_of_tree_while_growing</code></li>
+</ul>
+</details>
+<details class="bug" data-search="16 tree_target_dimension_power file `src/writer.rs:1401` variant `tree_target_dimension_power_1` tags `writer, tree-count, dim-scaling` fix commit [`92c1ddd`](https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a) fix context final version of the nb tree guesser (2025-07-07) related links [pr #138](https://github.com/meilisearch/arroy/pull/138) type `dimension-scaling-power` test mode `debug` failure profile dimension scaling exponent changed in tree target formula `tests::writer::guess_right_number_of_tree_while_growing`"><summary>Bug 16: tree_target_dimension_power (<code>tree_target_dimension_power_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1401`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`tree_target_dimension_power_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, tree-count, dim-scaling`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/92c1dddd2d59f6d7a7a4069c7f746d963d9dd08a" target="_blank" rel="noopener noreferrer">`92c1ddd`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>final version of the nb tree guesser (2025-07-07)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/138" target="_blank" rel="noopener noreferrer">PR #138</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`dimension-scaling-power`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>dimension scaling exponent changed in tree target formula</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::guess_right_number_of_tree_while_growing</code></li>
+</ul>
+</details>
+<details class="bug" data-search="17 euclidean_split_skip_normalize file `src/distance/euclidean.rs:84` variant `euclidean_split_skip_normalize_1` tags `distance, euclidean, split-normalization` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `missing-split-normalization` test mode `debug` failure profile euclidean split normal is left unnormalized `tests::writer::add_one_item_incrementally` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_item` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_vectors_until_there_is_a_split`"><summary>Bug 17: euclidean_split_skip_normalize (<code>euclidean_split_skip_normalize_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/euclidean.rs:84`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`euclidean_split_skip_normalize_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, euclidean, split-normalization`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-split-normalization`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>euclidean split normal is left unnormalized</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+</ul>
+</details>
+<details class="bug" data-search="18 median_top_k_truncate_bias file `src/reader.rs:707` variant `median_top_k_truncate_bias_1` tags `reader, top-k, threshold` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `early-buffer-truncation` test mode `debug` failure profile median top-k truncates too aggressively during thresholding `tests::reader::two_dimension_on_a_line` `tests::reader::median_top_k_vs_binary_heap`"><summary>Bug 18: median_top_k_truncate_bias (<code>median_top_k_truncate_bias_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:707`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`median_top_k_truncate_bias_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, top-k, threshold`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`early-buffer-truncation`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>median top-k truncates too aggressively during thresholding</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::reader::median_top_k_vs_binary_heap</code></li>
+</ul>
+</details>
+<details class="bug" data-search="19 euclidean_split_bias_scale file `src/distance/euclidean.rs:99` variant `euclidean_split_bias_scale_1` tags `distance, euclidean, split-bias` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `wrong-split-bias-scale` test mode `debug` failure profile euclidean split bias is over-scaled `tests::writer::add_one_item_incrementally` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_item` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points`"><summary>Bug 19: euclidean_split_bias_scale (<code>euclidean_split_bias_scale_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/euclidean.rs:99`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`euclidean_split_bias_scale_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, euclidean, split-bias`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-split-bias-scale`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>euclidean split bias is over-scaled</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+</ul>
+</details>
+<details class="bug" data-search="20 median_top_k_final_truncate file `src/reader.rs:732` variant `median_top_k_final_truncate_1` tags `reader, top-k, off-by-one` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `off-by-one-final-truncate` test mode `debug` failure profile final top-k truncation drops one nearest neighbor `tests::reader::search_in_db_with_a_single_vector` `tests::upgrade::simple_upgrade_v0_6_to_v0_7` `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::filtering` `tests::reader::median_top_k_vs_binary_heap` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 20: median_top_k_final_truncate (<code>median_top_k_final_truncate_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:732`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`median_top_k_final_truncate_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, top-k, off-by-one`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`off-by-one-final-truncate`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>final top-k truncation drops one nearest neighbor</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::search_in_db_with_a_single_vector</code></li>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::median_top_k_vs_binary_heap</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="21 euclidean_margin_sign file `src/distance/euclidean.rs:111` variant `euclidean_margin_sign_1` tags `distance, euclidean, margin-sign` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `inverted-margin-sign` test mode `debug` failure profile euclidean split margin uses inverted sign `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::add_one_item_incrementally` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_item` `tests::writer::create_root_split_node_with_empty_child` `tests::reader::two_dimension_on_a_line` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points`"><summary>Bug 21: euclidean_margin_sign (<code>euclidean_margin_sign_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/euclidean.rs:111`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`euclidean_margin_sign_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, euclidean, margin-sign`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`inverted-margin-sign`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>euclidean split margin uses inverted sign</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+</ul>
+</details>
+<details class="bug" data-search="22 median_top_k_filter_inversion file `src/reader.rs:693` variant `median_top_k_filter_inversion_1` tags `reader, top-k, filter` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `inverted-threshold-filter` test mode `debug` failure profile top-k candidate filter direction inverted `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::median_top_k_vs_binary_heap`"><summary>Bug 22: median_top_k_filter_inversion (<code>median_top_k_filter_inversion_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:693`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`median_top_k_filter_inversion_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, top-k, filter`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`inverted-threshold-filter`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>top-k candidate filter direction inverted</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::median_top_k_vs_binary_heap</code></li>
+</ul>
+</details>
+<details class="bug" data-search="23 median_top_k_sort_direction file `src/reader.rs:725` variant `median_top_k_sort_direction_1` tags `reader, top-k, ordering` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `reversed-ordering` test mode `debug` failure profile top-k ordering reversed before truncation `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::upgrade::simple_upgrade_v0_6_to_v0_7` `tests::reader::filtering` `tests::reader::median_top_k_vs_binary_heap` `tests::reader::two_dimension_on_a_line` `tests::reader::two_dimension_on_a_column`"><summary>Bug 23: median_top_k_sort_direction (<code>median_top_k_sort_direction_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:725`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`median_top_k_sort_direction_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, top-k, ordering`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`reversed-ordering`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>top-k ordering reversed before truncation</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::median_top_k_vs_binary_heap</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+</ul>
+</details>
+<details class="bug" data-search="24 reader_searchk_root_factor file `src/reader.rs:335` variant `reader_searchk_root_factor_1` tags `reader, search, budget` fix commit [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a) fix context implement the search nns api (2023-11-16) related links [pr #1](https://github.com/meilisearch/arroy/pull/1) type `missing-root-factor` test mode `debug` failure profile search budget ignores root-count factor `tests::reader::filtering` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 24: reader_searchk_root_factor (<code>reader_searchk_root_factor_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:335`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_searchk_root_factor_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, budget`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Implement the search nns API (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/1" target="_blank" rel="noopener noreferrer">PR #1</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-root-factor`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>search budget ignores root-count factor</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="25 reader_candidates_filter_bypass file `src/reader.rs:374` variant `reader_candidates_filter_bypass_1` tags `reader, search, candidates` fix commit [`3e7d3d0`](https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b) fix context add a test of the filtering (2023-12-05) related links [pr #38](https://github.com/meilisearch/arroy/pull/38) type `candidate-filter-bypass` test mode `debug` failure profile candidate-filter bypass in descendants expansion `tests::reader::filtering`"><summary>Bug 25: reader_candidates_filter_bypass (<code>reader_candidates_filter_bypass_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:374`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_candidates_filter_bypass_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, candidates`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b" target="_blank" rel="noopener noreferrer">`3e7d3d0`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>add a test of the filtering (2023-12-05)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/38" target="_blank" rel="noopener noreferrer">PR #38</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`candidate-filter-bypass`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>candidate-filter bypass in descendants expansion</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::filtering</code></li>
+</ul>
+</details>
+<details class="bug" data-search="26 reader_margin_argument_order file `src/reader.rs:399` variant `reader_margin_argument_order_1` tags `reader, search, margin` fix commit [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a) fix context implement the search nns api (2023-11-16) related links [pr #1](https://github.com/meilisearch/arroy/pull/1) type `swapped-margin-arguments` test mode `debug` failure profile margin argument order swapped `tests::reader::two_dimension_on_a_line`"><summary>Bug 26: reader_margin_argument_order (<code>reader_margin_argument_order_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:399`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_margin_argument_order_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, margin`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Implement the search nns API (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/1" target="_blank" rel="noopener noreferrer">PR #1</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`swapped-margin-arguments`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>margin argument order swapped</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="27 reader_split_side_distance_swap file `src/reader.rs:412` variant `reader_split_side_distance_swap_1` tags `reader, search, branch-priority` fix commit [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a) fix context implement the search nns api (2023-11-16) related links [pr #1](https://github.com/meilisearch/arroy/pull/1) type `swapped-branch-priority` test mode `debug` failure profile left/right branch priority distance swapped `tests::reader::two_dimension_on_a_line`"><summary>Bug 27: reader_split_side_distance_swap (<code>reader_split_side_distance_swap_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:412`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_split_side_distance_swap_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, branch-priority`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Implement the search nns API (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/1" target="_blank" rel="noopener noreferrer">PR #1</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`swapped-branch-priority`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>left/right branch priority distance swapped</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="28 reader_nns_dedup_order file `src/reader.rs:427` variant `reader_nns_dedup_order_1` tags `reader, search, dedup` fix commit [`3538b81`](https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a) fix context implement the search nns api (2023-11-16) related links [pr #1](https://github.com/meilisearch/arroy/pull/1) type `dedup-before-sort` test mode `debug` failure profile dedup performed before sorting nearest-neighbor ids `tests::reader::filtering` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 28: reader_nns_dedup_order (<code>reader_nns_dedup_order_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:427`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_nns_dedup_order_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, dedup`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3538b817105bac074f601008fbaba594eb5d121a" target="_blank" rel="noopener noreferrer">`3538b81`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Implement the search nns API (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/1" target="_blank" rel="noopener noreferrer">PR #1</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`dedup-before-sort`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>dedup performed before sorting nearest-neighbor IDs</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="29 median_top_k_initial_threshold file `src/reader.rs:679` variant `median_top_k_initial_threshold_1` tags `reader, top-k, threshold-init` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `wrong-threshold-initialization` test mode `debug` failure profile top-k threshold initialized to minimum value `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::median_top_k_vs_binary_heap`"><summary>Bug 29: median_top_k_initial_threshold (<code>median_top_k_initial_threshold_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:679`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`median_top_k_initial_threshold_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, top-k, threshold-init`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-threshold-initialization`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>top-k threshold initialized to minimum value</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::median_top_k_vs_binary_heap</code></li>
+</ul>
+</details>
+<details class="bug" data-search="30 reader_leaf_candidates_default_false file `src/reader.rs:361` variant `reader_leaf_candidates_default_false_1` tags `reader, search, candidates` fix commit [`3e7d3d0`](https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b) fix context add a test of the filtering (2023-12-05) related links [pr #38](https://github.com/meilisearch/arroy/pull/38) type `wrong-candidate-default` test mode `debug` failure profile leaf candidate filter defaults to excluding all items when no candidate set is provided `tests::upgrade::simple_upgrade_v0_6_to_v0_7`"><summary>Bug 30: reader_leaf_candidates_default_false (<code>reader_leaf_candidates_default_false_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:361`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_leaf_candidates_default_false_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, candidates`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b" target="_blank" rel="noopener noreferrer">`3e7d3d0`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>add a test of the filtering (2023-12-05)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/38" target="_blank" rel="noopener noreferrer">PR #38</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-candidate-default`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>leaf candidate filter defaults to excluding all items when no candidate set is provided</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+</ul>
+</details>
+<details class="bug" data-search="31 reader_descendant_no_candidates_skip file `src/reader.rs:382` variant `reader_descendant_no_candidates_skip_1` tags `reader, search, descendants` fix commit [`3e7d3d0`](https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b) fix context add a test of the filtering (2023-12-05) related links [pr #38](https://github.com/meilisearch/arroy/pull/38) type `skip-descendants-without-candidates` test mode `debug` failure profile descendant expansion is skipped when no candidate filter is provided `tests::reader::search_in_db_with_a_single_vector` `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::upgrade::simple_upgrade_v0_6_to_v0_7` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 31: reader_descendant_no_candidates_skip (<code>reader_descendant_no_candidates_skip_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:382`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_descendant_no_candidates_skip_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, descendants`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/3e7d3d0926e26d60e16f0f10ddf82596f782670b" target="_blank" rel="noopener noreferrer">`3e7d3d0`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>add a test of the filtering (2023-12-05)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/38" target="_blank" rel="noopener noreferrer">PR #38</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`skip-descendants-without-candidates`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>descendant expansion is skipped when no candidate filter is provided</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::search_in_db_with_a_single_vector</code></li>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="32 reader_k_selection_max file `src/reader.rs:450` variant `reader_k_selection_max_1` tags `reader, search, top-k` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `max-instead-of-min-top-k` test mode `debug` failure profile top-k bound uses max instead of min and over-returns neighbors `tests::upgrade::simple_upgrade_v0_6_to_v0_7` `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 32: reader_k_selection_max (<code>reader_k_selection_max_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:450`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_k_selection_max_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, top-k`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`max-instead-of-min-top-k`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>top-k bound uses max instead of min and over-returns neighbors</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="33 tree_target_small_dataset_exponent_shift file `src/writer.rs:1408` variant `tree_target_small_dataset_exponent_shift_1` tags `writer, tree-count, small-dataset` fix commit [`5b6f5b8`](https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93) fix context fix the number of tree nodes required per items (2024-01-03) related links [pr #49](https://github.com/meilisearch/arroy/pull/49) type `small-dataset-exponent-shift` test mode `debug` failure profile small-dataset tree exponent is shifted by +1 `tests::writer::guess_right_number_of_tree_while_growing`"><summary>Bug 33: tree_target_small_dataset_exponent_shift (<code>tree_target_small_dataset_exponent_shift_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1408`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`tree_target_small_dataset_exponent_shift_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, tree-count, small-dataset`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/5b6f5b8de08e87680ad0ac0049602d43717b5a93" target="_blank" rel="noopener noreferrer">`5b6f5b8`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the number of tree nodes required per items (2024-01-03)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/49" target="_blank" rel="noopener noreferrer">PR #49</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`small-dataset-exponent-shift`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>small-dataset tree exponent is shifted by +1</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::guess_right_number_of_tree_while_growing</code></li>
+</ul>
+</details>
+<details class="bug" data-search="34 euclidean_norm_no_sqrt file `src/distance/euclidean.rs:56` variant `euclidean_norm_no_sqrt_1` tags `distance, euclidean, norm` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `missing-norm-square-root` test mode `debug` failure profile euclidean norm omits the square root during split normalization `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::add_one_item_incrementally` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_one_item` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_vectors_until_there_is_a_split`"><summary>Bug 34: euclidean_norm_no_sqrt (<code>euclidean_norm_no_sqrt_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/euclidean.rs:56`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`euclidean_norm_no_sqrt_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, euclidean, norm`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-norm-square-root`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>euclidean norm omits the square root during split normalization</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+</ul>
+</details>
+<details class="bug" data-search="35 two_means_weighted_distance_left file `src/distance/mod.rs:175` variant `two_means_weighted_distance_left_1` tags `distance, split, weighting` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `missing-centroid-weighting` test mode `debug` failure profile left centroid weighting factor is dropped during split clustering `tests::writer::add_one_item_incrementally` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_item` `tests::writer::reuse_node_id` `tests::writer::overwrite_one_item_incremental` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points_with_little_memory` `tests::writer::write_and_update_lot_of_random_points`"><summary>Bug 35: two_means_weighted_distance_left (<code>two_means_weighted_distance_left_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/mod.rs:175`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`two_means_weighted_distance_left_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, split, weighting`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-centroid-weighting`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>left centroid weighting factor is dropped during split clustering</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+</ul>
+</details>
+<details class="bug" data-search="36 euclidean_two_means_cosine_flag file `src/distance/euclidean.rs:71` variant `euclidean_two_means_cosine_flag_1` tags `distance, euclidean, split-centroid` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `wrong-cosine-flag-in-euclidean-split` test mode `debug` failure profile euclidean split incorrectly enables cosine normalization in two-means `tests::writer::add_one_item_incrementally` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::reader::two_dimension_on_a_line` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::delete_extraneous_tree` `tests::writer::delete_one_item` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points`"><summary>Bug 36: euclidean_two_means_cosine_flag (<code>euclidean_two_means_cosine_flag_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/euclidean.rs:71`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`euclidean_two_means_cosine_flag_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, euclidean, split-centroid`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-cosine-flag-in-euclidean-split`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>euclidean split incorrectly enables cosine normalization in two-means</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+</ul>
+</details>
+<details class="bug" data-search="37 insert_descendants_right_guard file `src/writer.rs:1516` variant `insert_descendants_right_guard_1` tags `writer, descendants, right-branch` fix commit [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82) fix context fix panic when we have low memory (2025-06-17) related links [pr #130](https://github.com/meilisearch/arroy/pull/130) type `right-descendant-recursion-guard-inverted` test mode `debug` failure profile right descendants are skipped when right branch is non-empty `tests::writer::add_one_item_incrementally` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 37: insert_descendants_right_guard (<code>insert_descendants_right_guard_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1516`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`insert_descendants_right_guard_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, descendants, right-branch`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix panic when we have low memory (2025-06-17)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/130" target="_blank" rel="noopener noreferrer">PR #130</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`right-descendant-recursion-guard-inverted`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>right descendants are skipped when right branch is non-empty</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="38 reader_output_skip_normalization file `src/reader.rs:460` variant `reader_output_skip_normalization_1` tags `reader, search, output-distance` fix commit [`97ba58d`](https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2) fix context apply review suggestions, simplify top k fn (2025-05-26) related links [pr #129](https://github.com/meilisearch/arroy/pull/129) type `missing-distance-normalization` test mode `debug` failure profile reader returns non-normalized distances in search output `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::filtering` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 38: reader_output_skip_normalization (<code>reader_output_skip_normalization_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/reader.rs:460`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`reader_output_skip_normalization_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`reader, search, output-distance`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/97ba58d2e298567fb565019b9df0f75eacc5a1f2" target="_blank" rel="noopener noreferrer">`97ba58d`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>apply review suggestions, simplify top k fn (2025-05-26)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/129" target="_blank" rel="noopener noreferrer">PR #129</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-distance-normalization`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>reader returns non-normalized distances in search output</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="39 euclidean_built_distance_dot file `src/distance/euclidean.rs:46` variant `euclidean_built_distance_dot_1` tags `distance, euclidean, built-distance` fix commit [`60875eb`](https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36) fix context fix the euclidean distance (2024-09-09) related links [pr #82](https://github.com/meilisearch/arroy/pull/82) type `dot-product-used-as-distance` test mode `debug` failure profile euclidean built distance uses dot product instead of euclidean metric `tests::upgrade::simple_upgrade_v0_6_to_v0_7` `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::filtering` `tests::reader::two_dimension_on_a_line` `tests::writer::add_one_item_incrementally` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_one_item` `tests::writer::delete_extraneous_tree` `tests::reader::two_dimension_on_a_column` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points`"><summary>Bug 39: euclidean_built_distance_dot (<code>euclidean_built_distance_dot_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/euclidean.rs:46`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`euclidean_built_distance_dot_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, euclidean, built-distance`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/60875ebc0a110a2a8662c72d49af7b2a22284a36" target="_blank" rel="noopener noreferrer">`60875eb`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix the euclidean distance (2024-09-09)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/82" target="_blank" rel="noopener noreferrer">PR #82</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`dot-product-used-as-distance`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>euclidean built distance uses dot product instead of euclidean metric</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::simple_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+</ul>
+</details>
+<details class="bug" data-search="40 insert_descendants_merge_operator file `src/writer.rs:1462` variant `insert_descendants_merge_operator_1` tags `writer, descendants, merge` fix commit [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82) fix context fix panic when we have low memory (2025-06-17) related links [pr #130](https://github.com/meilisearch/arroy/pull/130) type `descendant-merge-intersection` test mode `debug` failure profile descendant updates intersect instead of union when merging inserts `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::add_one_item_incrementally` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 40: insert_descendants_merge_operator (<code>insert_descendants_merge_operator_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1462`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`insert_descendants_merge_operator_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, descendants, merge`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix panic when we have low memory (2025-06-17)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/130" target="_blank" rel="noopener noreferrer">PR #130</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`descendant-merge-intersection`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>descendant updates intersect instead of union when merging inserts</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="41 insert_descendants_left_guard file `src/writer.rs:1490` variant `insert_descendants_left_guard_1` tags `writer, descendants, left-branch` fix commit [`af2cdca`](https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82) fix context fix panic when we have low memory (2025-06-17) related links [pr #130](https://github.com/meilisearch/arroy/pull/130) type `left-descendant-recursion-guard-inverted` test mode `debug` failure profile left descendants are skipped when left branch is non-empty `tests::writer::add_one_item_incrementally` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 41: insert_descendants_left_guard (<code>insert_descendants_left_guard_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/writer.rs:1490`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`insert_descendants_left_guard_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`writer, descendants, left-branch`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/af2cdcae43ab5ca6b77ad6cad50df5e64af43b82" target="_blank" rel="noopener noreferrer">`af2cdca`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>fix panic when we have low memory (2025-06-17)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/130" target="_blank" rel="noopener noreferrer">PR #130</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`left-descendant-recursion-guard-inverted`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>left descendants are skipped when left branch is non-empty</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+<details class="bug" data-search="42 distance_normalized_distance_no_sqrt file `src/distance/mod.rs:60` variant `distance_normalized_distance_no_sqrt_1` tags `distance, normalization, scaling` fix commit [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601) fix context introduce the euclidean distance (2023-11-16) related links _no issue/pr links detected from tags, commit metadata, or github commit associations._ type `missing-distance-root-normalization` test mode `debug` failure profile test failure `tests::upgrade::large_upgrade_v0_6_to_v0_7` `tests::reader::filtering` `tests::reader::two_dimension_on_a_column` `tests::reader::two_dimension_on_a_line`"><summary>Bug 42: distance_normalized_distance_no_sqrt (<code>distance_normalized_distance_no_sqrt_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/mod.rs:60`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`distance_normalized_distance_no_sqrt_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, normalization, scaling`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601" target="_blank" rel="noopener noreferrer">`d5a7e6f`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Introduce the Euclidean distance (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td>_No issue/PR links detected from tags, commit metadata, or GitHub commit associations._</td>
+</tr>
+<tr>
+<td>Type</td><td>`missing-distance-root-normalization`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>test failure</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::upgrade::large_upgrade_v0_6_to_v0_7</code></li>
+<li><code>tests::reader::filtering</code></li>
+<li><code>tests::reader::two_dimension_on_a_column</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="43 distance_pq_left_margin_sign file `src/distance/mod.rs:70` variant `distance_pq_left_margin_sign_1` tags `distance, queue-priority, margin` fix commit [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601) fix context introduce the euclidean distance (2023-11-16) related links _no issue/pr links detected from tags, commit metadata, or github commit associations._ type `wrong-left-margin-sign` test mode `debug` failure profile test failure `tests::reader::two_dimension_on_a_line`"><summary>Bug 43: distance_pq_left_margin_sign (<code>distance_pq_left_margin_sign_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/mod.rs:70`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`distance_pq_left_margin_sign_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, queue-priority, margin`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601" target="_blank" rel="noopener noreferrer">`d5a7e6f`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Introduce the Euclidean distance (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td>_No issue/PR links detected from tags, commit metadata, or GitHub commit associations._</td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-left-margin-sign`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>test failure</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+</ul>
+</details>
+<details class="bug" data-search="44 distance_update_mean_divisor file `src/distance/mod.rs:101` variant `distance_update_mean_divisor_1` tags `distance, centroid, averaging` fix commit [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601) fix context introduce the euclidean distance (2023-11-16) related links _no issue/pr links detected from tags, commit metadata, or github commit associations._ type `wrong-centroid-divisor` test mode `debug` failure profile test failure `tests::writer::delete_one_leaf_in_a_split` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::delete_extraneous_tree` `tests::reader::two_dimension_on_a_line` `tests::writer::add_one_item_incrementally` `tests::writer::delete_one_item` `tests::writer::overwrite_one_item_incremental` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points_with_little_memory` `tests::writer::write_and_update_lot_of_random_points`"><summary>Bug 44: distance_update_mean_divisor (<code>distance_update_mean_divisor_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/mod.rs:101`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`distance_update_mean_divisor_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, centroid, averaging`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601" target="_blank" rel="noopener noreferrer">`d5a7e6f`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>Introduce the Euclidean distance (2023-11-16)</td>
+</tr>
+<tr>
+<td>Related links</td><td>_No issue/PR links detected from tags, commit metadata, or GitHub commit associations._</td>
+</tr>
+<tr>
+<td>Type</td><td>`wrong-centroid-divisor`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>test failure</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+</ul>
+</details>
+<details class="bug" data-search="45 distance_side_sign_flip file `src/distance/mod.rs:118` variant `distance_side_sign_flip_1` tags `distance, side-selection, sign` fix commit [`a70b1dd`](https://github.com/meilisearch/arroy/commit/a70b1dd3c46e75901d9de86070f3167aad6ea2be) fix context feat: make normal a leaf&lt;&#x27;_, distance&gt; (2025-05-29) related links [pr #132](https://github.com/meilisearch/arroy/pull/132) type `inverted-side-selection-sign` test mode `debug` failure profile test failure `tests::writer::add_one_item_incrementally_to_create_a_split_node` `tests::writer::add_one_item_incrementally` `tests::reader::two_dimension_on_a_line` `tests::writer::create_root_split_node_with_empty_child` `tests::writer::delete_one_item` `tests::writer::delete_extraneous_tree` `tests::writer::overwrite_one_item_incremental` `tests::writer::delete_one_leaf_in_a_split` `tests::writer::reuse_node_id` `tests::writer::write_vectors_until_there_is_a_split` `tests::writer::write_and_update_lot_of_random_points` `tests::writer::write_and_update_lot_of_random_points_with_little_memory`"><summary>Bug 45: distance_side_sign_flip (<code>distance_side_sign_flip_1</code>)</summary>
+<table class="meta">
+<tr>
+<td>File</td><td>`src/distance/mod.rs:118`</td>
+</tr>
+<tr>
+<td>Variant</td><td>`distance_side_sign_flip_1`</td>
+</tr>
+<tr>
+<td>Tags</td><td>`distance, side-selection, sign`</td>
+</tr>
+<tr>
+<td>Fix commit</td><td><a href="https://github.com/meilisearch/arroy/commit/a70b1dd3c46e75901d9de86070f3167aad6ea2be" target="_blank" rel="noopener noreferrer">`a70b1dd`</a></td>
+</tr>
+<tr>
+<td>Fix context</td><td>feat: make normal a Leaf&lt;&#x27;_, Distance&gt; (2025-05-29)</td>
+</tr>
+<tr>
+<td>Related links</td><td><a href="https://github.com/meilisearch/arroy/pull/132" target="_blank" rel="noopener noreferrer">PR #132</a></td>
+</tr>
+<tr>
+<td>Type</td><td>`inverted-side-selection-sign`</td>
+</tr>
+<tr>
+<td>Test mode</td><td>`debug`</td>
+</tr>
+<tr>
+<td>Failure profile</td><td>test failure</td>
+</tr>
+</table>
+<p><strong>Detecting tests</strong></p>
+<ul>
+<li><code>tests::writer::add_one_item_incrementally_to_create_a_split_node</code></li>
+<li><code>tests::writer::add_one_item_incrementally</code></li>
+<li><code>tests::reader::two_dimension_on_a_line</code></li>
+<li><code>tests::writer::create_root_split_node_with_empty_child</code></li>
+<li><code>tests::writer::delete_one_item</code></li>
+<li><code>tests::writer::delete_extraneous_tree</code></li>
+<li><code>tests::writer::overwrite_one_item_incremental</code></li>
+<li><code>tests::writer::delete_one_leaf_in_a_split</code></li>
+<li><code>tests::writer::reuse_node_id</code></li>
+<li><code>tests::writer::write_vectors_until_there_is_a_split</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points</code></li>
+<li><code>tests::writer::write_and_update_lot_of_random_points_with_little_memory</code></li>
+</ul>
+</details>
+</section>
+<script>
+const q=document.getElementById("q");
+function apply(){const term=(q.value||"").toLowerCase().trim();
+document.querySelectorAll(".idx-row,.bug").forEach(el=>{const s=el.dataset.search||"";el.classList.toggle("hidden", term && !s.includes(term));});}
+q.addEventListener("input",apply);
+</script>
+</main></body></html>

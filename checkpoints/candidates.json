@@ -1,0 +1,160 @@
+{
+  "run_id": "dfd37854-caf6-4818-b589-4fddab8f1c20",
+  "project": "arroy",
+  "repo": "https://github.com/meilisearch/arroy",
+  "language": "Rust",
+  "scan": {
+    "batch_size": 50,
+    "batches": [
+      { "offset": 0, "count": 50 },
+      { "offset": 50, "count": 50 }
+    ],
+    "total_commits_scanned": 100
+  },
+  "candidates": [
+    {
+      "id": 1,
+      "hash": "7d530beba1018abca2a97eb972cf725b48fb5f04",
+      "message": "fix bug",
+      "files": ["src/writer.rs"],
+      "diff_size": 2,
+      "classification": "expression",
+      "bug_type": "off-by-one-range",
+      "description": "When splitting child indices, removing range 0..max dropped one too few items. The fix changes to inclusive range 0..=max.",
+      "files_exist": true,
+      "suitability": "excellent"
+    },
+    {
+      "id": 2,
+      "hash": "a63f0979b216dde10d50fdfa4fadcb2b1dea73c7",
+      "message": "fix #143",
+      "files": ["src/parallel.rs"],
+      "diff_size": 4,
+      "classification": "statement",
+      "bug_type": "missing-seek",
+      "description": "Transitioning tmp-node state from reader to writer failed to seek to end before writing, so writes could overwrite existing bytes.",
+      "files_exist": true,
+      "suitability": "excellent"
+    },
+    {
+      "id": 3,
+      "hash": "af2cdcae43ab5ca6b77ad6cad50df5e64af43b82",
+      "message": "fix panic when we have low memory",
+      "files": ["src/writer.rs"],
+      "diff_size": 10,
+      "classification": "statement",
+      "bug_type": "wrong-none-handling",
+      "description": "Recursion over tmp nodes assumed presence and unwrapped. Under low-memory flow, None is valid and should merge descendant updates instead of panicking.",
+      "files_exist": true,
+      "suitability": "excellent"
+    },
+    {
+      "id": 4,
+      "hash": "144ea2c6149eba43921a6e4431a008de58b52166",
+      "message": "fix panic",
+      "files": ["src/writer.rs"],
+      "diff_size": 2,
+      "classification": "expression",
+      "bug_type": "wrong-source-container",
+      "description": "A split-side computation fetched nodes from `children` instead of `reader.leafs`, causing wrong lookups and panic on missing entries.",
+      "files_exist": true,
+      "suitability": "excellent"
+    },
+    {
+      "id": 5,
+      "hash": "444ab21facc73318a24b653210f8a494d2985e5a",
+      "message": "Fix a division by zero when deleting trees",
+      "files": ["src/writer.rs"],
+      "diff_size": 5,
+      "classification": "statement",
+      "bug_type": "missing-empty-guard",
+      "description": "Tree-deletion sizing logic divided by `roots.len()` without guarding empty roots; fix returns early when roots is empty.",
+      "files_exist": true,
+      "suitability": "excellent"
+    },
+    {
+      "id": 6,
+      "hash": "2128749806c67ca8853395e34bf0b4df1f9e41bc",
+      "message": "fix a panic at search time when the index is empty",
+      "files": ["src/reader.rs", "src/tests/reader.rs"],
+      "diff_size": 19,
+      "classification": "statement",
+      "bug_type": "missing-base-case",
+      "description": "Nearest-neighbor search did not handle empty item sets and could panic; fix adds an early empty-result return.",
+      "files_exist": true,
+      "suitability": "excellent"
+    },
+    {
+      "id": 7,
+      "hash": "5b6f5b8de08e87680ad0ac0049602d43717b5a93",
+      "message": "fix the number of tree nodes required per items",
+      "files": ["src/writer.rs", "src/tests/writer.rs", "src/tests/reader.rs"],
+      "diff_size": 40,
+      "classification": "expression",
+      "bug_type": "off-by-one-threshold",
+      "description": "Tree generation stop condition used `(n_items - 1).max(1)` instead of `n_items`, producing incorrect target tree-node counts for small datasets.",
+      "files_exist": true,
+      "suitability": "good"
+    },
+    {
+      "id": 8,
+      "hash": "5262b0866ed6a0b8fe529b170a1700fe4a47ebbd",
+      "message": "fix multiple bugs",
+      "files": ["src/writer.rs"],
+      "diff_size": 85,
+      "classification": "expression",
+      "bug_type": "wrong-remove-operation",
+      "description": "Random fit selection removed by positional rank (`remove_smallest(idx)`) instead of the selected item id (`remove(item)`), desynchronizing sampled and remaining sets.",
+      "files_exist": true,
+      "suitability": "good"
+    },
+    {
+      "id": 9,
+      "hash": "ecf0df4ae227be68306bc3ab78fecfaf55bc1e62",
+      "message": "check for error when inserting elements in a tree",
+      "files": ["src/writer.rs", "src/tests/writer.rs"],
+      "diff_size": 8,
+      "classification": "statement",
+      "bug_type": "missing-error-short-circuit",
+      "description": "Recursive insertion continued after an error was already queued, causing additional failures/stalls; fix short-circuits when error channel is full.",
+      "files_exist": true,
+      "suitability": "good"
+    },
+    {
+      "id": 10,
+      "hash": "f3db126a274264e90bb0eae70892da8293d74425",
+      "message": "fix a bug around multi-index metadata",
+      "files": ["src/lib.rs"],
+      "diff_size": 7,
+      "classification": "expression",
+      "bug_type": "wrong-key-field",
+      "description": "Upgrade path matched metadata branch on `key.index` instead of `key.node.item`, so metadata records could be misrouted during migration.",
+      "files_exist": true,
+      "suitability": "good"
+    },
+    {
+      "id": 11,
+      "hash": "7639506680d32853e1dc825a1d99ea974a4b1bb7",
+      "message": "Fix the broken update and test",
+      "files": ["src/upgrade.rs", "src/tests/upgrade.rs"],
+      "diff_size": 20,
+      "classification": "statement",
+      "bug_type": "missed-rewrite",
+      "description": "Upgrade logic only rewrote split nodes when a flag was set. Item->tree conversion can require rewrite regardless, so stale split-node links remained.",
+      "files_exist": true,
+      "suitability": "good"
+    },
+    {
+      "id": 12,
+      "hash": "c0e66c674c210ad8422f4f3bf6e043a729f5d914",
+      "message": "stop panicking if we don't find the node to remove in the two last elements",
+      "files": ["src/parallel.rs"],
+      "diff_size": 4,
+      "classification": "expression",
+      "bug_type": "overly-restrictive-search",
+      "description": "Tmp-node removal searched only the last two entries, then panicked. Fix scans all trailing history so valid nodes are found outside that fixed window.",
+      "files_exist": true,
+      "suitability": "fair"
+    }
+  ]
+}

@@ -1,12 +1,74 @@
 use std::num::NonZeroUsize;
 
+use heed::types::Unit;
 use heed::EnvOpenOptions;
+use roaring::RoaringBitmap;
 
-use super::DatabaseHandle;
-use crate::distance::Euclidean;
+use super::{create_database, DatabaseHandle};
+use crate::distance::{Cosine, Euclidean};
+use crate::key::Key;
+use crate::metadata::Metadata;
+use crate::node::ItemIds;
+use crate::roaring::RoaringBitmapCodec;
 use crate::tests::reader::NnsRes;
-use crate::upgrade::from_0_6_to_current;
-use crate::{Database, Reader};
+use crate::upgrade::{cosine_from_0_4_to_0_5, from_0_6_to_current};
+use crate::{Database, Distance, MetadataCodec, Reader};
+
+#[test]
+fn upgrade_v0_4_to_v0_5_handles_metadata_per_index() {
+    let handle = create_database::<Cosine>();
+    let database = handle.database;
+
+    let mut wtxn = handle.env.write_txn().unwrap();
+    for index in [0_u16, 1_u16] {
+        let metadata = Metadata {
+            dimensions: 3,
+            items: RoaringBitmap::from_sorted_iter([10_u32, 11_u32]).unwrap(),
+            roots: ItemIds::from_slice(&[0_u32]),
+            distance: "legacy-distance",
+        };
+        database
+            .remap_data_type::<MetadataCodec>()
+            // v0.4 encoded metadata entries with mode value 2, which maps to `Tree` in current code.
+            .put(&mut wtxn, &Key::tree(index, 0), &metadata)
+            .unwrap();
+
+        let updated = RoaringBitmap::from_sorted_iter([10_u32, 11_u32]).unwrap();
+        database
+            .remap_data_type::<RoaringBitmapCodec>()
+            .put(&mut wtxn, &Key::tree(index, 1), &updated)
+            .unwrap();
+    }
+    wtxn.commit().unwrap();
+
+    let rtxn = handle.env.read_txn().unwrap();
+    let mut wtxn = handle.env.write_txn().unwrap();
+    cosine_from_0_4_to_0_5(&rtxn, database, &mut wtxn, database).unwrap();
+    wtxn.commit().unwrap();
+    drop(rtxn);
+
+    let rtxn = handle.env.read_txn().unwrap();
+    for index in [0_u16, 1_u16] {
+        let metadata = database
+            .remap_data_type::<MetadataCodec>()
+            .get(&rtxn, &Key::metadata(index))
+            .unwrap()
+            .unwrap();
+        assert_eq!(metadata.distance, Cosine::name());
+        assert_eq!(metadata.dimensions, 3);
+
+        assert!(database
+            .remap_data_type::<Unit>()
+            .get(&rtxn, &Key::updated(index, 10))
+            .unwrap()
+            .is_some());
+        assert!(database
+            .remap_data_type::<Unit>()
+            .get(&rtxn, &Key::updated(index, 11))
+            .unwrap()
+            .is_some());
+    }
+}
 
 #[test]
 fn simple_upgrade_v0_6_to_v0_7() {

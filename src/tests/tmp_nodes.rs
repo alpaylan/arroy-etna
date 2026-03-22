@@ -3,12 +3,10 @@ use std::borrow::Cow;
 use insta::assert_debug_snapshot;
 use roaring::RoaringBitmap;
 
-use crate::{
-    distance::{Cosine, NodeHeaderCosine},
-    internals::UnalignedVector,
-    node::{Descendants, Leaf, Node, SplitPlaneNormal},
-    parallel::TmpNodes,
-};
+use crate::distance::{Cosine, NodeHeaderCosine};
+use crate::internals::UnalignedVector;
+use crate::node::{Descendants, Leaf, Node, SplitPlaneNormal};
+use crate::parallel::TmpNodes;
 
 #[test]
 fn test_put_and_get_tmp_nodes() {
@@ -101,4 +99,41 @@ fn test_put_and_get_tmp_nodes() {
         },
     )
     ");
+}
+
+#[test]
+fn test_read_then_append_keeps_previous_nodes_intact() {
+    let mut tmp_nodes = TmpNodes::<Cosine>::new().unwrap();
+
+    let mk_desc = |start: u32| {
+        Node::Descendants(Descendants {
+            descendants: Cow::Owned(RoaringBitmap::from_iter(start..start + 64)),
+        })
+    };
+
+    // Create enough data to exceed BufReader's internal buffer.
+    for i in 0..256u32 {
+        tmp_nodes.put(i, &mk_desc(i)).unwrap();
+    }
+
+    // Force transition to Reading and leave the cursor near the beginning of the file.
+    let _ = tmp_nodes.get(0).unwrap().unwrap();
+
+    // Transition back to Writing and append a new node.
+    tmp_nodes.put(10_000, &mk_desc(10_000)).unwrap();
+
+    // All original nodes must remain readable and unchanged.
+    for i in 0..256u32 {
+        let node = tmp_nodes.get(i).unwrap().unwrap();
+        let Node::Descendants(Descendants { descendants }) = node else { unreachable!() };
+        assert_eq!(descendants.len(), 64);
+        assert!(descendants.contains(i));
+        assert!(descendants.contains(i + 63));
+    }
+
+    let node = tmp_nodes.get(10_000).unwrap().unwrap();
+    let Node::Descendants(Descendants { descendants }) = node else { unreachable!() };
+    assert_eq!(descendants.len(), 64);
+    assert!(descendants.contains(10_000));
+    assert!(descendants.contains(10_063));
 }

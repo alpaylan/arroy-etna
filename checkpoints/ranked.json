@@ -1,0 +1,97 @@
+{
+  "run_id": "dfd37854-caf6-4818-b589-4fddab8f1c20",
+  "project": "arroy",
+  "ranking_criteria": {
+    "locality": "Prefer single-hunk, low-line-count fixes in core src/ files",
+    "semantic_clarity": "Prefer clear bug semantics (off-by-one, missing guard, wrong field/container)",
+    "testability": "Prefer fixes with nearby tests or paths exercised by existing proptest/unit suites",
+    "expressibility": "Prefer candidates that map to marauders expression/statement mutations",
+    "diversity": "Balance across writer/reader/parallel/upgrade subsystems"
+  },
+  "ranked": [
+    {
+      "rank": 1,
+      "id": 1,
+      "hash": "7d530beba1018abca2a97eb972cf725b48fb5f04",
+      "score": 96,
+      "rationale": "One-token off-by-one range fix in writer core path; highly local and mutation-friendly."
+    },
+    {
+      "rank": 2,
+      "id": 4,
+      "hash": "144ea2c6149eba43921a6e4431a008de58b52166",
+      "score": 95,
+      "rationale": "Single-line wrong-container access causing panic; very clear semantics and easy expression-level mutation."
+    },
+    {
+      "rank": 3,
+      "id": 5,
+      "hash": "444ab21facc73318a24b653210f8a494d2985e5a",
+      "score": 93,
+      "rationale": "Canonical missing-empty-check leading to division by zero; compact statement-level mutation with clear runtime impact."
+    },
+    {
+      "rank": 4,
+      "id": 2,
+      "hash": "a63f0979b216dde10d50fdfa4fadcb2b1dea73c7",
+      "score": 91,
+      "rationale": "Missing seek-before-write in reader->writer transition; localized and realistically bug-inducing."
+    },
+    {
+      "rank": 5,
+      "id": 6,
+      "hash": "2128749806c67ca8853395e34bf0b4df1f9e41bc",
+      "score": 90,
+      "rationale": "Clear base-case bug in empty-index search with dedicated regression test; straightforward statement mutation."
+    },
+    {
+      "rank": 6,
+      "id": 3,
+      "hash": "af2cdcae43ab5ca6b77ad6cad50df5e64af43b82",
+      "score": 88,
+      "rationale": "Low-memory None-handling panic fix in recursive insertion; good signal though slightly more context-coupled."
+    },
+    {
+      "rank": 7,
+      "id": 10,
+      "hash": "f3db126a274264e90bb0eae70892da8293d74425",
+      "score": 86,
+      "rationale": "Wrong key field in upgrade metadata branching; expression-level and precise, but migration-path specific."
+    },
+    {
+      "rank": 8,
+      "id": 7,
+      "hash": "5b6f5b8de08e87680ad0ac0049602d43717b5a93",
+      "score": 84,
+      "rationale": "Off-by-one threshold in tree-count stopping condition; good candidate but embedded in larger tuning change."
+    },
+    {
+      "rank": 9,
+      "id": 8,
+      "hash": "5262b0866ed6a0b8fe529b170a1700fe4a47ebbd",
+      "score": 81,
+      "rationale": "Strong expression bug (`remove_smallest` vs `remove(item)`), but commit bundles multiple fixes in same function."
+    },
+    {
+      "rank": 10,
+      "id": 9,
+      "hash": "ecf0df4ae227be68306bc3ab78fecfaf55bc1e62",
+      "score": 77,
+      "rationale": "Concurrency/error-propagation short-circuit fix is valid but has weaker deterministic observability as mutation."
+    },
+    {
+      "rank": 11,
+      "id": 11,
+      "hash": "7639506680d32853e1dc825a1d99ea974a4b1bb7",
+      "score": 72,
+      "rationale": "Real bug in upgrade rewrite logic with good provenance, but more structural and less direct to encode cleanly."
+    },
+    {
+      "rank": 12,
+      "id": 12,
+      "hash": "c0e66c674c210ad8422f4f3bf6e043a729f5d914",
+      "score": 64,
+      "rationale": "Search-window widening in tmp-node removal is plausible but semantically weaker and risks equivalent behavior."
+    }
+  ]
+}

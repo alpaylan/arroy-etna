@@ -75,6 +75,17 @@ It's all written in Rust and based on LMDB without a handful of ugly optimizatio
 
 The code should support Windows, thanks to LMDB and the Rust programming language.
 
+## Local workload docs
+
+This benchmark workspace includes generated bug documentation at `BUGS.md` and `BUGS.html`.
+
+Serve and open the HTML report locally:
+
+```sh
+cd workloads/Rust/arroy && python3 -m http.server 8000
+# then open http://127.0.0.1:8000/BUGS.html
+```
+
 ## Big thanks to the open-source community
 
 - Thanks to [Qdrant](https://qdrant.tech/) for their SIMD distances functions

@@ -2,25 +2,21 @@
 
 use std::borrow::Cow;
 
-use heed::{
-    types::{Bytes, LazyDecode, Unit},
-    RoTxn, RwTxn,
-};
+use heed::types::{Bytes, LazyDecode, Unit};
+use heed::{RoTxn, RwTxn};
 use roaring::RoaringBitmap;
 
-use crate::{
-    distance::Cosine,
-    key::{Key, KeyCodec, Prefix, PrefixCodec},
-    metadata::MetadataCodec,
-    node::{
-        Descendants, GenericReadNode, GenericReadNodeCodecFromV0_4_0, GenericReadSplitPlaneNormal,
-        Node, SplitPlaneNormal, WriteNodeCodecForV0_5_0,
-    },
-    node_id::NodeMode,
-    roaring::RoaringBitmapCodec,
-    version::{Version, VersionCodec},
-    Database, Distance, Error, Result,
+use crate::distance::Cosine;
+use crate::key::{Key, KeyCodec, Prefix, PrefixCodec};
+use crate::metadata::MetadataCodec;
+use crate::node::{
+    Descendants, GenericReadNode, GenericReadNodeCodecFromV0_4_0, GenericReadSplitPlaneNormal,
+    Node, SplitPlaneNormal, WriteNodeCodecForV0_5_0,
 };
+use crate::node_id::NodeMode;
+use crate::roaring::RoaringBitmapCodec;
+use crate::version::{Version, VersionCodec};
+use crate::{Database, Distance, Error, Result};
 
 /// Upgrade a cosine-based arroy database from v0.4 to v0.5 without rebuilding the trees.
 pub fn cosine_from_0_4_to_0_5(
@@ -112,6 +108,7 @@ pub fn cosine_from_0_4_to_0_5(
                 )?;
             }
             OldNodeMode::Metadata => {
+                /*| upgrade_wrong_metadata_key [upgrade, metadata, field-selection] */
                 match key.node.item {
                     0 => {
                         key.node.mode = NodeMode::Metadata;
@@ -138,6 +135,36 @@ pub fn cosine_from_0_4_to_0_5(
                         panic!("Unexpected {other} with value: {bytes:?}");
                     }
                 }
+                /*|| upgrade_wrong_metadata_key_1 */
+                /*|
+                match key.index {
+                    0 => {
+                        key.node.mode = NodeMode::Metadata;
+                        // The distance has been renamed
+                        let mut metadata = value.remap::<MetadataCodec>().decode().unwrap();
+                        metadata.distance = Cosine::name();
+                        write_database
+                            .remap_data_type::<MetadataCodec>()
+                            .put(wtxn, &key, &metadata)?;
+                    }
+                    1 => {
+                        key.node.mode = NodeMode::Updated;
+                        // In this case we have a roaring bitmap of document id
+                        // that we must re-insert as multiple values
+                        let updated =
+                            value.remap::<RoaringBitmapCodec>().decode().unwrap_or_default();
+                        for item in updated {
+                            key.node.item = item;
+                            write_database.remap_data_type::<Unit>().put(wtxn, &key, &())?;
+                        }
+                    }
+                    other => {
+                        let bytes = value.remap::<MetadataCodec>().decode().unwrap();
+                        panic!("Unexpected {other} with value: {bytes:?}");
+                    }
+                }
+                */
+                /* |*/
             }
         };
     }
@@ -257,11 +284,23 @@ pub fn from_0_6_to_current<C: Distance>(
                     NodeMode::Updated => unreachable!("Updated cannot be linked to a split node"),
                 };
 
+                /*| upgrade_splitnode_rewrite_gate [upgrade, splitnode, rewrite-gate] */
                 write_database.put(
                     wtxn,
                     &key,
                     &Node::SplitPlaneNormal(SplitPlaneNormal { normal, left, right }),
                 )?;
+                /*|| upgrade_splitnode_rewrite_gate_1 */
+                /*|
+                if normal.is_none() {
+                    write_database.put(
+                        wtxn,
+                        &key,
+                        &Node::SplitPlaneNormal(SplitPlaneNormal { normal, left, right }),
+                    )?;
+                }
+                */
+                /* |*/
             }
         }
     }

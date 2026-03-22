@@ -473,7 +473,13 @@ impl<D: Distance> Writer<D> {
     // that we can fit as much descendants as the number of dimensions
     fn fit_in_descendant(&self, opt: &BuildOption, n: u64) -> bool {
         let max_in_descendant = opt.split_after.unwrap_or(self.dimensions) as u64;
+        /*| fit_descendant_strict_threshold [writer, descendant, threshold] */
         n <= max_in_descendant
+        /*|| fit_descendant_strict_threshold_1 */
+        /*|
+        n < max_in_descendant
+        */
+        /* |*/
     }
 
     /// Returns an [`ArroyBuilder`] to configure the available options to build the database.
@@ -542,7 +548,13 @@ impl<D: Distance> Writer<D> {
             self.insert_items_in_current_trees(rng, options, to_insert, &roots, &frozen_reader)?;
 
         // Create a new descendant that contains all items for every missing trees
-        let nb_missing_trees = target_n_trees.saturating_sub(roots.len() as u64);
+        /*| missing_tree_count_direction [writer, tree-count, missing-tree] */
+        let nb_missing_trees = target_n_trees . saturating_sub (roots . len () as u64);
+        /*|| missing_tree_count_direction_1 */
+        /*|
+        let nb_missing_trees = (roots . len () as u64) . saturating_sub (target_n_trees);
+        */
+        /* |*/
 
         let (sub, progress) = SubStep::new(
             "descendants",
@@ -637,7 +649,13 @@ impl<D: Distance> Writer<D> {
         target_n_trees: u64,
     ) -> Result<(), Error> {
         (options.progress)(WriterProgress { main: MainStep::DeletingExtraTrees, sub: None });
-        let extraneous_tree = roots.len().saturating_sub(target_n_trees as usize);
+        /*| extraneous_tree_count_direction [writer, tree-count, extraneous-tree] */
+        let extraneous_tree = roots . len () . saturating_sub (target_n_trees as usize);
+        /*|| extraneous_tree_count_direction_1 */
+        /*|
+        let extraneous_tree = (target_n_trees as usize) . saturating_sub (roots . len ());
+        */
+        /* |*/
 
         for _ in 0..extraneous_tree {
             options.cancelled()?;
@@ -936,7 +954,13 @@ impl<D: Distance> Writer<D> {
                 &Key::tree(self.index, 0),
                 &Node::Descendants(Descendants { descendants: Cow::Borrowed(&item_indices) }),
             )?;
+            /*| single_leaf_root_id_mismatch [writer, single-leaf, root-id] */
             roots.push(0);
+            /*|| single_leaf_root_id_mismatch_1 */
+            /*|
+            roots.push(1);
+            */
+            /* |*/
         }
         options.cancelled()?;
         tracing::debug!("write the metadata...");
@@ -1056,7 +1080,13 @@ impl<D: Distance> Writer<D> {
                     (Some(left_items), right_items) if left_items.is_empty() => {
                         tmp_nodes.remove(new_left);
                         tmp_nodes.remove(current_node);
+                        /*| delete_empty_left_child_promote [writer, delete, empty-child] */
                         Ok((new_right, right_items))
+                        /*|| delete_empty_left_child_promote_1 */
+                        /*|
+                        Ok((current_node, right_items))
+                        */
+                        /* |*/
                     }
                     (left_items, Some(right_items)) if right_items.is_empty() => {
                         tmp_nodes.remove(new_right);
@@ -1368,16 +1398,35 @@ pub(crate) fn target_n_trees(
             // See https://github.com/meilisearch/guess-right-number-of-trees for more details on how we got this formula.
 
             let nb_vec = item_indices.len() as f64;
-            let nb_trees = if nb_vec < 10_000. {
-                2.0_f64.powf(nb_vec.log2() - 6.0)
-            } else {
-                2.0_f64.powf(
-                    nb_vec.log10()
-                        + (dimensions as f64).log10()
-                        + (768.0 / dimensions as f64).powf(4.0),
-                )
-            };
-            let mut nb_trees = nb_trees.ceil() as u64;
+            /*| tree_target_dimension_power [writer, tree-count, dim-scaling] */
+            let dim_bonus = (768.0 / dimensions as f64) . powf (4.0);
+            /*|| tree_target_dimension_power_1 */
+            /*|
+            let dim_bonus = (768.0 / dimensions as f64) . powf (3.0);
+            */
+            /* |*/
+            /*| tree_target_small_dataset_exponent_shift [writer, tree-count, small-dataset] */
+            let small_dataset_exponent = nb_vec . log2 () - 6.0;
+            /*|| tree_target_small_dataset_exponent_shift_1 */
+            /*|
+            let small_dataset_exponent = nb_vec . log2 () - 5.0;
+            */
+            /* |*/
+            /*| tree_target_small_dataset_boundary [writer, tree-count, threshold] */
+            let nb_trees = if nb_vec < 10_000. { 2.0_f64 . powf (small_dataset_exponent) } else { 2.0_f64 . powf (nb_vec . log10 () + (dimensions as f64) . log10 () + dim_bonus) };
+            /*|| tree_target_small_dataset_boundary_1 */
+            /*|
+            let nb_trees = if nb_vec <= 10_000. { 2.0_f64 . powf (small_dataset_exponent) } else { 2.0_f64 . powf (nb_vec . log10 () + (dimensions as f64) . log10 () + dim_bonus) };
+            */
+            /* |*/
+
+            /*| tree_target_rounding [writer, tree-count, rounding] */
+            let mut nb_trees = nb_trees . ceil () as u64;
+            /*|| tree_target_rounding_1 */
+            /*|
+            let mut nb_trees = nb_trees . floor () as u64;
+            */
+            /* |*/
 
             // We don't want to shrink too quickly when a user remove some documents.
             // We're only going to shrink if we should remove more than 20% of our trees.
@@ -1386,6 +1435,7 @@ pub(crate) fn target_n_trees(
                 if (tree_to_remove as f64 / nb_trees as f64) < 0.20 {
                     nb_trees = roots.len() as u64;
                 }
+
             }
 
             nb_trees
@@ -1409,7 +1459,13 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
         Node::Leaf(_) => unreachable!(),
         Node::Descendants(Descendants { descendants }) => {
             progress.fetch_add(to_insert.len(), Ordering::Relaxed);
+            /*| insert_descendants_merge_operator [writer, descendants, merge] */
             descendants_to_update.insert(current_node, descendants.into_owned() | to_insert);
+            /*|| insert_descendants_merge_operator_1 */
+            /*|
+            descendants_to_update.insert(current_node, descendants.into_owned() & to_insert);
+            */
+            /* |*/
         }
         Node::SplitPlaneNormal(SplitPlaneNormal { normal, left, right }) => {
             // Split the to_insert into two bitmaps on the left and right of this normal
@@ -1431,8 +1487,8 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
                 }
             }
 
-            if !left_ids.is_empty() {
-                insert_items_in_descendants_from_frozen_reader(
+            /*| insert_descendants_left_guard [writer, descendants, left-branch] */
+            if !left_ids.is_empty() {                insert_items_in_descendants_from_frozen_reader(
                     opt,
                     progress,
                     frozen_reader,
@@ -1442,8 +1498,23 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
                     descendants_to_update,
                 )?;
             }
-            if !right_ids.is_empty() {
-                insert_items_in_descendants_from_frozen_reader(
+            /*|| insert_descendants_left_guard_1 */
+            /*|
+            if left_ids.is_empty() {                insert_items_in_descendants_from_frozen_reader(
+                    opt,
+                    progress,
+                    frozen_reader,
+                    rng,
+                    left,
+                    &left_ids,
+                    descendants_to_update,
+                )?;
+            }
+            */
+            /* |*/
+
+            /*| insert_descendants_right_guard [writer, descendants, right-branch] */
+            if !right_ids.is_empty() {                insert_items_in_descendants_from_frozen_reader(
                     opt,
                     progress,
                     frozen_reader,
@@ -1453,18 +1524,31 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
                     descendants_to_update,
                 )?;
             }
+            /*|| insert_descendants_right_guard_1 */
+            /*|
+            if right_ids.is_empty() {                insert_items_in_descendants_from_frozen_reader(
+                    opt,
+                    progress,
+                    frozen_reader,
+                    rng,
+                    right,
+                    &right_ids,
+                    descendants_to_update,
+                )?;
+            }
+            */
+            /* |*/
+
         }
     }
     Ok(())
 }
 
-/// Find all the descendants that matches the list of items to insert and add them to the descendants_to_update map
+#[doc = " Find all the descendants that matches the list of items to insert and add them to the descendants_to_update map"]
 #[allow(clippy::too_many_arguments)]
 fn insert_items_in_descendants_from_tmpfile<D: Distance, R: Rng>(
     opt: &BuildOption,
-    // We still need this to read the leafs
     frozen_reader: &FrozzenReader<D>,
-    // Must be mutable because we're going to seek and read in it
     tmp_nodes: &mut TmpNodes<D>,
     error_snd: &Sender<Error>,
     rng: &mut R,
@@ -1472,62 +1556,67 @@ fn insert_items_in_descendants_from_tmpfile<D: Distance, R: Rng>(
     to_insert: &RoaringBitmap,
     descendants_to_update: &mut IntMap<ItemId, RoaringBitmap>,
 ) -> Result<()> {
-    opt.cancelled()?;
-    if error_snd.is_full() {
-        return Ok(());
-    }
-    match tmp_nodes.get(current_node)? {
-        Some(Node::Leaf(_) | Node::Descendants(_)) => unreachable!(),
-        None => {
-            *descendants_to_update.get_mut(&current_node).unwrap() |= to_insert;
+    {
+        /*| low_memory_none_handling [writer, low-memory, none-handling] */
+        opt.cancelled()?;
+        if error_snd.is_full() {
+            return Ok(());
         }
-        Some(Node::SplitPlaneNormal(SplitPlaneNormal { normal, left, right })) => {
-            // Split the to_insert into two bitmaps on the left and right of this normal
-            let mut left_ids = RoaringBitmap::new();
-            let mut right_ids = RoaringBitmap::new();
-
-            match normal {
-                None => {
-                    randomly_split_children(rng, to_insert, &mut left_ids, &mut right_ids);
-                }
-                Some(ref normal) => {
-                    for leaf in to_insert {
-                        let node = frozen_reader.leafs.get(leaf)?.unwrap();
-                        match D::side(normal, &node) {
-                            Side::Left => left_ids.insert(leaf),
-                            Side::Right => right_ids.insert(leaf),
-                        };
+        match tmp_nodes.get(current_node)? {
+            Some(Node::Leaf(_) | Node::Descendants(_)) => unreachable!(),
+            None => {
+                *descendants_to_update.get_mut(&current_node).unwrap() |= to_insert;
+            }
+            Some(Node::SplitPlaneNormal(SplitPlaneNormal { normal, left, right })) => {
+                let mut left_ids = RoaringBitmap::new();
+                let mut right_ids = RoaringBitmap::new();
+                match normal {
+                    None => {
+                        randomly_split_children(rng, to_insert, &mut left_ids, &mut right_ids);
+                    }
+                    Some(ref normal) => {
+                        for leaf in to_insert {
+                            let node = frozen_reader.leafs.get(leaf)?.unwrap();
+                            match D::side(normal, &node) {
+                                Side::Left => left_ids.insert(leaf),
+                                Side::Right => right_ids.insert(leaf),
+                            };
+                        }
                     }
                 }
-            }
-
-            if !left_ids.is_empty() {
-                insert_items_in_descendants_from_tmpfile(
-                    opt,
-                    frozen_reader,
-                    tmp_nodes,
-                    error_snd,
-                    rng,
-                    left,
-                    &left_ids,
-                    descendants_to_update,
-                )?;
-            }
-            if !right_ids.is_empty() {
-                insert_items_in_descendants_from_tmpfile(
-                    opt,
-                    frozen_reader,
-                    tmp_nodes,
-                    error_snd,
-                    rng,
-                    right,
-                    &right_ids,
-                    descendants_to_update,
-                )?;
+                if !left_ids.is_empty() {
+                    insert_items_in_descendants_from_tmpfile(
+                        opt,
+                        frozen_reader,
+                        tmp_nodes,
+                        error_snd,
+                        rng,
+                        left,
+                        &left_ids,
+                        descendants_to_update,
+                    )?;
+                }
+                if !right_ids.is_empty() {
+                    insert_items_in_descendants_from_tmpfile(
+                        opt,
+                        frozen_reader,
+                        tmp_nodes,
+                        error_snd,
+                        rng,
+                        right,
+                        &right_ids,
+                        descendants_to_update,
+                    )?;
+                }
             }
         }
+        Ok(())
+        /*|| low_memory_none_handling_1 */
+        /*|
+        opt . cancelled () ? ; if error_snd . is_full () { return Ok (()) ; } match Some (tmp_nodes . get (current_node) ? . unwrap ()) { Some (Node :: Leaf (_) | Node :: Descendants (_)) => unreachable ! () , None => { * descendants_to_update . get_mut (& current_node) . unwrap () |= to_insert ; } Some (Node :: SplitPlaneNormal (SplitPlaneNormal { normal , left , right })) => { let mut left_ids = RoaringBitmap :: new () ; let mut right_ids = RoaringBitmap :: new () ; match normal { None => { randomly_split_children (rng , to_insert , & mut left_ids , & mut right_ids) ; } Some (ref normal) => { for leaf in to_insert { let node = frozen_reader . leafs . get (leaf) ? . unwrap () ; match D :: side (normal , & node) { Side :: Left => left_ids . insert (leaf) , Side :: Right => right_ids . insert (leaf) , } ; } } } if ! left_ids . is_empty () { insert_items_in_descendants_from_tmpfile (opt , frozen_reader , tmp_nodes , error_snd , rng , left , & left_ids , descendants_to_update ,) ? ; } if ! right_ids . is_empty () { insert_items_in_descendants_from_tmpfile (opt , frozen_reader , tmp_nodes , error_snd , rng , right , & right_ids , descendants_to_update ,) ? ; } } } Ok (())
+        */
+        /* |*/
     }
-    Ok(())
 }
 
 /// Returns the items from the `to_insert` that fit in memory.
@@ -1563,8 +1652,13 @@ pub(crate) fn fit_in_memory<D: Distance, R: Rng>(
         nb_page_allowed
     };
 
-    // We must insert at least dimensions items to create a split
+    /*| fit_in_memory_min_split_threshold [writer, fit-memory, split-threshold] */
     let nb_items = if nb_items <= dimensions { dimensions + 1 } else { nb_items };
+    /*|| fit_in_memory_min_split_threshold_1 */
+    /*|
+    let nb_items = if nb_items < dimensions { dimensions } else { nb_items };
+    */
+    /* |*/
 
     if nb_items as u64 >= to_insert.len() {
         return Some(std::mem::take(to_insert));
@@ -1575,9 +1669,17 @@ pub(crate) fn fit_in_memory<D: Distance, R: Rng>(
     for _ in 0..nb_items {
         let idx = rng.gen_range(0..to_insert.len());
         // Safe to unwrap because we know nb_items is smaller than the number of items in the bitmap
+        /*| fit_in_memory_remove_by_rank [writer, sampling, wrong-remove] */
         let item = to_insert.select(idx as u32).unwrap();
         items.insert(item);
         to_insert.remove(item);
+        /*|| fit_in_memory_remove_by_rank_1 */
+        /*|
+        let item = to_insert.select(idx as u32).unwrap();
+        items.insert(item);
+        to_insert.remove_smallest(idx);
+        */
+        /* |*/
     }
 
     Some(items)

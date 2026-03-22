@@ -1,0 +1,774 @@
+{
+  "run_id": "dfd37854-caf6-4818-b589-4fddab8f1c20",
+  "project": "arroy",
+  "mutations": [
+    {
+      "name": "tmpfile_missing_seek",
+      "file": "src/parallel.rs",
+      "line": 41,
+      "variant": "tmpfile_missing_seek_1",
+      "tags": [
+        "parallel",
+        "io",
+        "append",
+        "issue-143"
+      ],
+      "bug_type": "missing-seek",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "a63f097",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_empty_search_guard",
+      "file": "src/reader.rs",
+      "line": 323,
+      "variant": "reader_empty_search_guard_1",
+      "tags": [
+        "reader",
+        "search",
+        "empty-index",
+        "issue-74"
+      ],
+      "bug_type": "missing-base-case",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "2128749",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "tree_target_rounding",
+      "file": "src/writer.rs",
+      "line": 1423,
+      "variant": "tree_target_rounding_1",
+      "tags": [
+        "writer",
+        "tree-count",
+        "rounding"
+      ],
+      "bug_type": "off-by-one-threshold",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "5b6f5b8",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "fit_in_memory_remove_by_rank",
+      "file": "src/writer.rs",
+      "line": 1672,
+      "variant": "fit_in_memory_remove_by_rank_1",
+      "tags": [
+        "writer",
+        "sampling",
+        "wrong-remove"
+      ],
+      "bug_type": "wrong-remove-operation",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "5262b08",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "low_memory_none_handling",
+      "file": "src/writer.rs",
+      "line": 1560,
+      "variant": "low_memory_none_handling_1",
+      "tags": [
+        "writer",
+        "low-memory",
+        "none-handling"
+      ],
+      "bug_type": "missing-none-handling",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "af2cdca",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "upgrade_wrong_metadata_key",
+      "file": "src/upgrade.rs",
+      "line": 111,
+      "variant": "upgrade_wrong_metadata_key_1",
+      "tags": [
+        "upgrade",
+        "metadata",
+        "field-selection"
+      ],
+      "bug_type": "wrong-key-field",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "f3db126",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "upgrade_splitnode_rewrite_gate",
+      "file": "src/upgrade.rs",
+      "line": 287,
+      "variant": "upgrade_splitnode_rewrite_gate_1",
+      "tags": [
+        "upgrade",
+        "splitnode",
+        "rewrite-gate"
+      ],
+      "bug_type": "conditional-rewrite",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "7639506",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "tmp_lookup_search_window",
+      "file": "src/parallel.rs",
+      "line": 161,
+      "variant": "tmp_lookup_search_window_1",
+      "tags": [
+        "parallel",
+        "tmp",
+        "search-window"
+      ],
+      "bug_type": "narrow-search-window",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "c0e66c6",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "fit_in_memory_min_split_threshold",
+      "file": "src/writer.rs",
+      "line": 1655,
+      "variant": "fit_in_memory_min_split_threshold_1",
+      "tags": [
+        "writer",
+        "fit-memory",
+        "split-threshold"
+      ],
+      "bug_type": "off-by-one-split-threshold",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "fa62650",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "missing_tree_count_direction",
+      "file": "src/writer.rs",
+      "line": 551,
+      "variant": "missing_tree_count_direction_1",
+      "tags": [
+        "writer",
+        "tree-count",
+        "missing-tree"
+      ],
+      "bug_type": "wrong-missing-tree-count",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "eaeb864",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "extraneous_tree_count_direction",
+      "file": "src/writer.rs",
+      "line": 652,
+      "variant": "extraneous_tree_count_direction_1",
+      "tags": [
+        "writer",
+        "tree-count",
+        "extraneous-tree"
+      ],
+      "bug_type": "wrong-extraneous-tree-count",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "66068b4",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "delete_empty_left_child_promote",
+      "file": "src/writer.rs",
+      "line": 1083,
+      "variant": "delete_empty_left_child_promote_1",
+      "tags": [
+        "writer",
+        "delete",
+        "empty-child"
+      ],
+      "bug_type": "stale-empty-child-promotion",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "c6c53c5",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "fit_descendant_strict_threshold",
+      "file": "src/writer.rs",
+      "line": 476,
+      "variant": "fit_descendant_strict_threshold_1",
+      "tags": [
+        "writer",
+        "descendant",
+        "threshold"
+      ],
+      "bug_type": "strict-fit-threshold",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "dfc3e60",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "single_leaf_root_id_mismatch",
+      "file": "src/writer.rs",
+      "line": 957,
+      "variant": "single_leaf_root_id_mismatch_1",
+      "tags": [
+        "writer",
+        "single-leaf",
+        "root-id"
+      ],
+      "bug_type": "wrong-single-leaf-root-id",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "dfc3e60",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "tree_target_small_dataset_boundary",
+      "file": "src/writer.rs",
+      "line": 1415,
+      "variant": "tree_target_small_dataset_boundary_1",
+      "tags": [
+        "writer",
+        "tree-count",
+        "threshold"
+      ],
+      "bug_type": "small-dataset-threshold",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "92c1ddd",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "tree_target_dimension_power",
+      "file": "src/writer.rs",
+      "line": 1401,
+      "variant": "tree_target_dimension_power_1",
+      "tags": [
+        "writer",
+        "tree-count",
+        "dim-scaling"
+      ],
+      "bug_type": "dimension-scaling-power",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "92c1ddd",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "euclidean_split_skip_normalize",
+      "file": "src/distance/euclidean.rs",
+      "line": 84,
+      "variant": "euclidean_split_skip_normalize_1",
+      "tags": [
+        "distance",
+        "euclidean",
+        "split-normalization"
+      ],
+      "bug_type": "missing-split-normalization",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "median_top_k_truncate_bias",
+      "file": "src/reader.rs",
+      "line": 707,
+      "variant": "median_top_k_truncate_bias_1",
+      "tags": [
+        "reader",
+        "top-k",
+        "threshold"
+      ],
+      "bug_type": "early-buffer-truncation",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "euclidean_split_bias_scale",
+      "file": "src/distance/euclidean.rs",
+      "line": 99,
+      "variant": "euclidean_split_bias_scale_1",
+      "tags": [
+        "distance",
+        "euclidean",
+        "split-bias"
+      ],
+      "bug_type": "wrong-split-bias-scale",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "median_top_k_final_truncate",
+      "file": "src/reader.rs",
+      "line": 732,
+      "variant": "median_top_k_final_truncate_1",
+      "tags": [
+        "reader",
+        "top-k",
+        "off-by-one"
+      ],
+      "bug_type": "off-by-one-final-truncate",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "euclidean_margin_sign",
+      "file": "src/distance/euclidean.rs",
+      "line": 111,
+      "variant": "euclidean_margin_sign_1",
+      "tags": [
+        "distance",
+        "euclidean",
+        "margin-sign"
+      ],
+      "bug_type": "inverted-margin-sign",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "median_top_k_filter_inversion",
+      "file": "src/reader.rs",
+      "line": 693,
+      "variant": "median_top_k_filter_inversion_1",
+      "tags": [
+        "reader",
+        "top-k",
+        "filter"
+      ],
+      "bug_type": "inverted-threshold-filter",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "median_top_k_sort_direction",
+      "file": "src/reader.rs",
+      "line": 725,
+      "variant": "median_top_k_sort_direction_1",
+      "tags": [
+        "reader",
+        "top-k",
+        "ordering"
+      ],
+      "bug_type": "reversed-ordering",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_searchk_root_factor",
+      "file": "src/reader.rs",
+      "line": 335,
+      "variant": "reader_searchk_root_factor_1",
+      "tags": [
+        "reader",
+        "search",
+        "budget"
+      ],
+      "bug_type": "missing-root-factor",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "3538b81",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_candidates_filter_bypass",
+      "file": "src/reader.rs",
+      "line": 374,
+      "variant": "reader_candidates_filter_bypass_1",
+      "tags": [
+        "reader",
+        "search",
+        "candidates"
+      ],
+      "bug_type": "candidate-filter-bypass",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "3e7d3d0",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_margin_argument_order",
+      "file": "src/reader.rs",
+      "line": 399,
+      "variant": "reader_margin_argument_order_1",
+      "tags": [
+        "reader",
+        "search",
+        "margin"
+      ],
+      "bug_type": "swapped-margin-arguments",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "3538b81",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_split_side_distance_swap",
+      "file": "src/reader.rs",
+      "line": 412,
+      "variant": "reader_split_side_distance_swap_1",
+      "tags": [
+        "reader",
+        "search",
+        "branch-priority"
+      ],
+      "bug_type": "swapped-branch-priority",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "3538b81",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_nns_dedup_order",
+      "file": "src/reader.rs",
+      "line": 427,
+      "variant": "reader_nns_dedup_order_1",
+      "tags": [
+        "reader",
+        "search",
+        "dedup"
+      ],
+      "bug_type": "dedup-before-sort",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "3538b81",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "median_top_k_initial_threshold",
+      "file": "src/reader.rs",
+      "line": 679,
+      "variant": "median_top_k_initial_threshold_1",
+      "tags": [
+        "reader",
+        "top-k",
+        "threshold-init"
+      ],
+      "bug_type": "wrong-threshold-initialization",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_leaf_candidates_default_false",
+      "file": "src/reader.rs",
+      "line": 361,
+      "variant": "reader_leaf_candidates_default_false_1",
+      "tags": [
+        "reader",
+        "search",
+        "candidates"
+      ],
+      "bug_type": "wrong-candidate-default",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "3e7d3d0",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_descendant_no_candidates_skip",
+      "file": "src/reader.rs",
+      "line": 382,
+      "variant": "reader_descendant_no_candidates_skip_1",
+      "tags": [
+        "reader",
+        "search",
+        "descendants"
+      ],
+      "bug_type": "skip-descendants-without-candidates",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "3e7d3d0",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_k_selection_max",
+      "file": "src/reader.rs",
+      "line": 450,
+      "variant": "reader_k_selection_max_1",
+      "tags": [
+        "reader",
+        "search",
+        "top-k"
+      ],
+      "bug_type": "max-instead-of-min-top-k",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "tree_target_small_dataset_exponent_shift",
+      "file": "src/writer.rs",
+      "line": 1408,
+      "variant": "tree_target_small_dataset_exponent_shift_1",
+      "tags": [
+        "writer",
+        "tree-count",
+        "small-dataset"
+      ],
+      "bug_type": "small-dataset-exponent-shift",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "5b6f5b8",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "euclidean_norm_no_sqrt",
+      "file": "src/distance/euclidean.rs",
+      "line": 56,
+      "variant": "euclidean_norm_no_sqrt_1",
+      "tags": [
+        "distance",
+        "euclidean",
+        "norm"
+      ],
+      "bug_type": "missing-norm-square-root",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "two_means_weighted_distance_left",
+      "file": "src/distance/mod.rs",
+      "line": 175,
+      "variant": "two_means_weighted_distance_left_1",
+      "tags": [
+        "distance",
+        "split",
+        "weighting"
+      ],
+      "bug_type": "missing-centroid-weighting",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "euclidean_two_means_cosine_flag",
+      "file": "src/distance/euclidean.rs",
+      "line": 71,
+      "variant": "euclidean_two_means_cosine_flag_1",
+      "tags": [
+        "distance",
+        "euclidean",
+        "split-centroid"
+      ],
+      "bug_type": "wrong-cosine-flag-in-euclidean-split",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "insert_descendants_right_guard",
+      "file": "src/writer.rs",
+      "line": 1516,
+      "variant": "insert_descendants_right_guard_1",
+      "tags": [
+        "writer",
+        "descendants",
+        "right-branch"
+      ],
+      "bug_type": "right-descendant-recursion-guard-inverted",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "af2cdca",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "reader_output_skip_normalization",
+      "file": "src/reader.rs",
+      "line": 460,
+      "variant": "reader_output_skip_normalization_1",
+      "tags": [
+        "reader",
+        "search",
+        "output-distance"
+      ],
+      "bug_type": "missing-distance-normalization",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "97ba58d",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "euclidean_built_distance_dot",
+      "file": "src/distance/euclidean.rs",
+      "line": 46,
+      "variant": "euclidean_built_distance_dot_1",
+      "tags": [
+        "distance",
+        "euclidean",
+        "built-distance"
+      ],
+      "bug_type": "dot-product-used-as-distance",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "60875eb",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "insert_descendants_merge_operator",
+      "file": "src/writer.rs",
+      "line": 1462,
+      "variant": "insert_descendants_merge_operator_1",
+      "tags": [
+        "writer",
+        "descendants",
+        "merge"
+      ],
+      "bug_type": "descendant-merge-intersection",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "af2cdca",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "insert_descendants_left_guard",
+      "file": "src/writer.rs",
+      "line": 1490,
+      "variant": "insert_descendants_left_guard_1",
+      "tags": [
+        "writer",
+        "descendants",
+        "left-branch"
+      ],
+      "bug_type": "left-descendant-recursion-guard-inverted",
+      "difficulty": "easy",
+      "expressibility": "high",
+      "source_commit": "af2cdca",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "distance_normalized_distance_no_sqrt",
+      "file": "src/distance/mod.rs",
+      "line": 60,
+      "variant": "distance_normalized_distance_no_sqrt_1",
+      "tags": [
+        "distance",
+        "normalization",
+        "scaling"
+      ],
+      "bug_type": "missing-distance-root-normalization",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "d5a7e6f",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "distance_pq_left_margin_sign",
+      "file": "src/distance/mod.rs",
+      "line": 70,
+      "variant": "distance_pq_left_margin_sign_1",
+      "tags": [
+        "distance",
+        "queue-priority",
+        "margin"
+      ],
+      "bug_type": "wrong-left-margin-sign",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "d5a7e6f",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "distance_update_mean_divisor",
+      "file": "src/distance/mod.rs",
+      "line": 101,
+      "variant": "distance_update_mean_divisor_1",
+      "tags": [
+        "distance",
+        "centroid",
+        "averaging"
+      ],
+      "bug_type": "wrong-centroid-divisor",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "d5a7e6f",
+      "selected": true,
+      "test_mode": "debug"
+    },
+    {
+      "name": "distance_side_sign_flip",
+      "file": "src/distance/mod.rs",
+      "line": 118,
+      "variant": "distance_side_sign_flip_1",
+      "tags": [
+        "distance",
+        "side-selection",
+        "sign"
+      ],
+      "bug_type": "inverted-side-selection-sign",
+      "difficulty": "medium",
+      "expressibility": "high",
+      "source_commit": "a70b1dd",
+      "selected": true,
+      "test_mode": "debug"
+    }
+  ],
+  "deferred_mutations": []
+}

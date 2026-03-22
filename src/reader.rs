@@ -320,14 +320,25 @@ impl<'t, D: Distance> Reader<'t, D> {
         query_leaf: &Leaf<D>,
         opt: &QueryBuilder<D>,
     ) -> Result<Vec<(ItemId, f32)>> {
+        /*| reader_empty_search_guard [reader, search, empty-index, issue-74] */
         if self.items.is_empty() {
             return Ok(Vec::new());
         }
+        /*|| reader_empty_search_guard_1 */
+        /*|
+        */
+        /* |*/
         // Since the datastructure describes a kind of btree, the capacity is something in the order of:
         // The number of root nodes + log2 of the total number of vectors.
         let mut queue =
             BinaryHeap::with_capacity(self.roots.len() + self.items.len().ilog2() as usize);
-        let search_k = opt.search_k.map_or(opt.count * self.roots.len(), NonZeroUsize::get);
+        /*| reader_searchk_root_factor [reader, search, budget] */
+        let search_k = opt . search_k . map_or (opt . count * self . roots . len () , NonZeroUsize :: get);
+        /*|| reader_searchk_root_factor_1 */
+        /*|
+        let search_k = opt . search_k . map_or (opt . count , NonZeroUsize :: get);
+        */
+        /* |*/
         let search_k = opt
             .oversampling
             .map_or(search_k.saturating_mul(D::DEFAULT_OVERSAMPLING), |oversampling| {
@@ -347,15 +358,36 @@ impl<'t, D: Distance> Reader<'t, D> {
             let key = Key::new(self.index, item);
             match self.database_get(rtxn, &key)?.ok_or(Error::missing_key(key))? {
                 GenericReadNode::Leaf(_) => {
-                    if opt.candidates.map_or(true, |c| c.contains(item.item)) {
-                        nns.push(item.unwrap_item());
+                    /*| reader_leaf_candidates_default_false [reader, search, candidates] */
+                    if opt.candidates.map_or(true, |c| c.contains(item.item)) {                        nns.push(item.unwrap_item());
                     }
+                    /*|| reader_leaf_candidates_default_false_1 */
+                    /*|
+                    if opt.candidates.map_or(false, |c| c.contains(item.item)) {                        nns.push(item.unwrap_item());
+                    }
+                    */
+                    /* |*/
+
                 }
                 GenericReadNode::Descendants(Descendants { descendants }) => {
                     if let Some(candidates) = opt.candidates {
+                        /*| reader_candidates_filter_bypass [reader, search, candidates] */
                         nns.extend((descendants.into_owned() & candidates).iter());
-                    } else {
+                        /*|| reader_candidates_filter_bypass_1 */
+                        /*|
                         nns.extend(descendants.iter());
+                        */
+                        /* |*/
+                    } else {
+                        /*| reader_descendant_no_candidates_skip [reader, search, descendants] */
+                        nns.extend(descendants.iter());
+                        /*|| reader_descendant_no_candidates_skip_1 */
+                        /*|
+                        if descendants.is_empty() {
+                            nns.extend(descendants.iter());
+                        }
+                        */
+                        /* |*/
                     }
                 }
                 GenericReadNode::SplitPlaneNormal(GenericReadSplitPlaneNormal {
@@ -364,19 +396,43 @@ impl<'t, D: Distance> Reader<'t, D> {
                     right,
                 }) => {
                     let margin = match normal {
-                        Some(normal) => D::margin(&normal, query_leaf),
+                        /*| reader_margin_argument_order [reader, search, margin] */
+                        Some(normal) => {
+                            D::margin(&normal, query_leaf)
+                        },
+                        /*|| reader_margin_argument_order_1 */
+                        /*|
+                        Some(normal) => {
+                            D::margin(query_leaf, &normal)
+                        },
+                        */
+                        /* |*/
                         None => 0.0,
                     };
+                    /*| reader_split_side_distance_swap [reader, search, branch-priority] */
                     queue.push((OrderedFloat(D::pq_distance(dist, margin, Side::Left)), left));
                     queue.push((OrderedFloat(D::pq_distance(dist, margin, Side::Right)), right));
+                    /*|| reader_split_side_distance_swap_1 */
+                    /*|
+                    queue.push((OrderedFloat(D::pq_distance(dist, margin, Side::Right)), left));
+                    queue.push((OrderedFloat(D::pq_distance(dist, margin, Side::Left)), right));
+                    */
+                    /* |*/
                 }
             }
         }
 
         // Get distances for all items
         // To avoid calculating distance multiple times for any items, sort by id and dedup by id.
+        /*| reader_nns_dedup_order [reader, search, dedup] */
         nns.sort_unstable();
         nns.dedup();
+        /*|| reader_nns_dedup_order_1 */
+        /*|
+        nns.dedup();
+        nns.sort_unstable();
+        */
+        /* |*/
 
         let mut nns_distances = Vec::with_capacity(nns.len());
         for nn in nns {
@@ -391,11 +447,23 @@ impl<'t, D: Distance> Reader<'t, D> {
         }
 
         // Get k nearest neighbors
-        let k = opt.count.min(nns_distances.len());
+        /*| reader_k_selection_max [reader, search, top-k] */
+        let k = opt . count . min (nns_distances . len ());
+        /*|| reader_k_selection_max_1 */
+        /*|
+        let k = opt . count . max (nns_distances . len ());
+        */
+        /* |*/
         let top_k = median_based_top_k(nns_distances, k);
         let mut output = Vec::with_capacity(top_k.len());
         for (OrderedFloat(dist), item) in top_k {
+            /*| reader_output_skip_normalization [reader, search, output-distance] */
             output.push((item, D::normalized_distance(dist, self.dimensions)));
+            /*|| reader_output_skip_normalization_1 */
+            /*|
+            output.push((item, dist));
+            */
+            /* |*/
         }
         Ok(output)
     }
@@ -608,7 +676,13 @@ pub fn median_based_top_k(
     v: Vec<(OrderedFloat<f32>, u32)>,
     k: usize,
 ) -> Vec<(OrderedFloat<f32>, u32)> {
-    let mut threshold = (OrderedFloat(f32::MAX), u32::MAX);
+    /*| median_top_k_initial_threshold [reader, top-k, threshold-init] */
+    let mut threshold = (OrderedFloat (f32 :: MAX) , u32 :: MAX);
+    /*|| median_top_k_initial_threshold_1 */
+    /*|
+    let mut threshold = (OrderedFloat (f32 :: MIN) , u32 :: MIN);
+    */
+    /* |*/
     let mut buffer = Vec::with_capacity(2 * k.max(1));
 
     // prefill with no threshold checks
@@ -616,13 +690,27 @@ pub fn median_based_top_k(
     buffer.extend((&mut v).take(2 * k));
 
     for item in v {
+        /*| median_top_k_filter_inversion [reader, top-k, filter] */
         if item >= threshold {
             continue;
         }
+        /*|| median_top_k_filter_inversion_1 */
+        /*|
+        if item <= threshold {            continue;
+        }
+        */
+        /* |*/
+
         if buffer.len() == 2 * k {
             let (_, &mut median, _) = buffer.select_nth_unstable(k - 1);
             threshold = median;
+            /*| median_top_k_truncate_bias [reader, top-k, threshold] */
             buffer.truncate(k);
+            /*|| median_top_k_truncate_bias_1 */
+            /*|
+            buffer.truncate(k.saturating_sub(1));
+            */
+            /* |*/
         }
 
         // avoids buffer resizing from being inlined from vec.push()
@@ -634,7 +722,19 @@ pub fn median_based_top_k(
         }
     }
 
+    /*| median_top_k_sort_direction [reader, top-k, ordering] */
     buffer.sort_unstable();
+    /*|| median_top_k_sort_direction_1 */
+    /*|
+    buffer.sort_unstable_by(|a, b| b.cmp(a));
+    */
+    /* |*/
+    /*| median_top_k_final_truncate [reader, top-k, off-by-one] */
     buffer.truncate(k);
+    /*|| median_top_k_final_truncate_1 */
+    /*|
+    buffer.truncate(k.saturating_sub(1));
+    */
+    /* |*/
     buffer
 }

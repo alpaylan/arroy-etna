@@ -1,0 +1,360 @@
+{
+  "run_id": "dfd37854-caf6-4818-b589-4fddab8f1c20",
+  "project": "arroy",
+  "repo": "https://github.com/meilisearch/arroy",
+  "language": "Rust",
+  "summary": {
+    "commits_scanned": 100,
+    "candidates_identified": 12,
+    "fixes_extracted": 10,
+    "mutations_classified": 45,
+    "mutations_deferred": 0,
+    "mutations_injected": 45,
+    "mutations_tested": 45,
+    "mutations_detected": 45,
+    "mutations_undetected": 0,
+    "mutations_removed": 2,
+    "mutations_final": 45,
+    "base_tests_passing": true
+  },
+  "pipeline_stages": {
+    "candidates": "checkpoints/candidates.json",
+    "ranked": "checkpoints/ranked.json",
+    "fixes": "checkpoints/fixes.json",
+    "classified": "checkpoints/classified.json",
+    "tests": "checkpoints/tests.json",
+    "mutations": "checkpoints/mutations.json"
+  },
+  "final_mutations": [
+    {
+      "name": "tmpfile_missing_seek",
+      "file": "src/parallel.rs:41",
+      "variant": "tmpfile_missing_seek_1",
+      "bug_type": "missing-seek",
+      "failing_tests": 1
+    },
+    {
+      "name": "reader_empty_search_guard",
+      "file": "src/reader.rs:323",
+      "variant": "reader_empty_search_guard_1",
+      "bug_type": "missing-base-case",
+      "failing_tests": 2
+    },
+    {
+      "name": "tree_target_rounding",
+      "file": "src/writer.rs:1423",
+      "variant": "tree_target_rounding_1",
+      "bug_type": "wrong-rounding",
+      "failing_tests": 2
+    },
+    {
+      "name": "fit_in_memory_remove_by_rank",
+      "file": "src/writer.rs:1672",
+      "variant": "fit_in_memory_remove_by_rank_1",
+      "bug_type": "wrong-remove-operation",
+      "failing_tests": 3
+    },
+    {
+      "name": "low_memory_none_handling",
+      "file": "src/writer.rs:1560",
+      "variant": "low_memory_none_handling_1",
+      "bug_type": "missing-none-handling",
+      "failing_tests": 1
+    },
+    {
+      "name": "upgrade_wrong_metadata_key",
+      "file": "src/upgrade.rs:111",
+      "variant": "upgrade_wrong_metadata_key_1",
+      "bug_type": "wrong-key-field",
+      "failing_tests": 1
+    },
+    {
+      "name": "upgrade_splitnode_rewrite_gate",
+      "file": "src/upgrade.rs:287",
+      "variant": "upgrade_splitnode_rewrite_gate_1",
+      "bug_type": "conditional-rewrite",
+      "failing_tests": 2
+    },
+    {
+      "name": "tmp_lookup_search_window",
+      "file": "src/parallel.rs:161",
+      "variant": "tmp_lookup_search_window_1",
+      "bug_type": "narrow-search-window",
+      "failing_tests": 2
+    },
+    {
+      "name": "fit_in_memory_min_split_threshold",
+      "file": "src/writer.rs:1655",
+      "variant": "fit_in_memory_min_split_threshold_1",
+      "bug_type": "off-by-one-split-threshold",
+      "failing_tests": 0
+    },
+    {
+      "name": "missing_tree_count_direction",
+      "file": "src/writer.rs:551",
+      "variant": "missing_tree_count_direction_1",
+      "bug_type": "wrong-missing-tree-count",
+      "failing_tests": 13
+    },
+    {
+      "name": "extraneous_tree_count_direction",
+      "file": "src/writer.rs:652",
+      "variant": "extraneous_tree_count_direction_1",
+      "bug_type": "wrong-extraneous-tree-count",
+      "failing_tests": 3
+    },
+    {
+      "name": "delete_empty_left_child_promote",
+      "file": "src/writer.rs:1083",
+      "variant": "delete_empty_left_child_promote_1",
+      "bug_type": "stale-empty-child-promotion",
+      "failing_tests": 1
+    },
+    {
+      "name": "fit_descendant_strict_threshold",
+      "file": "src/writer.rs:476",
+      "variant": "fit_descendant_strict_threshold_1",
+      "bug_type": "strict-fit-threshold",
+      "failing_tests": 15
+    },
+    {
+      "name": "single_leaf_root_id_mismatch",
+      "file": "src/writer.rs:957",
+      "variant": "single_leaf_root_id_mismatch_1",
+      "bug_type": "wrong-single-leaf-root-id",
+      "failing_tests": 18
+    },
+    {
+      "name": "tree_target_small_dataset_boundary",
+      "file": "src/writer.rs:1415",
+      "variant": "tree_target_small_dataset_boundary_1",
+      "bug_type": "small-dataset-threshold",
+      "failing_tests": 1
+    },
+    {
+      "name": "tree_target_dimension_power",
+      "file": "src/writer.rs:1401",
+      "variant": "tree_target_dimension_power_1",
+      "bug_type": "dimension-scaling-power",
+      "failing_tests": 1
+    },
+    {
+      "name": "euclidean_split_skip_normalize",
+      "file": "src/distance/euclidean.rs:84",
+      "variant": "euclidean_split_skip_normalize_1",
+      "bug_type": "missing-split-normalization",
+      "failing_tests": 10
+    },
+    {
+      "name": "median_top_k_truncate_bias",
+      "file": "src/reader.rs:707",
+      "variant": "median_top_k_truncate_bias_1",
+      "bug_type": "early-buffer-truncation",
+      "failing_tests": 2
+    },
+    {
+      "name": "euclidean_split_bias_scale",
+      "file": "src/distance/euclidean.rs:99",
+      "variant": "euclidean_split_bias_scale_1",
+      "bug_type": "wrong-split-bias-scale",
+      "failing_tests": 10
+    },
+    {
+      "name": "median_top_k_final_truncate",
+      "file": "src/reader.rs:732",
+      "variant": "median_top_k_final_truncate_1",
+      "bug_type": "off-by-one-final-truncate",
+      "failing_tests": 7
+    },
+    {
+      "name": "euclidean_margin_sign",
+      "file": "src/distance/euclidean.rs:111",
+      "variant": "euclidean_margin_sign_1",
+      "bug_type": "inverted-margin-sign",
+      "failing_tests": 11
+    },
+    {
+      "name": "median_top_k_filter_inversion",
+      "file": "src/reader.rs:693",
+      "variant": "median_top_k_filter_inversion_1",
+      "bug_type": "inverted-threshold-filter",
+      "failing_tests": 2
+    },
+    {
+      "name": "median_top_k_sort_direction",
+      "file": "src/reader.rs:725",
+      "variant": "median_top_k_sort_direction_1",
+      "bug_type": "reversed-ordering",
+      "failing_tests": 6
+    },
+    {
+      "name": "reader_searchk_root_factor",
+      "file": "src/reader.rs:335",
+      "variant": "reader_searchk_root_factor_1",
+      "bug_type": "missing-root-factor",
+      "failing_tests": 3
+    },
+    {
+      "name": "reader_candidates_filter_bypass",
+      "file": "src/reader.rs:374",
+      "variant": "reader_candidates_filter_bypass_1",
+      "bug_type": "candidate-filter-bypass",
+      "failing_tests": 1
+    },
+    {
+      "name": "reader_margin_argument_order",
+      "file": "src/reader.rs:399",
+      "variant": "reader_margin_argument_order_1",
+      "bug_type": "swapped-margin-arguments",
+      "failing_tests": 1
+    },
+    {
+      "name": "reader_split_side_distance_swap",
+      "file": "src/reader.rs:412",
+      "variant": "reader_split_side_distance_swap_1",
+      "bug_type": "swapped-branch-priority",
+      "failing_tests": 1
+    },
+    {
+      "name": "reader_nns_dedup_order",
+      "file": "src/reader.rs:427",
+      "variant": "reader_nns_dedup_order_1",
+      "bug_type": "dedup-before-sort",
+      "failing_tests": 3
+    },
+    {
+      "name": "median_top_k_initial_threshold",
+      "file": "src/reader.rs:679",
+      "variant": "median_top_k_initial_threshold_1",
+      "bug_type": "wrong-threshold-initialization",
+      "failing_tests": 2
+    },
+    {
+      "name": "reader_leaf_candidates_default_false",
+      "file": "src/reader.rs:361",
+      "variant": "reader_leaf_candidates_default_false_1",
+      "bug_type": "wrong-candidate-default",
+      "failing_tests": 1
+    },
+    {
+      "name": "reader_descendant_no_candidates_skip",
+      "file": "src/reader.rs:382",
+      "variant": "reader_descendant_no_candidates_skip_1",
+      "bug_type": "skip-descendants-without-candidates",
+      "failing_tests": 5
+    },
+    {
+      "name": "reader_k_selection_max",
+      "file": "src/reader.rs:450",
+      "variant": "reader_k_selection_max_1",
+      "bug_type": "max-instead-of-min-top-k",
+      "failing_tests": 4
+    },
+    {
+      "name": "tree_target_small_dataset_exponent_shift",
+      "file": "src/writer.rs:1408",
+      "variant": "tree_target_small_dataset_exponent_shift_1",
+      "bug_type": "small-dataset-exponent-shift",
+      "failing_tests": 1
+    },
+    {
+      "name": "euclidean_norm_no_sqrt",
+      "file": "src/distance/euclidean.rs:56",
+      "variant": "euclidean_norm_no_sqrt_1",
+      "bug_type": "missing-norm-square-root",
+      "failing_tests": 10
+    },
+    {
+      "name": "two_means_weighted_distance_left",
+      "file": "src/distance/mod.rs:175",
+      "variant": "two_means_weighted_distance_left_1",
+      "bug_type": "missing-centroid-weighting",
+      "failing_tests": 9
+    },
+    {
+      "name": "euclidean_two_means_cosine_flag",
+      "file": "src/distance/euclidean.rs:71",
+      "variant": "euclidean_two_means_cosine_flag_1",
+      "bug_type": "wrong-cosine-flag-in-euclidean-split",
+      "failing_tests": 11
+    },
+    {
+      "name": "insert_descendants_right_guard",
+      "file": "src/writer.rs:1516",
+      "variant": "insert_descendants_right_guard_1",
+      "bug_type": "right-descendant-recursion-guard-inverted",
+      "failing_tests": 5
+    },
+    {
+      "name": "reader_output_skip_normalization",
+      "file": "src/reader.rs:460",
+      "variant": "reader_output_skip_normalization_1",
+      "bug_type": "missing-distance-normalization",
+      "failing_tests": 4
+    },
+    {
+      "name": "euclidean_built_distance_dot",
+      "file": "src/distance/euclidean.rs:46",
+      "variant": "euclidean_built_distance_dot_1",
+      "bug_type": "dot-product-used-as-distance",
+      "failing_tests": 15
+    },
+    {
+      "name": "insert_descendants_merge_operator",
+      "file": "src/writer.rs:1462",
+      "variant": "insert_descendants_merge_operator_1",
+      "bug_type": "descendant-merge-intersection",
+      "failing_tests": 6
+    },
+    {
+      "name": "insert_descendants_left_guard",
+      "file": "src/writer.rs:1490",
+      "variant": "insert_descendants_left_guard_1",
+      "bug_type": "left-descendant-recursion-guard-inverted",
+      "failing_tests": 3
+    },
+    {
+      "name": "distance_normalized_distance_no_sqrt",
+      "file": "src/distance/mod.rs:60",
+      "variant": "distance_normalized_distance_no_sqrt_1",
+      "bug_type": "missing-distance-root-normalization",
+      "failing_tests": 4
+    },
+    {
+      "name": "distance_pq_left_margin_sign",
+      "file": "src/distance/mod.rs:70",
+      "variant": "distance_pq_left_margin_sign_1",
+      "bug_type": "wrong-left-margin-sign",
+      "failing_tests": 1
+    },
+    {
+      "name": "distance_update_mean_divisor",
+      "file": "src/distance/mod.rs:101",
+      "variant": "distance_update_mean_divisor_1",
+      "bug_type": "wrong-centroid-divisor",
+      "failing_tests": 12
+    },
+    {
+      "name": "distance_side_sign_flip",
+      "file": "src/distance/mod.rs:118",
+      "variant": "distance_side_sign_flip_1",
+      "bug_type": "inverted-side-selection-sign",
+      "failing_tests": 12
+    }
+  ],
+  "undetected": [],
+  "notes": [
+    "No undetected mutations remain in this injection pass.",
+    "Added tree-count direction mutations from eaeb864 and 66068b4; both are detected by delete_extraneous_tree.",
+    "Added delete_empty_left_child_promote from c6c53c5; detected in low-memory writer path.",
+    "Added targeted regression coverage for tmpfile append semantics and v0.4/v0.5 metadata upgrade handling.",
+    "insert_error_channel_short_circuit was removed after remaining undetected with current deterministic tests.",
+    "split_lookup_wrong_source was removed as equivalent in current arroy head.",
+    "The originally ranked split_right_off_by_one site is not present in current arroy head and was skipped.",
+    "Added Euclidean split and reader top-k regressions plus tree-target formula regressions from later history.",
+    "Added 5 detected mutations in reader/writer/euclidean paths; removed undetected queue-init and top-k-prefill candidates.",
+    "Extended workload to 41 retained detected mutations, with no undetected retained variants.",
+    "Added 7 detected mutations in distance/euclidean, descendants insertion, and reader output normalization paths.",
+    "Synchronized to 45 active source variants after full-variant health verification."
+  ]
+}

@@ -43,11 +43,23 @@ impl Distance for Euclidean {
     }
 
     fn built_distance(p: &Leaf<Self>, q: &Leaf<Self>) -> f32 {
+        /*| euclidean_built_distance_dot [distance, euclidean, built-distance] */
         euclidean_distance(&p.vector, &q.vector)
+        /*|| euclidean_built_distance_dot_1 */
+        /*|
+        dot_product(&p.vector, &q.vector)
+        */
+        /* |*/
     }
 
     fn norm_no_header(v: &UnalignedVector<Self::VectorCodec>) -> f32 {
+        /*| euclidean_norm_no_sqrt [distance, euclidean, norm] */
         dot_product(v, v).sqrt()
+        /*|| euclidean_norm_no_sqrt_1 */
+        /*|
+        dot_product(v, v)
+        */
+        /* |*/
     }
 
     fn init(_node: &mut Leaf<Self>) {}
@@ -56,27 +68,52 @@ impl Distance for Euclidean {
         children: &'a ImmutableSubsetLeafs<Self>,
         rng: &mut R,
     ) -> heed::Result<Leaf<'a, Self>> {
-        let [node_p, node_q] = two_means(rng, children, false)?;
+        /*| euclidean_two_means_cosine_flag [distance, euclidean, split-centroid] */
+        let [node_p , node_q] = two_means (rng , children , false) ?;
+        /*|| euclidean_two_means_cosine_flag_1 */
+        /*|
+        let [node_p , node_q] = two_means (rng , children , true) ?;
+        */
+        /* |*/
         let vector: Vec<_> =
             node_p.vector.iter().zip(node_q.vector.iter()).map(|(p, q)| p - q).collect();
         let mut normal: Leaf<'static, Self> = Leaf {
             header: NodeHeaderEuclidean { bias: 0.0 },
             vector: UnalignedVector::from_vec(vector),
         };
+        /*| euclidean_split_skip_normalize [distance, euclidean, split-normalization] */
         Self::normalize(&mut normal);
+        /*|| euclidean_split_skip_normalize_1 */
+        /*|
+        ()
+        */
+        /* |*/
 
-        normal.header.bias = normal
+        let bias: f32 = normal
             .vector
             .iter()
             .zip(node_p.vector.iter())
             .zip(node_q.vector.iter())
             .map(|((n, p), q)| -n * (p + q) / 2.0)
             .sum();
+        /*| euclidean_split_bias_scale [distance, euclidean, split-bias] */
+        normal.header.bias = bias;
+        /*|| euclidean_split_bias_scale_1 */
+        /*|
+        normal.header.bias = bias * 2.0;
+        */
+        /* |*/
 
         Ok(normal)
     }
 
     fn margin(n: &Leaf<Self>, q: &Leaf<Self>) -> f32 {
+        /*| euclidean_margin_sign [distance, euclidean, margin-sign] */
         n.header.bias + dot_product(&n.vector, &q.vector)
+        /*|| euclidean_margin_sign_1 */
+        /*|
+        n.header.bias - dot_product(&n.vector, &q.vector)
+        */
+        /* |*/
     }
 }

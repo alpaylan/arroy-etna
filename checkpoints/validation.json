@@ -1,0 +1,23 @@
+{
+  "run_id": "dfd37854-caf6-4818-b589-4fddab8f1c20",
+  "project": "arroy",
+  "checks": {
+    "run_id_consistent": true,
+    "commits_scanned_match": true,
+    "candidates_match": true,
+    "fixes_match": true,
+    "classified_match": true,
+    "deferred_match": true,
+    "ranked_match": true,
+    "injected_match": true,
+    "tested_match": true,
+    "detected_match": true,
+    "undetected_match": true,
+    "removed_match": true,
+    "final_count_match": true,
+    "final_exist_in_mutations": true,
+    "final_failing_tests_exist_in_tests_checkpoint": true
+  },
+  "passed": true,
+  "mismatches": []
+}

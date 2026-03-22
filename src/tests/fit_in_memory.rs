@@ -1,9 +1,10 @@
-use crate::distance::Distance;
-use crate::distances::Euclidean;
-use crate::writer::fit_in_memory;
 use rand::rngs::StdRng;
 use rand::SeedableRng;
 use roaring::RoaringBitmap;
+
+use crate::distance::Distance;
+use crate::distances::Euclidean;
+use crate::writer::fit_in_memory;
 
 #[test]
 fn test_empty_bitmap() {
