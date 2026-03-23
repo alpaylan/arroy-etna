@@ -359,7 +359,8 @@ impl<'t, D: Distance> Reader<'t, D> {
             match self.database_get(rtxn, &key)?.ok_or(Error::missing_key(key))? {
                 GenericReadNode::Leaf(_) => {
                     /*| reader_leaf_candidates_default_false [reader, search, candidates] */
-                    if opt.candidates.map_or(true, |c| c.contains(item.item)) {                        nns.push(item.unwrap_item());
+                    if opt.candidates.map_or(true, |c| c.contains(item.item)) {
+                        nns.push(item.unwrap_item());
                     }
                     /*|| reader_leaf_candidates_default_false_1 */
                     /*|
@@ -367,7 +368,6 @@ impl<'t, D: Distance> Reader<'t, D> {
                     }
                     */
                     /* |*/
-
                 }
                 GenericReadNode::Descendants(Descendants { descendants }) => {
                     if let Some(candidates) = opt.candidates {

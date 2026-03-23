@@ -1435,7 +1435,6 @@ pub(crate) fn target_n_trees(
                 if (tree_to_remove as f64 / nb_trees as f64) < 0.20 {
                     nb_trees = roots.len() as u64;
                 }
-
             }
 
             nb_trees
@@ -1488,7 +1487,8 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
             }
 
             /*| insert_descendants_left_guard [writer, descendants, left-branch] */
-            if !left_ids.is_empty() {                insert_items_in_descendants_from_frozen_reader(
+            if !left_ids.is_empty() {
+                insert_items_in_descendants_from_frozen_reader(
                     opt,
                     progress,
                     frozen_reader,
@@ -1514,7 +1514,8 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
             /* |*/
 
             /*| insert_descendants_right_guard [writer, descendants, right-branch] */
-            if !right_ids.is_empty() {                insert_items_in_descendants_from_frozen_reader(
+            if !right_ids.is_empty() {
+                insert_items_in_descendants_from_frozen_reader(
                     opt,
                     progress,
                     frozen_reader,
@@ -1538,7 +1539,6 @@ fn insert_items_in_descendants_from_frozen_reader<D: Distance, R: Rng>(
             }
             */
             /* |*/
-
         }
     }
     Ok(())

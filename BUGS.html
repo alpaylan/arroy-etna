@@ -450,6 +450,237 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 </tbody></table>
 </section>
+<section class="panel">
+<h2>Property-based detectors</h2>
+<p>One validated failing property test per variant (checked with <code>wkgen test variant</code> in functional mutation mode on 2026-03-23).</p>
+<table><thead><tr><th>#</th><th>Variant</th><th>Failing Property Test</th></tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>`tmpfile_missing_seek_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>2</td>
+<td>`reader_empty_search_guard_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>3</td>
+<td>`tree_target_rounding_1`</td>
+<td>`tests::property_regressions::target_n_trees_matches_formula`</td>
+</tr>
+<tr>
+<td>4</td>
+<td>`fit_in_memory_remove_by_rank_1`</td>
+<td>`tests::property_regressions::fit_in_memory_sampling_invariants`</td>
+</tr>
+<tr>
+<td>5</td>
+<td>`low_memory_none_handling_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>6</td>
+<td>`upgrade_wrong_metadata_key_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>7</td>
+<td>`upgrade_splitnode_rewrite_gate_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>8</td>
+<td>`tmp_lookup_search_window_1`</td>
+<td>`tests::property_regressions::tmp_nodes_random_read_append_preserves_previous_nodes`</td>
+</tr>
+<tr>
+<td>9</td>
+<td>`fit_in_memory_min_split_threshold_1`</td>
+<td>`tests::property_regressions::fit_in_memory_sampling_invariants`</td>
+</tr>
+<tr>
+<td>10</td>
+<td>`missing_tree_count_direction_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>11</td>
+<td>`extraneous_tree_count_direction_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>12</td>
+<td>`delete_empty_left_child_promote_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>13</td>
+<td>`fit_descendant_strict_threshold_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>14</td>
+<td>`single_leaf_root_id_mismatch_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>15</td>
+<td>`tree_target_small_dataset_boundary_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>16</td>
+<td>`tree_target_dimension_power_1`</td>
+<td>`tests::property_regressions::target_n_trees_matches_formula`</td>
+</tr>
+<tr>
+<td>17</td>
+<td>`euclidean_split_skip_normalize_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>18</td>
+<td>`median_top_k_truncate_bias_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>19</td>
+<td>`euclidean_split_bias_scale_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>20</td>
+<td>`median_top_k_final_truncate_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>21</td>
+<td>`euclidean_margin_sign_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>22</td>
+<td>`median_top_k_filter_inversion_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>23</td>
+<td>`median_top_k_sort_direction_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>24</td>
+<td>`reader_searchk_root_factor_1`</td>
+<td>`tests::property_regressions::reader_default_search_k_matches_explicit_root_budget`</td>
+</tr>
+<tr>
+<td>25</td>
+<td>`reader_candidates_filter_bypass_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>26</td>
+<td>`reader_margin_argument_order_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>27</td>
+<td>`reader_split_side_distance_swap_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>28</td>
+<td>`reader_nns_dedup_order_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>29</td>
+<td>`median_top_k_initial_threshold_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>30</td>
+<td>`reader_leaf_candidates_default_false_1`</td>
+<td>`tests::property_regressions::reader_full_scan_without_candidates_returns_all_items`</td>
+</tr>
+<tr>
+<td>31</td>
+<td>`reader_descendant_no_candidates_skip_1`</td>
+<td>`tests::property_regressions::reader_full_scan_without_candidates_returns_all_items`</td>
+</tr>
+<tr>
+<td>32</td>
+<td>`reader_k_selection_max_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>33</td>
+<td>`tree_target_small_dataset_exponent_shift_1`</td>
+<td>`tests::property_regressions::target_n_trees_matches_formula`</td>
+</tr>
+<tr>
+<td>34</td>
+<td>`euclidean_norm_no_sqrt_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>35</td>
+<td>`two_means_weighted_distance_left_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>36</td>
+<td>`euclidean_two_means_cosine_flag_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>37</td>
+<td>`insert_descendants_right_guard_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>38</td>
+<td>`reader_output_skip_normalization_1`</td>
+<td>`tests::property_regressions::reader_output_is_normalized_euclidean_distance`</td>
+</tr>
+<tr>
+<td>39</td>
+<td>`euclidean_built_distance_dot_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>40</td>
+<td>`insert_descendants_merge_operator_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>41</td>
+<td>`insert_descendants_left_guard_1`</td>
+<td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
+<tr>
+<td>42</td>
+<td>`distance_normalized_distance_no_sqrt_1`</td>
+<td>`tests::distance_properties::normalized_distance_matches_square_root`</td>
+</tr>
+<tr>
+<td>43</td>
+<td>`distance_pq_left_margin_sign_1`</td>
+<td>`tests::distance_properties::pq_left_side_uses_negative_margin`</td>
+</tr>
+<tr>
+<td>44</td>
+<td>`distance_update_mean_divisor_1`</td>
+<td>`tests::distance_properties::update_mean_respects_weighted_average_divisor`</td>
+</tr>
+<tr>
+<td>45</td>
+<td>`distance_side_sign_flip_1`</td>
+<td>`tests::distance_properties::side_is_consistent_with_margin_sign`</td>
+</tr>
+</tbody></table>
+</section>
 <section>
 <h2>Bug details</h2>
 <details class="bug" data-search="1 tmpfile_missing_seek file `src/parallel.rs:41` variant `tmpfile_missing_seek_1` tags `parallel, io, append, issue-143` fix commit [`a63f097`](https://github.com/meilisearch/arroy/commit/a63f0979b216dde10d50fdfa4fadcb2b1dea73c7) fix context fix #143 (2025-06-19) related links [pr #144](https://github.com/meilisearch/arroy/pull/144), [issue #143](https://github.com/meilisearch/arroy/issues/143) type `missing-seek` test mode `debug` failure profile heed decode error after read to append overwrite `tests::tmp_nodes::test_read_then_append_keeps_previous_nodes_intact`"><summary>Bug 1: tmpfile_missing_seek (<code>tmpfile_missing_seek_1</code>)</summary>
@@ -477,6 +708,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>Heed decode error after read to append overwrite</td>
@@ -512,6 +746,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>panic from integer logarithm on empty items</td>
@@ -548,6 +785,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::target_n_trees_matches_formula`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>snapshot regressions in tree count behavior</td>
@@ -584,6 +824,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::fit_in_memory_sampling_invariants`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>fit in memory selection corruption</td>
@@ -621,6 +864,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>panic from unwrap on missing tmp node</td>
@@ -656,6 +902,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>metadata decode mismatch in v0.4 to v0.5 upgrade path</td>
@@ -691,6 +940,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>split nodes not fully rewritten during upgrade</td>
@@ -727,6 +979,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::tmp_nodes_random_read_append_preserves_previous_nodes`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>tmp node lookup misses nodes outside recent tail</td>
@@ -763,6 +1018,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::fit_in_memory_sampling_invariants`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>timeout/non-termination in low-memory writer path</td>
@@ -798,6 +1056,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>target tree backfill skipped due inverted saturating subtraction</td>
@@ -845,6 +1106,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>extraneous tree pruning count inverted; tree layout diverges</td>
@@ -882,6 +1146,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>duplicate tmp-node deletion panic in low-memory update path</td>
@@ -917,6 +1184,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>strict descendant threshold causes early split-node expansion</td>
@@ -966,6 +1236,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>single-leaf metadata points to missing tree id</td>
@@ -1018,6 +1291,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>small-dataset threshold includes 10k boundary and shifts tree target snapshots</td>
@@ -1053,6 +1329,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::target_n_trees_matches_formula`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>dimension scaling exponent changed in tree target formula</td>
@@ -1088,6 +1367,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>euclidean split normal is left unnormalized</td>
@@ -1132,6 +1414,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>median top-k truncates too aggressively during thresholding</td>
@@ -1168,6 +1453,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>euclidean split bias is over-scaled</td>
@@ -1212,6 +1500,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>final top-k truncation drops one nearest neighbor</td>
@@ -1253,6 +1544,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>euclidean split margin uses inverted sign</td>
@@ -1298,6 +1592,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>top-k candidate filter direction inverted</td>
@@ -1334,6 +1631,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>top-k ordering reversed before truncation</td>
@@ -1374,6 +1674,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_default_search_k_matches_explicit_root_budget`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>search budget ignores root-count factor</td>
@@ -1411,6 +1714,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>candidate-filter bypass in descendants expansion</td>
@@ -1446,6 +1752,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>margin argument order swapped</td>
@@ -1481,6 +1790,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>left/right branch priority distance swapped</td>
@@ -1516,6 +1828,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>dedup performed before sorting nearest-neighbor IDs</td>
@@ -1553,6 +1868,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>top-k threshold initialized to minimum value</td>
@@ -1589,6 +1907,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_full_scan_without_candidates_returns_all_items`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>leaf candidate filter defaults to excluding all items when no candidate set is provided</td>
@@ -1624,6 +1945,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_full_scan_without_candidates_returns_all_items`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>descendant expansion is skipped when no candidate filter is provided</td>
@@ -1663,6 +1987,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>top-k bound uses max instead of min and over-returns neighbors</td>
@@ -1701,6 +2028,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::target_n_trees_matches_formula`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>small-dataset tree exponent is shifted by +1</td>
@@ -1736,6 +2066,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>euclidean norm omits the square root during split normalization</td>
@@ -1780,6 +2113,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>left centroid weighting factor is dropped during split clustering</td>
@@ -1823,6 +2159,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>euclidean split incorrectly enables cosine normalization in two-means</td>
@@ -1868,6 +2207,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>right descendants are skipped when right branch is non-empty</td>
@@ -1907,6 +2249,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_output_is_normalized_euclidean_distance`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>reader returns non-normalized distances in search output</td>
@@ -1945,6 +2290,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>euclidean built distance uses dot product instead of euclidean metric</td>
@@ -1994,6 +2342,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>descendant updates intersect instead of union when merging inserts</td>
@@ -2034,6 +2385,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::property_regressions::reader_candidates_singleton_is_respected`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>left descendants are skipped when left branch is non-empty</td>
@@ -2071,6 +2425,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::distance_properties::normalized_distance_matches_square_root`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>test failure</td>
@@ -2109,6 +2466,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::distance_properties::pq_left_side_uses_negative_margin`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>test failure</td>
@@ -2144,6 +2504,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::distance_properties::update_mean_respects_weighted_average_divisor`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>test failure</td>
@@ -2190,6 +2553,9 @@ a{color:#0b7285;text-decoration:none;}a:hover{text-decoration:underline;}
 </tr>
 <tr>
 <td>Test mode</td><td>`debug`</td>
+<tr>
+<td>Failing property test</td><td>`tests::distance_properties::side_is_consistent_with_margin_sign`</td>
+</tr>
 </tr>
 <tr>
 <td>Failure profile</td><td>test failure</td>

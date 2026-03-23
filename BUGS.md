@@ -68,6 +68,58 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | 44 | `distance_update_mean_divisor` | `distance_update_mean_divisor_1` | `src/distance/mod.rs:101` | `wrong-centroid-divisor` | 12 | [`d5a7e6f`](https://github.com/meilisearch/arroy/commit/d5a7e6f6f5d8204d60ec602e5f1dbccc238a1601) |
 | 45 | `distance_side_sign_flip` | `distance_side_sign_flip_1` | `src/distance/mod.rs:118` | `inverted-side-selection-sign` | 12 | [`a70b1dd`](https://github.com/meilisearch/arroy/commit/a70b1dd3c46e75901d9de86070f3167aad6ea2be) |
 
+## Property-Based Detectors
+
+One validated failing property test per variant (checked with `wkgen test variant` in functional mutation mode on 2026-03-23).
+
+| # | Variant | Failing Property Test |
+|---|---|---|
+| 1 | `tmpfile_missing_seek_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 2 | `reader_empty_search_guard_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 3 | `tree_target_rounding_1` | `tests::property_regressions::target_n_trees_matches_formula` |
+| 4 | `fit_in_memory_remove_by_rank_1` | `tests::property_regressions::fit_in_memory_sampling_invariants` |
+| 5 | `low_memory_none_handling_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 6 | `upgrade_wrong_metadata_key_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 7 | `upgrade_splitnode_rewrite_gate_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 8 | `tmp_lookup_search_window_1` | `tests::property_regressions::tmp_nodes_random_read_append_preserves_previous_nodes` |
+| 9 | `fit_in_memory_min_split_threshold_1` | `tests::property_regressions::fit_in_memory_sampling_invariants` |
+| 10 | `missing_tree_count_direction_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 11 | `extraneous_tree_count_direction_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 12 | `delete_empty_left_child_promote_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 13 | `fit_descendant_strict_threshold_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 14 | `single_leaf_root_id_mismatch_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 15 | `tree_target_small_dataset_boundary_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 16 | `tree_target_dimension_power_1` | `tests::property_regressions::target_n_trees_matches_formula` |
+| 17 | `euclidean_split_skip_normalize_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 18 | `median_top_k_truncate_bias_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 19 | `euclidean_split_bias_scale_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 20 | `median_top_k_final_truncate_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 21 | `euclidean_margin_sign_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 22 | `median_top_k_filter_inversion_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 23 | `median_top_k_sort_direction_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 24 | `reader_searchk_root_factor_1` | `tests::property_regressions::reader_default_search_k_matches_explicit_root_budget` |
+| 25 | `reader_candidates_filter_bypass_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 26 | `reader_margin_argument_order_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 27 | `reader_split_side_distance_swap_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 28 | `reader_nns_dedup_order_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 29 | `median_top_k_initial_threshold_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 30 | `reader_leaf_candidates_default_false_1` | `tests::property_regressions::reader_full_scan_without_candidates_returns_all_items` |
+| 31 | `reader_descendant_no_candidates_skip_1` | `tests::property_regressions::reader_full_scan_without_candidates_returns_all_items` |
+| 32 | `reader_k_selection_max_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 33 | `tree_target_small_dataset_exponent_shift_1` | `tests::property_regressions::target_n_trees_matches_formula` |
+| 34 | `euclidean_norm_no_sqrt_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 35 | `two_means_weighted_distance_left_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 36 | `euclidean_two_means_cosine_flag_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 37 | `insert_descendants_right_guard_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 38 | `reader_output_skip_normalization_1` | `tests::property_regressions::reader_output_is_normalized_euclidean_distance` |
+| 39 | `euclidean_built_distance_dot_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 40 | `insert_descendants_merge_operator_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 41 | `insert_descendants_left_guard_1` | `tests::property_regressions::reader_candidates_singleton_is_respected` |
+| 42 | `distance_normalized_distance_no_sqrt_1` | `tests::distance_properties::normalized_distance_matches_square_root` |
+| 43 | `distance_pq_left_margin_sign_1` | `tests::distance_properties::pq_left_side_uses_negative_margin` |
+| 44 | `distance_update_mean_divisor_1` | `tests::distance_properties::update_mean_respects_weighted_average_divisor` |
+| 45 | `distance_side_sign_flip_1` | `tests::distance_properties::side_is_consistent_with_margin_sign` |
+
 ## Bug Details
 
 ### Bug 1: `tmpfile_missing_seek`
@@ -82,6 +134,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #144](https://github.com/meilisearch/arroy/pull/144), [Issue #143](https://github.com/meilisearch/arroy/issues/143) |
 | **Type** | `missing-seek` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | Heed decode error after read to append overwrite |
 
 **Detecting tests**
@@ -100,6 +153,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #76](https://github.com/meilisearch/arroy/pull/76), [Issue #74](https://github.com/meilisearch/arroy/issues/74) |
 | **Type** | `missing-base-case` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | panic from integer logarithm on empty items |
 
 **Detecting tests**
@@ -119,6 +173,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #49](https://github.com/meilisearch/arroy/pull/49) |
 | **Type** | `wrong-rounding` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::target_n_trees_matches_formula` |
 | **Failure profile** | snapshot regressions in tree count behavior |
 
 **Detecting tests**
@@ -138,6 +193,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #130](https://github.com/meilisearch/arroy/pull/130) |
 | **Type** | `wrong-remove-operation` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::fit_in_memory_sampling_invariants` |
 | **Failure profile** | fit in memory selection corruption |
 
 **Detecting tests**
@@ -158,6 +214,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #130](https://github.com/meilisearch/arroy/pull/130) |
 | **Type** | `missing-none-handling` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | panic from unwrap on missing tmp node |
 
 **Detecting tests**
@@ -176,6 +233,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #108](https://github.com/meilisearch/arroy/pull/108) |
 | **Type** | `wrong-key-field` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | metadata decode mismatch in v0.4 to v0.5 upgrade path |
 
 **Detecting tests**
@@ -194,6 +252,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #127](https://github.com/meilisearch/arroy/pull/127) |
 | **Type** | `conditional-rewrite` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | split nodes not fully rewritten during upgrade |
 
 **Detecting tests**
@@ -213,6 +272,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #57](https://github.com/meilisearch/arroy/pull/57) |
 | **Type** | `narrow-search-window` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::tmp_nodes_random_read_append_preserves_previous_nodes` |
 | **Failure profile** | tmp node lookup misses nodes outside recent tail |
 
 **Detecting tests**
@@ -232,6 +292,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #130](https://github.com/meilisearch/arroy/pull/130) |
 | **Type** | `off-by-one-split-threshold` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::fit_in_memory_sampling_invariants` |
 | **Failure profile** | timeout/non-termination in low-memory writer path |
 
 **Detecting tests**
@@ -250,6 +311,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #116](https://github.com/meilisearch/arroy/pull/116) |
 | **Type** | `wrong-missing-tree-count` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | target tree backfill skipped due inverted saturating subtraction |
 
 **Detecting tests**
@@ -280,6 +342,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #116](https://github.com/meilisearch/arroy/pull/116) |
 | **Type** | `wrong-extraneous-tree-count` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | extraneous tree pruning count inverted; tree layout diverges |
 
 **Detecting tests**
@@ -300,6 +363,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #116](https://github.com/meilisearch/arroy/pull/116), [Issue #117](https://github.com/meilisearch/arroy/issues/117) |
 | **Type** | `stale-empty-child-promotion` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | duplicate tmp-node deletion panic in low-memory update path |
 
 **Detecting tests**
@@ -318,6 +382,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #41](https://github.com/meilisearch/arroy/pull/41) |
 | **Type** | `strict-fit-threshold` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | strict descendant threshold causes early split-node expansion |
 
 **Detecting tests**
@@ -350,6 +415,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #41](https://github.com/meilisearch/arroy/pull/41) |
 | **Type** | `wrong-single-leaf-root-id` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | single-leaf metadata points to missing tree id |
 
 **Detecting tests**
@@ -385,6 +451,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #138](https://github.com/meilisearch/arroy/pull/138) |
 | **Type** | `small-dataset-threshold` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | small-dataset threshold includes 10k boundary and shifts tree target snapshots |
 
 **Detecting tests**
@@ -403,6 +470,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #138](https://github.com/meilisearch/arroy/pull/138) |
 | **Type** | `dimension-scaling-power` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::target_n_trees_matches_formula` |
 | **Failure profile** | dimension scaling exponent changed in tree target formula |
 
 **Detecting tests**
@@ -421,6 +489,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `missing-split-normalization` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | euclidean split normal is left unnormalized |
 
 **Detecting tests**
@@ -448,6 +517,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `early-buffer-truncation` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | median top-k truncates too aggressively during thresholding |
 
 **Detecting tests**
@@ -467,6 +537,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `wrong-split-bias-scale` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | euclidean split bias is over-scaled |
 
 **Detecting tests**
@@ -494,6 +565,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `off-by-one-final-truncate` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | final top-k truncation drops one nearest neighbor |
 
 **Detecting tests**
@@ -518,6 +590,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `inverted-margin-sign` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | euclidean split margin uses inverted sign |
 
 **Detecting tests**
@@ -546,6 +619,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `inverted-threshold-filter` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | top-k candidate filter direction inverted |
 
 **Detecting tests**
@@ -565,6 +639,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `reversed-ordering` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | top-k ordering reversed before truncation |
 
 **Detecting tests**
@@ -588,6 +663,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #1](https://github.com/meilisearch/arroy/pull/1) |
 | **Type** | `missing-root-factor` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_default_search_k_matches_explicit_root_budget` |
 | **Failure profile** | search budget ignores root-count factor |
 
 **Detecting tests**
@@ -608,6 +684,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #38](https://github.com/meilisearch/arroy/pull/38) |
 | **Type** | `candidate-filter-bypass` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | candidate-filter bypass in descendants expansion |
 
 **Detecting tests**
@@ -626,6 +703,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #1](https://github.com/meilisearch/arroy/pull/1) |
 | **Type** | `swapped-margin-arguments` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | margin argument order swapped |
 
 **Detecting tests**
@@ -644,6 +722,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #1](https://github.com/meilisearch/arroy/pull/1) |
 | **Type** | `swapped-branch-priority` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | left/right branch priority distance swapped |
 
 **Detecting tests**
@@ -662,6 +741,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #1](https://github.com/meilisearch/arroy/pull/1) |
 | **Type** | `dedup-before-sort` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | dedup performed before sorting nearest-neighbor IDs |
 
 **Detecting tests**
@@ -682,6 +762,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `wrong-threshold-initialization` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | top-k threshold initialized to minimum value |
 
 **Detecting tests**
@@ -701,6 +782,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #38](https://github.com/meilisearch/arroy/pull/38) |
 | **Type** | `wrong-candidate-default` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_full_scan_without_candidates_returns_all_items` |
 | **Failure profile** | leaf candidate filter defaults to excluding all items when no candidate set is provided |
 
 **Detecting tests**
@@ -719,6 +801,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #38](https://github.com/meilisearch/arroy/pull/38) |
 | **Type** | `skip-descendants-without-candidates` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_full_scan_without_candidates_returns_all_items` |
 | **Failure profile** | descendant expansion is skipped when no candidate filter is provided |
 
 **Detecting tests**
@@ -741,6 +824,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `max-instead-of-min-top-k` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | top-k bound uses max instead of min and over-returns neighbors |
 
 **Detecting tests**
@@ -762,6 +846,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #49](https://github.com/meilisearch/arroy/pull/49) |
 | **Type** | `small-dataset-exponent-shift` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::target_n_trees_matches_formula` |
 | **Failure profile** | small-dataset tree exponent is shifted by +1 |
 
 **Detecting tests**
@@ -780,6 +865,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `missing-norm-square-root` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | euclidean norm omits the square root during split normalization |
 
 **Detecting tests**
@@ -807,6 +893,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `missing-centroid-weighting` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | left centroid weighting factor is dropped during split clustering |
 
 **Detecting tests**
@@ -833,6 +920,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `wrong-cosine-flag-in-euclidean-split` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | euclidean split incorrectly enables cosine normalization in two-means |
 
 **Detecting tests**
@@ -861,6 +949,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #130](https://github.com/meilisearch/arroy/pull/130) |
 | **Type** | `right-descendant-recursion-guard-inverted` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | right descendants are skipped when right branch is non-empty |
 
 **Detecting tests**
@@ -883,6 +972,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #129](https://github.com/meilisearch/arroy/pull/129) |
 | **Type** | `missing-distance-normalization` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_output_is_normalized_euclidean_distance` |
 | **Failure profile** | reader returns non-normalized distances in search output |
 
 **Detecting tests**
@@ -904,6 +994,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #82](https://github.com/meilisearch/arroy/pull/82) |
 | **Type** | `dot-product-used-as-distance` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | euclidean built distance uses dot product instead of euclidean metric |
 
 **Detecting tests**
@@ -936,6 +1027,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #130](https://github.com/meilisearch/arroy/pull/130) |
 | **Type** | `descendant-merge-intersection` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | descendant updates intersect instead of union when merging inserts |
 
 **Detecting tests**
@@ -959,6 +1051,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #130](https://github.com/meilisearch/arroy/pull/130) |
 | **Type** | `left-descendant-recursion-guard-inverted` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::property_regressions::reader_candidates_singleton_is_respected` |
 | **Failure profile** | left descendants are skipped when left branch is non-empty |
 
 **Detecting tests**
@@ -979,6 +1072,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | _No issue/PR links detected from tags, commit metadata, or GitHub commit associations._ |
 | **Type** | `missing-distance-root-normalization` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::distance_properties::normalized_distance_matches_square_root` |
 | **Failure profile** | test failure |
 
 **Detecting tests**
@@ -1000,6 +1094,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | _No issue/PR links detected from tags, commit metadata, or GitHub commit associations._ |
 | **Type** | `wrong-left-margin-sign` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::distance_properties::pq_left_side_uses_negative_margin` |
 | **Failure profile** | test failure |
 
 **Detecting tests**
@@ -1018,6 +1113,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | _No issue/PR links detected from tags, commit metadata, or GitHub commit associations._ |
 | **Type** | `wrong-centroid-divisor` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::distance_properties::update_mean_respects_weighted_average_divisor` |
 | **Failure profile** | test failure |
 
 **Detecting tests**
@@ -1047,6 +1143,7 @@ python3 -m wkgen test variant --workload-dir workloads/Rust/arroy --variant <var
 | **Related links** | [PR #132](https://github.com/meilisearch/arroy/pull/132) |
 | **Type** | `inverted-side-selection-sign` |
 | **Test mode** | `debug` |
+| **Failing property test** | `tests::distance_properties::side_is_consistent_with_margin_sign` |
 | **Failure profile** | test failure |
 
 **Detecting tests**

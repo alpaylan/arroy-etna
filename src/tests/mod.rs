@@ -12,7 +12,9 @@ use crate::version::VersionCodec;
 use crate::{Database, Distance, MetadataCodec, NodeCodec, NodeMode, Reader};
 
 mod binary_quantized;
+mod distance_properties;
 mod fit_in_memory;
+mod property_regressions;
 mod reader;
 mod tmp_nodes;
 mod upgrade;
