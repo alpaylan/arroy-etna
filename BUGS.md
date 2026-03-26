@@ -2,7 +2,7 @@
 
 This workload contains **45** detected bugs derived from historical fixes in [meilisearch/arroy](https://github.com/meilisearch/arroy).
 
-Each bug is injected with [marauders](https://github.com/akeles/marauders) comment syntax and has one active variant (`M_<variant>=active`).
+Each bug is injected with [marauders](http://github.com/alpaylan/marauders) comment syntax and has one active variant (`M_<variant>=active`).
 The base configuration is expected to pass (`passed=True`, duration ~5.04s in the latest run).
 
 ## How To Inspect
