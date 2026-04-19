@@ -37,11 +37,16 @@ pub fn property_bq_len_matches_iter(original: Vec<f32>) -> PropertyResult {
 
     // UnalignedVector<BinaryQuantized> is produced via Distance::Header::VectorCodec.
     // We go through the library's public from_slice to exercise the same code path.
+    // NOTE: deliberately skip `to_vec()` here — the buggy variant reports a truncated
+    // `len()` and the SSE/NEON implementations pre-allocate `vec![0.0; vec.len()]` before
+    // writing an iter's worth of f32s into it. A mismatched length corrupts memory and
+    // aborts with SIGABRT (uncatchable by `catch_unwind`). The ExactSizeIterator contract
+    // we care about here is `len() == iter().count()`, which is enough to detect the
+    // bug without tripping the UB path.
     let cow = <BinaryQuantizedEuclidean as Distance>::VectorCodec::from_slice(&original);
     let vec_ref: &UnalignedVector<_> = &cow;
     let reported = vec_ref.len();
     let iter_count = vec_ref.iter().count();
-    let to_vec_count = vec_ref.to_vec().len();
 
     if reported != iter_count {
         return PropertyResult::Fail(format!(
@@ -49,12 +54,6 @@ pub fn property_bq_len_matches_iter(original: Vec<f32>) -> PropertyResult {
             reported,
             iter_count,
             original.len()
-        ));
-    }
-    if reported != to_vec_count {
-        return PropertyResult::Fail(format!(
-            "len()={} but to_vec().len()={} (input len={})",
-            reported, to_vec_count, original.len()
         ));
     }
     PropertyResult::Pass
