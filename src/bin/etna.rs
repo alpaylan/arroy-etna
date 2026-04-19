@@ -202,9 +202,17 @@ fn qc_bq_len_matches_iter(seed: u64) -> TestResult {
     }
 }
 
-fn qc_cosine_distance_in_unit(a: u64, b: u64) -> TestResult {
+fn qc_cosine_distance_in_unit(a: u64, b: u64, identical: bool) -> TestResult {
     QC_COUNTER.fetch_add(1, Ordering::Relaxed);
-    match property_cosine_distance_in_unit(seed_to_f32_vec(a), seed_to_f32_vec(b)) {
+    // Force identical pairs on ~1/2 of calls so the rounding-driven bug
+    // (unclamped cosine > 1.0 for near-parallel vectors) is sampled.
+    let (va, vb) = if identical {
+        let v = seed_to_f32_vec(a);
+        (v.clone(), v)
+    } else {
+        (seed_to_f32_vec(a), seed_to_f32_vec(b))
+    };
+    match property_cosine_distance_in_unit(va, vb) {
         PropertyResult::Pass => TestResult::passed(),
         PropertyResult::Discard => TestResult::discard(),
         PropertyResult::Fail(_) => TestResult::failed(),
@@ -230,7 +238,7 @@ fn run_quickcheck_property(property: &str) -> Outcome {
     let result = match property {
         "BqLenMatchesIter" => qc.quicktest(qc_bq_len_matches_iter as fn(u64) -> TestResult),
         "CosineDistanceInUnit" => {
-            qc.quicktest(qc_cosine_distance_in_unit as fn(u64, u64) -> TestResult)
+            qc.quicktest(qc_cosine_distance_in_unit as fn(u64, u64, bool) -> TestResult)
         }
         "BqEuclidSelfDistanceZero" => {
             qc.quicktest(qc_bq_euclid_self_distance_zero as fn(u64) -> TestResult)
