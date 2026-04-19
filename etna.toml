@@ -1,0 +1,46 @@
+# ETNA workload index for arroy.
+#
+# One [[variant]] per injected mutation. Source of truth for variant->property
+# mapping. Every other fact is derivable from the source tree:
+#   - ls patches/*.patch                          (patch-based variants)
+#   - grep -rn "pub fn property_" src/etna.rs     (property functions)
+#   - grep -rn "fn witness_.*_case_" tests/       (witness tests)
+#
+# Base commit for this workload is HEAD of master on this tree. Every
+# etna/<variant> branch is master + exactly one patch applied on top.
+
+[[variant]]
+name = "bq_len_bits_vs_bytes_facc857_1"
+property = "bq_len_matches_iter"
+injection = "patch"
+patch = "patches/bq_len_bits_vs_bytes_facc857_1.patch"
+source_commit = "facc8575222d3f5da5b9a94288e44896911e701f"
+witnesses = [
+    "witness_bq_len_matches_iter_case_five_floats",
+]
+frameworks = ["proptest", "quickcheck", "crabcheck", "hegel"]
+files = ["src/unaligned_vector/binary_quantized.rs"]
+
+[[variant]]
+name = "cosine_distance_no_clamp_6a09118_1"
+property = "cosine_distance_in_unit"
+injection = "patch"
+patch = "patches/cosine_distance_no_clamp_6a09118_1.patch"
+source_commit = "6a091180d7558d464cdd2ce9daec35e055e1d91c"
+witnesses = [
+    "witness_cosine_distance_in_unit_case_identical_ones",
+]
+frameworks = ["proptest", "quickcheck", "crabcheck", "hegel"]
+files = ["src/distance/cosine.rs"]
+
+[[variant]]
+name = "bq_euclid_self_distance_or_not_xor_47fd2bd_1"
+property = "bq_euclid_self_distance_zero"
+injection = "patch"
+patch = "patches/bq_euclid_self_distance_or_not_xor_47fd2bd_1.patch"
+source_commit = "47fd2bdd7f59efa84ddd9ea5dcb1b10c32b4849c"
+witnesses = [
+    "witness_bq_euclid_self_distance_zero_case_small_positive",
+]
+frameworks = ["proptest", "quickcheck", "crabcheck", "hegel"]
+files = ["src/distance/binary_quantized_euclidean.rs"]

@@ -3,3 +3,4 @@ Cargo.lock
 /assets/test.tree
 *.out
 *.tree
+/.hegel/

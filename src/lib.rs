@@ -96,6 +96,8 @@ mod writer;
 mod tests;
 mod unaligned_vector;
 
+pub mod etna;
+
 pub use distance::Distance;
 pub use error::Error;
 
