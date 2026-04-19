@@ -285,9 +285,17 @@ fn cc_bq_len_matches_iter(v: Vec<usize>) -> Option<bool> {
     }
 }
 
-fn cc_cosine_distance_in_unit((a, b): (Vec<usize>, Vec<usize>)) -> Option<bool> {
+fn cc_cosine_distance_in_unit((a, b, identical): (Vec<usize>, Vec<usize>, bool)) -> Option<bool> {
     CC_COUNTER.fetch_add(1, Ordering::Relaxed);
-    match property_cosine_distance_in_unit(usize_vec_to_f32_vec(a), usize_vec_to_f32_vec(b)) {
+    // With probability ~1/2 we force a == b so the near-parallel rounding case
+    // (required to surface the unclamped-cosine bug) is actually sampled.
+    let (va, vb) = if identical {
+        let v = usize_vec_to_f32_vec(a);
+        (v.clone(), v)
+    } else {
+        (usize_vec_to_f32_vec(a), usize_vec_to_f32_vec(b))
+    };
+    match property_cosine_distance_in_unit(va, vb) {
         PropertyResult::Pass => Some(true),
         PropertyResult::Fail(_) => Some(false),
         PropertyResult::Discard => None,
