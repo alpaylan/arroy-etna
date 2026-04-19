@@ -65,7 +65,7 @@ impl UnalignedVectorCodec for BinaryQuantized {
     }
 
     fn len(vec: &UnalignedVector<Self>) -> usize {
-        (vec.vector.len() / QUANTIZED_WORD_BYTES) * QUANTIZED_WORD_BITS
+        vec.vector.len() / QUANTIZED_WORD_BYTES
     }
 
     fn is_zero(vec: &UnalignedVector<Self>) -> bool {
