@@ -106,6 +106,17 @@ fn float_vec_strategy() -> BoxedStrategy<Vec<f32>> {
     prop::collection::vec(float_strategy(), 1..=16).boxed()
 }
 
+// The cosine-distance bug needs near-parallel vectors (e.g. a==b of all-ones)
+// to surface — pure random pairs don't hit the rounding edge. Mix independent
+// pairs with identical pairs so the unclamped-cosine > 1.0 case gets sampled.
+fn float_vec_pair_strategy() -> BoxedStrategy<(Vec<f32>, Vec<f32>)> {
+    prop_oneof![
+        (float_vec_strategy(), float_vec_strategy()),
+        float_vec_strategy().prop_map(|v| (v.clone(), v)),
+    ]
+    .boxed()
+}
+
 fn run_proptest_property(property: &str) -> Outcome {
     if property == "All" {
         return run_all(run_proptest_property);
@@ -129,16 +140,13 @@ fn run_proptest_property(property: &str) -> Outcome {
         "CosineDistanceInUnit" => {
             let c = counter.clone();
             runner
-                .run(
-                    &(float_vec_strategy(), float_vec_strategy()),
-                    move |(a, b)| {
-                        c.fetch_add(1, Ordering::Relaxed);
-                        match property_cosine_distance_in_unit(a, b) {
-                            PropertyResult::Pass | PropertyResult::Discard => Ok(()),
-                            PropertyResult::Fail(m) => Err(TestCaseError::fail(m)),
-                        }
-                    },
-                )
+                .run(&float_vec_pair_strategy(), move |(a, b)| {
+                    c.fetch_add(1, Ordering::Relaxed);
+                    match property_cosine_distance_in_unit(a, b) {
+                        PropertyResult::Pass | PropertyResult::Discard => Ok(()),
+                        PropertyResult::Fail(m) => Err(TestCaseError::fail(m)),
+                    }
+                })
                 .map_err(|e| e.to_string())
         }
         "BqEuclidSelfDistanceZero" => {
