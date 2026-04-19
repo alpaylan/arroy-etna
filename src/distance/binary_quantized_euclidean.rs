@@ -119,6 +119,6 @@ fn squared_euclidean_distance_binary_quantized(
     v: &UnalignedVector<BinaryQuantized>,
 ) -> f32 {
     let ret =
-        u.as_bytes().iter().zip(v.as_bytes()).map(|(u, v)| (u ^ v).count_ones()).sum::<u32>() * 4;
+        u.as_bytes().iter().zip(v.as_bytes()).map(|(u, v)| (u | v).count_ones()).sum::<u32>() * 4;
     ret as f32
 }
