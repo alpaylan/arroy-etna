@@ -1,46 +1,82 @@
-# ETNA workload index for arroy.
-#
-# One [[variant]] per injected mutation. Source of truth for variant->property
-# mapping. Every other fact is derivable from the source tree:
-#   - ls patches/*.patch                          (patch-based variants)
-#   - grep -rn "pub fn property_" src/etna.rs     (property functions)
-#   - grep -rn "fn witness_.*_case_" tests/       (witness tests)
-#
-# Base commit for this workload is HEAD of master on this tree. Every
-# etna/<variant> branch is master + exactly one patch applied on top.
+name = "arroy"
+language = "rust"
+crate = "arroy"
+base_commit = "fcbde648347761cb28b95823c9b5ec65107e9dc9"
 
-[[variant]]
-name = "bq_len_bits_vs_bytes_facc857_1"
-property = "bq_len_matches_iter"
-injection = "patch"
-patch = "patches/bq_len_bits_vs_bytes_facc857_1.patch"
-source_commit = "facc8575222d3f5da5b9a94288e44896911e701f"
-witnesses = [
-    "witness_bq_len_matches_iter_case_five_floats",
-]
-frameworks = ["proptest", "quickcheck", "crabcheck", "hegel"]
+[[tasks]]
+mutations = ["bq_len_bits_vs_bytes_facc857_1"]
+
+[tasks.source]
+repo = "https://github.com/meilisearch/arroy"
+commits = ["facc8575222d3f5da5b9a94288e44896911e701f"]
+commit_subjects = ["fix the size of the iterator"]
+summary = "`UnalignedVector<BinaryQuantized>::len()` returned a word count instead of a bit count, so the `ExactSizeIterator` length was 64× smaller than the number of f32s actually yielded by `iter()` and `to_vec()`."
+
+[tasks.injection]
+kind = "patch"
 files = ["src/unaligned_vector/binary_quantized.rs"]
+locations = [{ file = "src/unaligned_vector/binary_quantized.rs" }]
+patch = "patches/bq_len_bits_vs_bytes_facc857_1.patch"
 
-[[variant]]
-name = "cosine_distance_no_clamp_6a09118_1"
-property = "cosine_distance_in_unit"
-injection = "patch"
-patch = "patches/cosine_distance_no_clamp_6a09118_1.patch"
-source_commit = "6a091180d7558d464cdd2ce9daec35e055e1d91c"
+[tasks.bug]
+short_name = "bq_len_bits_vs_bytes"
+invariant = "`UnalignedVector<BinaryQuantized>::len()` must equal the number of items produced by `iter()` and `to_vec()` (ExactSizeIterator contract)."
+how_triggered = "`len()` returns `vec.vector.len() / QUANTIZED_WORD_BYTES` (a word count) instead of `(vec.vector.len() / QUANTIZED_WORD_BYTES) * QUANTIZED_WORD_BITS` (a bit count). The iterator still yields `words * 64` f32s, so `len()` falls out of sync by a factor of 64."
+
+[[tasks.tasks]]
+property = "BqLenMatchesIter"
 witnesses = [
-    "witness_cosine_distance_in_unit_case_identical_ones",
+  { test_fn = "witness_bq_len_matches_iter_case_five_floats" },
 ]
-frameworks = ["proptest", "quickcheck", "crabcheck", "hegel"]
+
+[[tasks]]
+mutations = ["cosine_distance_no_clamp_6a09118_1"]
+
+[tasks.source]
+repo = "https://github.com/meilisearch/arroy"
+commits = ["6a091180d7558d464cdd2ce9daec35e055e1d91c"]
+commit_subjects = ["Numerical stability improvements for Cosine Distance"]
+summary = "`Cosine::built_distance` could return a negative value because the pre-fix body neither guarded the divisor against tiny `pnqn` values nor clamped the cosine to `[-1.0, 1.0]` before computing `1 - cos`. The fix strengthens the guard to `f32::EPSILON` and clamps the cosine before subtraction."
+
+[tasks.injection]
+kind = "patch"
 files = ["src/distance/cosine.rs"]
+locations = [{ file = "src/distance/cosine.rs" }]
+patch = "patches/cosine_distance_no_clamp_6a09118_1.patch"
 
-[[variant]]
-name = "bq_euclid_self_distance_or_not_xor_47fd2bd_1"
-property = "bq_euclid_self_distance_zero"
-injection = "patch"
-patch = "patches/bq_euclid_self_distance_or_not_xor_47fd2bd_1.patch"
-source_commit = "47fd2bdd7f59efa84ddd9ea5dcb1b10c32b4849c"
+[tasks.bug]
+short_name = "cosine_distance_no_clamp"
+invariant = "`Cosine::built_distance(p, q)` must be finite and within `[0.0, 1.0]` for any pair of sanitized, non-empty vectors."
+how_triggered = "The division guard is weakened from `pnqn > f32::EPSILON` to `pnqn != 0.0`, and the subsequent `cos.clamp(-1.0, 1.0)` is removed. In f32 `sqrt(7)^2 != 7`, so the cosine of seven-ones against itself can land slightly above 1.0, making the distance `1 - cos` negative."
+
+[[tasks.tasks]]
+property = "CosineDistanceInUnit"
 witnesses = [
-    "witness_bq_euclid_self_distance_zero_case_small_positive",
+  { test_fn = "witness_cosine_distance_in_unit_case_identical_ones" },
 ]
-frameworks = ["proptest", "quickcheck", "crabcheck", "hegel"]
+
+[[tasks]]
+mutations = ["bq_euclid_self_distance_or_not_xor_47fd2bd_1"]
+
+[tasks.source]
+repo = "https://github.com/meilisearch/arroy"
+commits = ["47fd2bdd7f59efa84ddd9ea5dcb1b10c32b4849c"]
+commit_subjects = ["fix the normalized distance for the binary quantized euclidean distance"]
+summary = "`BinaryQuantizedEuclidean::built_distance` computed the popcount over `u | v` instead of `u ^ v`, so `built_distance(p, p)` became `4 * popcount(p)` instead of `0` — violating the self-identity axiom for any non-zero leaf."
+
+[tasks.injection]
+kind = "patch"
 files = ["src/distance/binary_quantized_euclidean.rs"]
+locations = [{ file = "src/distance/binary_quantized_euclidean.rs" }]
+patch = "patches/bq_euclid_self_distance_or_not_xor_47fd2bd_1.patch"
+
+[tasks.bug]
+short_name = "bq_euclid_self_distance_or_not_xor"
+invariant = "`BinaryQuantizedEuclidean::built_distance(p, p)` must be `0.0` for every leaf (self-identity axiom of a distance metric)."
+how_triggered = "The popcount argument changes from `u ^ v` (XOR, which gives `0` for `u == v`) to `u | v` (OR, which equals `popcount(v)` for `u == v`). Any leaf with at least one positive scalar then reports `built_distance(p, p) = 4 * popcount(v) > 0`."
+
+[[tasks.tasks]]
+property = "BqEuclidSelfDistanceZero"
+witnesses = [
+  { test_fn = "witness_bq_euclid_self_distance_zero_case_small_positive" },
+]
