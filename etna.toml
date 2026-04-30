@@ -1,5 +1,6 @@
 name = "arroy"
 language = "rust"
+strategies = ["proptest", "quickcheck", "crabcheck", "hegel"]
 crate = "arroy"
 base_commit = "fcbde648347761cb28b95823c9b5ec65107e9dc9"
 
